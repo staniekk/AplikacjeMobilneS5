@@ -84,7 +84,7 @@ export function HomeScreen({ navigation }) {
 
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('WpiszTutajGdzieMaPrzenieść')}>
+                <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map')}>
                     <Text style={styles.loginText}>Run!</Text>
                 </Pressable >
 

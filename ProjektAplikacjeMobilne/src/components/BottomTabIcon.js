@@ -1,55 +1,55 @@
-import {StyleSheet, Image} from "react-native";
+import { StyleSheet, Image } from "react-native";
 
 export const BottomTabIcon = ({ routeName, focused }) => {
 
     switch (routeName) {
-        case 'Login':
-            if(focused) {
+        case 'HomeScreen':
+            if (focused) {
                 return <Image
                     style={styles.imgActive}
-                    source={require('./../img/bottomNav/profile_active.png')}
+                    source={require('./../img/bottomNav/home_active.png')}
                 />
-            }else{
+            } else {
                 return <Image
                     style={styles.img}
-                    source={require('./../img/bottomNav/profile_inactive.png')}
+                    source={require('./../img/bottomNav/home_inactive.png')}
                 />
             }
-        case 'Register':
-            if(focused) {
+        case 'Map':
+            if (focused) {
                 return <Image
                     style={styles.imgActive}
-                    source={require('./../img/bottomNav/regD.png')}
+                    source={require('./../img/bottomNav/map_active.png')}
                 />
-            }else{
+            } else {
                 return <Image
                     style={styles.img}
-                    source={require('./../img/bottomNav/reg.png')}
+                    source={require('./../img/bottomNav/map_inactive.png')}
                 />
             }
-        case 'About':
-            if(focused) {
+        case 'Calendar':
+            if (focused) {
                 return <Image
                     style={styles.imgActive}
-                    source={require('./../img/bottomNav/QuestionMarkD.png')}
+                    source={require('./../img/bottomNav/calendar_active.png')}
                 />
-            }else{
+            } else {
                 return <Image
                     style={styles.img}
-                    source={require('./../img/bottomNav/QuestionMark.png')}
+                    source={require('./../img/bottomNav/calendar_inactive.png')}
                 />
             }
         default:
             return <Image
                 style={styles.imgActive}
-                source={require('./../img/bottomNav/profile_active.png')}
+                source={require('./../img/bottomNav/home_active.png')}
             />
     }
 
 }
 
 const styles = StyleSheet.create({
-    img:{
+    img: {
         width: 28,
         height: 28
     },

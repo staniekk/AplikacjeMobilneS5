@@ -7,34 +7,9 @@
       "password": "pass"
     },
     {
-      "id": 2,
-      "name": "Ked",
-      "login": "logi",
-      "password": "passw"
-    },
-    {
-      "login": "J",
-      "password": "H",
-      "id": 3
-    },
-    {
-      "login": "R",
-      "password": "R",
-      "id": 4
-    }
-  ],
-  "tasks": [
-    {
-      "id": 1,
-      "description": "Zrób db.json"
-    },
-    {
-      "id": 2,
-      "description": "Zrób konteks"
-    },
-    {
-      "id": 3,
-      "description": "Zrób usuwanie"
+      "login": "123",
+      "password": "123",
+      "id": 2
     }
   ]
 }

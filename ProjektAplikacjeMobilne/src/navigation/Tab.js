@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Login, Register} from "../views";
-import {BottomTabIcon} from "../components/BottomTabIcon";
-import {About } from "../views/About";
+import { MapActive } from "../views/Map";
+import { BottomTabIcon } from "../components/BottomTabIcon";
 import { HomeScreen } from '../views/HomeScreen';
+import { Calendar } from '../views/Calendar';
 
 
 
@@ -22,10 +22,10 @@ export default function TabNav() {
                 return <BottomTabIcon routeName={route?.name} focused={focused} />;
             }
         })}>
-            
+
             <Tab.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
-            <Tab.Screen name="Register" component={Register} options={optionScreen} />
-            <Tab.Screen name="About" component={About} options={optionScreen} />
+            <Tab.Screen name="Map" component={MapActive} options={optionScreen} />
+            <Tab.Screen name="Calendar" component={Calendar} options={optionScreen} />
         </Tab.Navigator>
     );
 }

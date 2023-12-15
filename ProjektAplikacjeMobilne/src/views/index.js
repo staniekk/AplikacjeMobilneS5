@@ -1,10 +1,8 @@
-import {Login} from "./Login";
-import {LoginW} from "./LoginW";
-import {Register} from "./Register";
-import {About} from "./About";
-import {TaskList} from "./TaskList";
-import { EditTable } from "./EditTable";
-// import {Drawer} from "./Drawer";
+import { Login } from "./Login";
+import { Register } from "./Register";
+import { MapActive } from "./Map";
+import { Calendar } from "./Calendar";
+import { HomeScreen } from "./HomeScreen";
 
 
-export { Login, Register, About, LoginW,TaskList,EditTable}
+export { Login, Register, MapActive, Calendar, HomeScreen }
