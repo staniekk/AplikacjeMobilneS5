@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id":1,
+      "name":"Kedar",
+      "login": "log",
+      "password": "pass"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "description": "Zrób db.json"
+    },
+    {
+      "id": 2,
+      "description": "Zrób konteks"
+    },
+    {
+      "id": 3,
+      "description": "Zrób usuwanie"
+    }
+  ]
+}
