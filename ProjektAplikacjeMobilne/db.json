@@ -1,10 +1,26 @@
 {
   "users": [
     {
-      "id":1,
-      "name":"Kedar",
+      "id": 1,
+      "name": "Kedar",
       "login": "log",
       "password": "pass"
+    },
+    {
+      "id": 2,
+      "name": "Ked",
+      "login": "logi",
+      "password": "passw"
+    },
+    {
+      "login": "J",
+      "password": "H",
+      "id": 3
+    },
+    {
+      "login": "R",
+      "password": "R",
+      "id": 4
     }
   ],
   "tasks": [

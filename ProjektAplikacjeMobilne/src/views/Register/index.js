@@ -1,14 +1,13 @@
 import React from 'react';
-import { Text, View, Pressable, TextInput, Alert, BackHandler,Image } from "react-native";
+import { Text, View, Pressable, TextInput, Alert, BackHandler, Image } from "react-native";
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 
 export function Register({ navigation }) {
-
-    [textLoginR, setLoginR] = React.useState('');
-    [textPasswordR, setPasswordR] = React.useState('');
-    [textPasswordRepeatR, setPasswordRepeatR] = React.useState('');
+    const [textLoginR, setLoginR] = React.useState('');
+    const [textPasswordR, setPasswordR] = React.useState('');
+    const [textPasswordRepeatR, setPasswordRepeatR] = React.useState('');
 
     useFocusEffect(
         React.useCallback(() => {
@@ -17,8 +16,19 @@ export function Register({ navigation }) {
             setPasswordRepeatR('');
         }, [])
     );
-    
-    const handleCreateAccount = () => {
+
+    const checkUserExists = async (username) => {
+        try {
+            const response = await axios.get('http://192.168.1.229:3000/users');
+            const users = response.data;
+            return users.some(user => user.login === username);
+        } catch (error) {
+            Alert.alert("Error", "Unable to check if username exists: " + error.message);
+            return false;
+        }
+    };
+
+    const handleCreateAccount = async () => {
         if (!textLoginR.trim()) {
             Alert.alert("Error", "Login is required.");
             return;
@@ -35,61 +45,55 @@ export function Register({ navigation }) {
             Alert.alert("Error", "Passwords do not match.");
             return;
         }
-        // Call register user function
-        registerUser();
+
+        const userExists = await checkUserExists(textLoginR);
+        if (userExists) {
+            Alert.alert("Error", "Username already exists. Please choose a different one.");
+        } else {
+            axios.post('http://192.168.1.229:3000/users', {
+                login: textLoginR,
+                password: textPasswordR
+            })
+                .then(() => {
+                    Alert.alert("Success", "Account created successfully.");
+                    navigation.navigate("LoginW");
+                })
+                .catch(error => {
+                    Alert.alert("Registration Error", error.message);
+                });
+        }
     };
 
     React.useEffect(() => {
-        const backAction = () => {
-          return true; 
-        };
-    
-        const backHandler = BackHandler.addEventListener(
-          "hardwareBackPress",
-          backAction
-        );
-    
+        const backAction = () => true;
+        const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
         return () => backHandler.remove();
-      }, []);
+    }, []);
 
-    const registerUser = () => {
-        axios.post('http://192.168.1.140:3000/users/register', {
-            login: textLoginR,
-            password: textPasswordR
-        }).then(response => {
-            const data = response.data;
-            if (data.success) {
-                Alert.alert("Success", "Account created successfully.");
-                navigation.navigate('LoginW');
-            } else {
-                Alert.alert("Error", data.message || "Failed to create account.");
-            }
-        }).catch(error => {
-            Alert.alert("Error", "Failed to create account.");
-        });
-    };
 
-    return (
-        <View style={styles.mainContainer}>
-      
+   
+
+return (
+    <View style={styles.mainContainer}>
+
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Image style={styles.logo}
-             source={require('../../img/logo/Logo.png')}
-                />
-            </View>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                source={require('../../img/logo/Logo.png')}
+            />
+        </View>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
 
-                </View>
-                <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={styles.textInfo}> Time to run!</Text>
+        </View>
+        <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={styles.textInfo}> Time to run!</Text>
             <TextInput
                 style={styles.loginTextInput}
                 onChangeText={setLoginR}
                 value={textLoginR}
                 placeholder='Login'
             />
-  
+
             <TextInput
                 secureTextEntry
                 style={styles.loginTextInput}
@@ -97,7 +101,7 @@ export function Register({ navigation }) {
                 value={textPasswordR}
                 placeholder='Password'
             />
-   
+
             <TextInput
                 secureTextEntry
                 style={styles.loginTextInput}
@@ -111,11 +115,11 @@ export function Register({ navigation }) {
             {/* <Pressable style={styles.text} onPress={() => navigation.navigate('TabNav')}>
                 <Text>Go to Home screen</Text>
             </Pressable> */}
-                </View>
-
         </View>
 
-       
-    );
+    </View>
 
-        }
+
+);
+
+}
