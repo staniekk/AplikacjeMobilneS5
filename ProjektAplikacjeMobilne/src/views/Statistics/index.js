@@ -87,46 +87,71 @@ export function Statistics({ navigation }) {
                   }}>
 
             <View style={styles.panel}>
-                <Text>Lifetime summary</Text>
+                <Text style={styles.panelTitle}>Lifetime summary</Text>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Steps:</Text>
-                    <Text style={styles.statsRight}>{totalSteps}</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{totalSteps}</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Distance:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(totalDist, 3)} km</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(totalDist, 3)}</Text>
+                        <Text style={styles.statsUnit}> km</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Time spent:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(totalTime, 2)} hr(s)</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(totalTime, 2)}</Text>
+                        <Text style={styles.statsUnit}> hr(s)</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Avg. speed:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(avgSpeed, 2)} km/h</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(avgSpeed, 2)}</Text>
+                        <Text style={styles.statsUnit}> km/h</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Avg. time:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(avgTime, 2)} hr(s)</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(avgTime, 2)}</Text>
+                        <Text style={styles.statsUnit}> hr(s)</Text>
+                     </Text>
                 </View>
             </View>
 
             <View style={styles.panel}>
-                <Text>Personal Bests</Text>
+                <Text style={styles.panelTitle}>Personal Bests</Text>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Most steps:</Text>
-                    <Text style={styles.statsRight}>{bestSteps}</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{bestSteps}</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Highest avg. speed:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(bestSpeed, 2)} km/h</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(bestSpeed, 2)}</Text>
+                        <Text style={styles.statsUnit}> km/h</Text>
+                     </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Longest distance:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(bestDist, 3)} km</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(bestDist, 3)}</Text>
+                        <Text style={styles.statsUnit}> km</Text>
+                     </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Longest time:</Text>
-                    <Text style={styles.statsRight}>{formatNumber(bestTime, 2)} hr(s)</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{formatNumber(bestTime, 2)}</Text>
+                        <Text style={styles.statsUnit}> hr(s)</Text>
+                     </Text>
                 </View>
             </View>
 

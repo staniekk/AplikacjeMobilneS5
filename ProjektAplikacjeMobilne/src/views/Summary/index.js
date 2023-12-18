@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export function Statistics({ navigation }) {
+export function Summary({ navigation }) {
     const [lastRun, setLastRun] = React.useState('');
 
     React.useEffect(() => {
@@ -42,24 +42,37 @@ export function Statistics({ navigation }) {
                   contentContainerStyle={{
                       flexGrow: 2,
                       flex: 6,
+                      alignItems: 'center',
+                        justifyContent: 'center',
                   }}>
             <View style={styles.panel}>
-                <Text>Runs summary</Text>
+                <Text style={styles.panelTitle}>Run's summary</Text>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Steps:</Text>
-                    <Text style={styles.statsRight}>{lastRun.steps}</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{lastRun.steps}</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Distance:</Text>
-                    <Text style={styles.statsRight}>{lastRun.dist} km</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{lastRun.dist}</Text>
+                        <Text style={styles.statsUnit}> km</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Time spent:</Text>
-                    <Text style={styles.statsRight}>{lastRun.time} hr(s)</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{lastRun.time}</Text>
+                        <Text style={styles.statsUnit}> hr(s)</Text>
+                    </Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Avg. speed:</Text>
-                    <Text style={styles.statsRight}>{lastRun.speed} km/h</Text>
+                    <Text style={styles.statsRight}>
+                        <Text style={styles.statsData}>{lastRun.speed}</Text>
+                        <Text style={styles.statsUnit}> km/h</Text>
+                     </Text>
                 </View>
             </View>
 
