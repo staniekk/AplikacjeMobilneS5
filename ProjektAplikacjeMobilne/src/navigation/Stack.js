@@ -6,6 +6,8 @@ import { HomeScreen } from '../views/HomeScreen';
 import React from 'react';
 import { Calendar } from '../views/Calendar';
 import { MapActive } from '../views/Map';
+import { Statistics } from '../views/Statistics';
+import { Summary } from '../views/Summary';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,7 +19,8 @@ const optionScreen = {
 export default function StackNav() {
     return (
         <Stack.Navigator>
-            
+
+            <Stack.Screen name="Statistics" component={Statistics} options={optionScreen} />
             <Stack.Screen name="Login" component={Login} options={optionScreen} />
             <Stack.Screen name="TabNav" component={TabNav} options={optionScreen} />
             <Stack.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />

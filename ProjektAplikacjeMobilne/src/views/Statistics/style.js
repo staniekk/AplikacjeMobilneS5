@@ -62,9 +62,10 @@ export const styles = StyleSheet.create({
     },
     panel: {
         backgroundColor: '#F4F7F8',
-        padding: 25,
+        padding: 5,
         borderRadius: 5,
-        elevation: 3
+        elevation: 8,
+        margin: 10
     },
     stats: {
     flexDirection: 'row',

@@ -27,7 +27,7 @@ export function Login({ navigation }) {
         //     login: textLogin,
         //     password: textPassword
         // })
-        axios.get('http://192.168.1.12:3000/users')
+        axios.get(' http://192.168.51.122:3004/users')
             .then(response => {
                 const users = response.data;
                 const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);

@@ -19,7 +19,7 @@ export function Statistics({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.1.12:3000/history')
+        axios.get('http://192.168.51.122:3004/history')
               .then(response => {
                    const data = response.data;
 
@@ -41,23 +41,23 @@ export function Statistics({ navigation }) {
                       alignItems: 'center',
                       justifyContent: 'center',
                   }}>
-            <View style={styles.panel}
-                <Text>Run's summary</Text>
+            <View style={styles.panel}>
+                {/*<Text>Runs summary</Text>*/}
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Steps:<\Text>
-                    <Text style={styles.statsRight}>{lastRun.steps}<\Text>
+                    <Text style={styles.statsLeft}>Steps:</Text>
+                    <Text style={styles.statsRight}>{lastRun.steps}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Distance:<\Text>
-                    <Text style={styles.statsRight}>{lastRun.dist}<\Text>
+                    <Text style={styles.statsLeft}>Distance:</Text>
+                    <Text style={styles.statsRight}>{lastRun.dist}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Time spent:<\Text>
-                    <Text style={styles.statsRight}>{lastRun.time}<\Text>
+                    <Text style={styles.statsLeft}>Time spent:</Text>
+                    <Text style={styles.statsRight}>{lastRun.time}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Avg. speed:<\Text>
-                    <Text style={styles.statsRight}>{lastRun.speed}<\Text>
+                    <Text style={styles.statsLeft}>Avg. speed:</Text>
+                    <Text style={styles.statsRight}>{lastRun.speed}</Text>
                 </View>
             </View>
 

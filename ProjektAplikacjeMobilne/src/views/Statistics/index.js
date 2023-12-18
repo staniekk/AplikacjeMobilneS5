@@ -28,7 +28,7 @@ export function Statistics({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.1.12:3000/history')
+        axios.get('http://192.168.51.122:3004/history')
               .then(response => {
                     const stepsArray = response.data.map(item => item.steps);
                     const distArray = response.data.map(item => item.dist);
@@ -39,12 +39,12 @@ export function Statistics({ navigation }) {
                     const sumTime = timeArray.reduce((acc, time) => acc + time, 0);
 
                     const aveSpeed = sumDist / sumTime;
-                    const aveTime = sumTime / timeArray.length();
+                    const aveTime = sumTime / timeArray.length;
 
-                    const maxSteps = Math.max(...response.data(item => item.steps));
-                    const maxSpeed = Math.max(...response.data(item => item.speed));
-                    const maxDist = Math.max(...response.data(item => item.dist));
-                    const maxTime = Math.max(...response.data(item => item.time));
+                    const maxSteps = Math.max(...response.data.map(item => item.steps));
+                    const maxSpeed = Math.max(...response.data.map(item => item.speed));
+                    const maxDist = Math.max(...response.data.map(item => item.dist));
+                    const maxTime = Math.max(...response.data.map(item => item.time));
 
                     setTotalSteps(sumSteps);
                     setTotalDist(sumDist);
@@ -71,47 +71,47 @@ export function Statistics({ navigation }) {
                       alignItems: 'center',
                       justifyContent: 'center',
                   }}>
-            <View style={styles.panel}
+            <View style={styles.panel}>
                 <Text>Lifetime summary</Text>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Steps:<\Text>
-                    <Text style={styles.statsRight}>{totalSteps}<\Text>
+                    <Text style={styles.statsLeft}>Steps:</Text>
+                    <Text style={styles.statsRight}>{totalSteps}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Distance:<\Text>
-                    <Text style={styles.statsRight}>{totalDist}<\Text>
+                    <Text style={styles.statsLeft}>Distance:</Text>
+                    <Text style={styles.statsRight}>{totalDist}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Time spent:<\Text>
-                    <Text style={styles.statsRight}>{totalTime}<\Text>
+                    <Text style={styles.statsLeft}>Time spent:</Text>
+                    <Text style={styles.statsRight}>{totalTime}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Avg. speed:<\Text>
-                    <Text style={styles.statsRight}>{avgSpeed}<\Text>
+                    <Text style={styles.statsLeft}>Avg. speed:</Text>
+                    <Text style={styles.statsRight}>{avgSpeed}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Avg. time:<\Text>
-                    <Text style={styles.statsRight}>{avgTime}<\Text>
+                    <Text style={styles.statsLeft}>Avg. time:</Text>
+                    <Text style={styles.statsRight}>{avgTime}</Text>
                 </View>
             </View>
 
-            <View style={styles.panel}
+            <View style={styles.panel}>
                 <Text>Personal Bests</Text>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Steps:<\Text>
-                    <Text style={styles.statsRight}>{bestSteps}<\Text>
+                    <Text style={styles.statsLeft}>Steps:</Text>
+                    <Text style={styles.statsRight}>{bestSteps}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Avg. speed:<\Text>
-                    <Text style={styles.statsRight}>{bestSpeed}<\Text>
+                    <Text style={styles.statsLeft}>Avg. speed:</Text>
+                    <Text style={styles.statsRight}>{bestSpeed}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Longest distance:<\Text>
-                    <Text style={styles.statsRight}>{bestDist}<\Text>
+                    <Text style={styles.statsLeft}>Longest distance:</Text>
+                    <Text style={styles.statsRight}>{bestDist}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Longest time:<\Text>
-                    <Text style={styles.statsRight}>{bestTime}<\Text>
+                    <Text style={styles.statsLeft}>Longest time:</Text>
+                    <Text style={styles.statsRight}>{bestTime}</Text>
                 </View>
             </View>
 
