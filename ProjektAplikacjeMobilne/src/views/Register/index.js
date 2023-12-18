@@ -64,11 +64,7 @@ export function Register({ navigation }) {
         }
     };
 
-    React.useEffect(() => {
-        const backAction = () => true;
-        const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
-        return () => backHandler.remove();
-    }, []);
+
 
 
 

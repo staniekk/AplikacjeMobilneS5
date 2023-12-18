@@ -20,13 +20,16 @@ export default function StackNav() {
     return (
         <Stack.Navigator>
 
-            <Stack.Screen name="Summary" component={Summary} options={optionScreen} />
+            
+            
             <Stack.Screen name="Login" component={Login} options={optionScreen} />
             <Stack.Screen name="TabNav" component={TabNav} options={optionScreen} />
             <Stack.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
             <Stack.Screen name="Register" component={Register} options={optionScreen} />
             <Stack.Screen name="Calendar" component={Calendar} options={optionScreen} />
             <Stack.Screen name="Map" component={MapActive} options={optionScreen} />
+            <Stack.Screen name="Statistics" component={Statistics} options={optionScreen} />
+            <Stack.Screen name="Summary" component={Summary} options={optionScreen} />
         </Stack.Navigator>
 
     );
