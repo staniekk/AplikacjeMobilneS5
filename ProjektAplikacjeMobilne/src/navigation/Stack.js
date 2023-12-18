@@ -8,7 +8,7 @@ import { Calendar } from '../views/Calendar';
 import { MapActive } from '../views/Map';
 import { Statistics } from '../views/Statistics';
 import { Summary } from '../views/Summary';
-
+import { HistoryS } from '../views/HistoryS';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,10 +20,11 @@ export default function StackNav() {
     return (
         <Stack.Navigator>
 
-            
-            
+
+           
             <Stack.Screen name="Login" component={Login} options={optionScreen} />
             <Stack.Screen name="TabNav" component={TabNav} options={optionScreen} />
+            <Stack.Screen name="HistoryS" component={HistoryS} options={optionScreen} />
             <Stack.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
             <Stack.Screen name="Register" component={Register} options={optionScreen} />
             <Stack.Screen name="Calendar" component={Calendar} options={optionScreen} />

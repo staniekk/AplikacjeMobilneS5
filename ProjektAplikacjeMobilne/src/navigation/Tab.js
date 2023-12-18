@@ -26,6 +26,7 @@ export default function TabNav() {
             <Tab.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
             <Tab.Screen name="Map" component={MapActive} options={optionScreen} />
             <Tab.Screen name="Calendar" component={Calendar} options={optionScreen} />
+            
         </Tab.Navigator>
     );
 }
