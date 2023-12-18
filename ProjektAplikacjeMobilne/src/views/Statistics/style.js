@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Dimensions } from 'react-native';
 
 
 export const styles = StyleSheet.create({
@@ -47,13 +48,13 @@ export const styles = StyleSheet.create({
     },
     mainContainer:
     {
-        backgroundColor: '#11B5E4'
+        backgroundColor: '#11B5E4',
 
     },
     logo: {
-
-        width: 240,
-        height: 200
+        marginTop: 50,
+        width: 55,
+        height: 45
     },
     FP: {
         marginTop: 30,
@@ -65,7 +66,8 @@ export const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
         elevation: 8,
-        margin: 10
+        margin: 10,
+        width: Dimensions.get('window').width - 25
     },
     stats: {
     flexDirection: 'row',

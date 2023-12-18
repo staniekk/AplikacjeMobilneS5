@@ -1,4 +1,4 @@
-import { Text,ScrollView, BackHandler, View } from "react-native";
+import { Text,ScrollView, BackHandler, View, Image } from "react-native";
 import { styles } from "./style";
 import React from "react";
 import axios from 'axios';
@@ -62,15 +62,30 @@ export function Statistics({ navigation }) {
         return () => backHandler.remove();
       }, []);
 
+      function formatNumber(val, n) {
+            if (typeof val !== 'undefined' && typeof val === 'number' && !isNaN(val)) {
+                const fixedValue = val.toFixed(n);
+                return parseFloat(fixedValue).toString();
+            } else {
+                return '...';
+            }
+        }
+
       return (
+
+      <View style={{ backgroundColor: '#11B5E4', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Image style={styles.logo}
+                            source={require('../../img/logo/Logo.png')}
+                        />
+
           <ScrollView style={styles.mainContainer}
                   keyboardShouldPersistTaps='handled'
                   contentContainerStyle={{
-                      flexGrow: 1,
                       flex: 6,
                       alignItems: 'center',
                       justifyContent: 'center',
                   }}>
+
             <View style={styles.panel}>
                 <Text>Lifetime summary</Text>
                 <View style={styles.stats}>
@@ -79,44 +94,45 @@ export function Statistics({ navigation }) {
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Distance:</Text>
-                    <Text style={styles.statsRight}>{totalDist}</Text>
+                    <Text style={styles.statsRight}>{formatNumber(totalDist, 3)} km</Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Time spent:</Text>
-                    <Text style={styles.statsRight}>{totalTime}</Text>
+                    <Text style={styles.statsRight}>{formatNumber(totalTime, 2)} hr(s)</Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Avg. speed:</Text>
-                    <Text style={styles.statsRight}>{avgSpeed}</Text>
+                    <Text style={styles.statsRight}>{formatNumber(avgSpeed, 2)} km/h</Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Avg. time:</Text>
-                    <Text style={styles.statsRight}>{avgTime}</Text>
+                    <Text style={styles.statsRight}>{formatNumber(avgTime, 2)} hr(s)</Text>
                 </View>
             </View>
 
             <View style={styles.panel}>
                 <Text>Personal Bests</Text>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Steps:</Text>
+                    <Text style={styles.statsLeft}>Most steps:</Text>
                     <Text style={styles.statsRight}>{bestSteps}</Text>
                 </View>
                 <View style={styles.stats}>
-                    <Text style={styles.statsLeft}>Avg. speed:</Text>
-                    <Text style={styles.statsRight}>{bestSpeed}</Text>
+                    <Text style={styles.statsLeft}>Highest avg. speed:</Text>
+                    <Text style={styles.statsRight}>{formatNumber(bestSpeed, 2)} km/h</Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Longest distance:</Text>
-                    <Text style={styles.statsRight}>{bestDist}</Text>
+                    <Text style={styles.statsRight}>{formatNumber(bestDist, 3)} km</Text>
                 </View>
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Longest time:</Text>
-                    <Text style={styles.statsRight}>{bestTime}</Text>
+                    <Text style={styles.statsRight}>{formatNumber(bestTime, 2)} hr(s)</Text>
                 </View>
             </View>
 
             {/* Tu muszę umieścić jeszcze wykres (jakiś?) */}
 
           </ScrollView>
+          </View>
         );
 }
