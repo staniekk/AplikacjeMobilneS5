@@ -19,7 +19,7 @@ export function Register({ navigation }) {
 
     const checkUserExists = async (username) => {
         try {
-            const response = await axios.get(' http://192.168.51.122:3004/users');
+            const response = await axios.get('http://192.168.7.140:3000/users');
             const users = response.data;
             return users.some(user => user.login === username);
         } catch (error) {
@@ -50,7 +50,7 @@ export function Register({ navigation }) {
         if (userExists) {
             Alert.alert("Error", "Username already exists. Please choose a different one.");
         } else {
-            axios.post(' http://192.168.51.122:3004/users', {
+            axios.post('http://192.168.7.140:3000/users', {
                 login: textLoginR,
                 password: textPasswordR
             })

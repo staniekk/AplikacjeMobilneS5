@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export function Statistics({ navigation }) {
+export function Summary({ navigation }) {
     const [lastRun, setLastRun] = React.useState('');
 
     React.useEffect(() => {
@@ -19,7 +19,7 @@ export function Statistics({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.51.122:3004/history')
+        axios.get('http://192.168.7.140:3000/history')
               .then(response => {
                    const data = response.data;
 
