@@ -3,6 +3,7 @@ import { Text, View, Pressable, TextInput, Alert, BackHandler, Image, ScrollView
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -12,9 +13,19 @@ export function Login({ navigation }) {
 
     useFocusEffect(
         React.useCallback(() => {
-            setLogin('');
-            setPassword('');
-        }, [])
+
+            AsyncStorage.getItem('lastLoginTime').then(lastLoginTime => {
+                const timeNow = new Date().getTime();
+                const timeElapsed = timeNow - JSON.parse(lastLoginTime);
+
+                if (timeElapsed < 150000) { // 15 sekund = 15000 milisekund
+                    navigation.navigate("TabNav");
+                } else {
+                    setLogin('');
+                    setPassword('');
+                }
+            });
+        }, [navigation])
     );
 
     const handleLogin = () => {
@@ -30,19 +41,19 @@ export function Login({ navigation }) {
         axios.get('http://192.168.7.140:3000/users')
             .then(response => {
                 const users = response.data;
-                const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
+                 authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
 
-                if (authenticatedUser) {
-                    navigation.navigate("TabNav"); // Zmienić na właściwy cel nawigacyjny
-                } else {
-                    Alert.alert("Error", "Nieprawidłowy login lub hasło");
-                }
+                 if (authenticatedUser) {
+                    // Zapisz aktualny czas jako czas ostatniego logowania
+                    AsyncStorage.setItem('lastLoginTime', JSON.stringify(new Date().getTime()));
+                    navigation.navigate("TabNav");
+                } 
             })
             .catch(error => {
                 Alert.alert("Login Error", error.message);
             });
-
-    };
+            
+        };
 
     React.useEffect(() => {
         const backAction = () => true;
