@@ -17,33 +17,6 @@ export function HomeScreen({ navigation }) {
         }, [])
     );
 
-    const handleJoinAccount = () => {
-        if (!textLogin.trim()) {
-            Alert.alert("Error", "Login is required.");
-            return;
-        }
-        if (!textPassword.trim()) {
-            Alert.alert("Error", "Password is required.");
-            return;
-        }
-
-
-        axios.get('http://192.168.1.12:3000/users')
-            .then(response => {
-                const users = response.data;
-                const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
-
-                if (authenticatedUser) {
-                    navigation.navigate("TaskList");
-                } else {
-
-                    alert("Nieprawidłowy login lub hasło");
-                }
-            })
-
-        navigation.navigate('TabNav');
-    };
-
     React.useEffect(() => {
         const backAction = () => {
             return true;

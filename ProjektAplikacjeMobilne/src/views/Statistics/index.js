@@ -28,7 +28,7 @@ export function Statistics({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.51.122:3004/history')
+        axios.get('http://192.168.7.140:3000/history')
               .then(response => {
                     const stepsArray = response.data.map(item => item.steps);
                     const distArray = response.data.map(item => item.dist);
