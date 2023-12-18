@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from "../views/Login";
 import TabNav from "./Tab";
+import DrawerNav from "./Drawer";
 import { Register } from "../views/Register";
 import { HomeScreen } from '../views/HomeScreen';
 import React from 'react';
@@ -22,6 +23,7 @@ export default function StackNav() {
 
             <Stack.Screen name="Statistics" component={Statistics} options={optionScreen} />
             <Stack.Screen name="Login" component={Login} options={optionScreen} />
+            <Stack.Screen name="DrawerNav" component={DrawerNav} options={optionScreen} />
             <Stack.Screen name="TabNav" component={TabNav} options={optionScreen} />
             <Stack.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
             <Stack.Screen name="Register" component={Register} options={optionScreen} />
