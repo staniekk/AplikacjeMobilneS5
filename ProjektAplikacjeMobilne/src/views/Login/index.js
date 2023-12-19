@@ -20,7 +20,8 @@ export function Login({ navigation }) {
                 const timeElapsed = timeNow - JSON.parse(lastLoginTime);
 
                 if (timeElapsed < 150000) { // 15 sekund = 15000 milisekund
-                    navigation.navigate("BottomTabNav");
+                    //navigation.navigate("BottomTabNav");
+                    ;
                 } else {
                     setLogin('');
                     setPassword('');

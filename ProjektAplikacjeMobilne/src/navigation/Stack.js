@@ -21,7 +21,6 @@ const HomeStackNav = () => {
     return (
         <Stack.Navigator>
             
-            
             <Stack.Screen name="HomeScreenStack" component={HomeScreen} options={optionScreen}/>
             <Stack.Screen name="SummaryStack" component={Summary} options={optionScreen} />
         </Stack.Navigator>
@@ -33,11 +32,20 @@ const MapStackNav = () => {
     return (
         <Stack.Navigator>
             
-            
             <Stack.Screen name="MapStack" component={MapActive} options={optionScreen} />
         </Stack.Navigator>
 
     );
 }
 
-export {HomeStackNav, MapStackNav};
+const SettingsStackNav = () => {
+    return (
+        <Stack.Navigator>
+            
+            <Stack.Screen name="Settings" component={Settings} options={optionScreen} />
+        </Stack.Navigator>
+
+    );
+}
+
+export {HomeStackNav, MapStackNav, SettingsStackNav};

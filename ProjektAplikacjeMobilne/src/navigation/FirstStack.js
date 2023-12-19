@@ -20,7 +20,6 @@ export default function FirstStackNav() {
             
             <FirstStack.Screen name="Login" component={Login} options={optionScreen} />
             <FirstStack.Screen name="Register" component={Register} options={optionScreen} />
-
             <FirstStack.Screen name="DrawerNav" component={DrawerNav} options={optionScreen}/>
         </FirstStack.Navigator>
 

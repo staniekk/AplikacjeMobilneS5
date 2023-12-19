@@ -57,15 +57,6 @@ export function HomeScreen({ navigation }) {
                 <Text style={styles.textInfoAcc}>tip of the day </Text>
                 <Text style={styles.textInfo}>Lorem ipsum lorem ipsum </Text>
 
-                    {/* Settings Icon */}
-                    <Pressable onPress={() => navigation.navigate('Settings')}>
-                    <Image
-                        source={require('../../img/settings_icon.png')} // Update the path as needed
-                        style={{ width: 25, height: 25, marginBottom: 10 }}
-                    />
-                </Pressable>
-
-
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map')}>

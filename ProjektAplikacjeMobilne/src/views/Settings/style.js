@@ -1,35 +1,10 @@
-import { StyleSheet } from "react-native";
-
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    loginBtn: {
-        padding: 5,
-        backgroundColor: '#F4F7F8',
-        width: 150,
-        marginBottom: 10,
-        borderRadius: 30,
-        marginTop: 30
-
-    },
-    loginText: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25
-    },
-    loginTextInput: {
-        color: '#564949',
-        fontWeight: '200',
-        textAlign: 'left',
-        fontSize: 25,
-        elevation: 8,
-        backgroundColor: '#F4F7F8',
-        padding: 10,
-        width: 300,
-        height: 60,
-        marginBottom: 15,
-        borderRadius: 20
-
+    mainContainer: {
+        backgroundColor: '#11B5E4',
+        flex: 1,
+        padding: 30,
     },
     textInfo: {
         color: '#fff',
@@ -38,27 +13,41 @@ export const styles = StyleSheet.create({
         fontSize: 28,
         padding: 30
     },
-    textInfoAcc: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 15
-    },
-    mainContainer:
-    {
-        backgroundColor: '#11B5E4'
 
+    settingItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10,
     },
-    logo: {
 
-        width: 240,
-        height: 200
+    settingText: {
+        color: '#fff',
+        fontSize: 18,
+        marginBottom: 10,
     },
-    FP: {
-        marginTop: 30,
-        width: 55,
-        height: 55
-    }
-
-})
+    input: {
+        color: '#fff',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        borderRadius: 5,
+    },
+    slider: {
+        width: '100%',
+        height: 40,
+    },
+    logoutBtn: {
+        backgroundColor: '#013442',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 20,
+        marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    logoutText: {
+        color: '#FFFFFF',
+        fontSize: 18,
+    },
+});
