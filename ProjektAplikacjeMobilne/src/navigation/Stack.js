@@ -9,7 +9,7 @@ import { Calendar } from '../views/Calendar';
 import { MapActive } from '../views/Map';
 import { Statistics } from '../views/Statistics';
 import { Summary } from '../views/Summary';
-
+import { HistoryS } from '../views/HistoryS';
 
 const Stack = createNativeStackNavigator();
 

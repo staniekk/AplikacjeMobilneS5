@@ -70,6 +70,11 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#11B5E4'
     },
+    licznik: {
+        marginTop: 5,
+        width: 270,
+        height:270
+    },
     logo: {
         marginTop: 50,
         width: 55,

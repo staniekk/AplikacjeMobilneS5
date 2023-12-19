@@ -45,13 +45,10 @@ export function HomeScreen({ navigation }) {
             <View style={{ flex: 5, alignItems: 'center', justifyContent: 'center' }}>
 
                 <Text style={styles.textInfoT}> Today:</Text>
-                <Text style={styles.textInfoT}> 3.16</Text>
+                <Text style={styles.textInfoT}> 3.16 km</Text>
 
-                <TextInput
-                    style={styles.loginTextInput}
-                    onChangeText={setLogin}
-                    value={textLogin}
-                    placeholder='Tutaj będzie ten licznik'
+                <Image style={styles.licznik}
+                    source={require('../../img/logo/licznik.png')}
                 />
 
 
