@@ -64,64 +64,24 @@ export const styles = StyleSheet.create({
     panel: {
         backgroundColor: '#F4F7F8',
         padding: 5,
-        borderRadius: 12,
+        borderRadius: 5,
         elevation: 8,
-        margin: 15,
-        width: Dimensions.get('window').width - 50
+        margin: 10,
+        width: Dimensions.get('window').width - 25
     },
     stats: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: 10,
     },
     statsLeft: {
         flex: 1,
         textAlign: 'left',
-        color: '#564949',
-        fontWeight: 'bold',
-        fontSize: 21,
-        paddingLeft: 10
+        marginRight: 10,
     },
     statsRight: {
         flex: 1,
         textAlign: 'right',
-        paddingRight: 10
     },
-    statsData: {
-        color: '#11B5E4',
-       fontWeight: 'bold',
-       fontSize: 40,
-    },
-    statsUnit: {
-        color: '#564949',
-       fontWeight: 'bold',
-       fontSize: 15,
-    },
-    panelTitle:
-    {
-        textAlign: 'center',
-        color: '#11B5E4',
-        fontWeight: 'bold',
-        fontSize: 40,
-        margin: 12
-    },
-    switcher: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 10,
-        paddingLeft: 75,
-        paddingRight: 75,
-        margin: 6
-    },
-    switcherText: {
-        textAlign: 'center',
-        color: '#11B5E4',
-        fontWeight: 'bold',
-        fontSize: 20,
-    },
-    chart: {
-        width: Dimensions.get('window').width - 80
-    }
 
 })
