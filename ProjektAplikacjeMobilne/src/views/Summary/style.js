@@ -105,5 +105,8 @@ export const styles = StyleSheet.create({
             fontSize: 40,
             margin: 12
         },
+        chart: {
+                  width: Dimensions.get('window').width - 80
+              }
 
 })

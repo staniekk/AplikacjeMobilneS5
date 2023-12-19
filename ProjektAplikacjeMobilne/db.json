@@ -15,6 +15,7 @@
   "history": [
     {
       "id": 1,
+      "type": "passive",
       "speed": 8,
       "dist": 16,
       "time": 2,
@@ -22,6 +23,7 @@
     },
     {
       "id": 2,
+      "type": "run",
       "speed": 4,
       "dist": 12,
       "time": 3,
@@ -29,6 +31,7 @@
     },
     {
       "id": 3,
+      "type": "run",
       "speed": 6.67,
       "dist": 10,
       "time": 1.5,
@@ -36,6 +39,7 @@
     },
     {
       "id": 4,
+      "type": "passive",
       "speed": 6,
       "dist": 12,
       "time": 2,
@@ -43,6 +47,7 @@
     },
     {
       "id": 5,
+      "type": "run",
       "speed": 20,
       "dist": 4,
       "time": 0.2,

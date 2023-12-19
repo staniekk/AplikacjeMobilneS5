@@ -76,6 +76,15 @@ export function Summary({ navigation }) {
                 </View>
             </View>
 
+            {/* Tu muszę umieścić jeszcze mapkę (jakąś?) */}
+            {/*
+            <View style={styles.panel}>
+                <Image style={styles.chart}
+                  source={require('../../img/temp/exampleChart.png')}
+                />
+            </View>
+            */}
+
           </ScrollView>
           </View>
         );

@@ -1,4 +1,4 @@
-import { Text,ScrollView, BackHandler, View, Image } from "react-native";
+import { Text,ScrollView, BackHandler, View, Image, TouchableOpacity } from "react-native";
 import { styles } from "./style";
 import React from "react";
 import axios from 'axios';
@@ -7,6 +7,11 @@ import axios from 'axios';
 
 
 export function Statistics({ navigation }) {
+    const modes = ['All', 'Runs', 'Passive'];
+    const [currentMode, setCurrentMode] = React.useState(0);
+
+    const [data, setData] = React.useState([]);
+
     const [totalSteps, setTotalSteps] = React.useState('');
     const [totalDist, setTotalDist] = React.useState('');
     const [totalTime, setTotalTime] = React.useState('');
@@ -30,6 +35,8 @@ export function Statistics({ navigation }) {
 
         axios.get('http://192.168.51.122:3004/history')
               .then(response => {
+                    const readData = response.data;
+
                     const stepsArray = response.data.map(item => item.steps);
                     const distArray = response.data.map(item => item.dist);
                     const timeArray = response.data.map(item => item.time);
@@ -56,6 +63,8 @@ export function Statistics({ navigation }) {
                     setBestSpeed(maxSpeed);
                     setBestDist(maxDist);
                     setBestTime(maxTime);
+
+                    setData(readData);
               })
               .catch(error => console.error("Błąd podczas pobierania danych: ", error));
 
@@ -70,6 +79,114 @@ export function Statistics({ navigation }) {
                 return '...';
             }
         }
+
+        function whatMode() {
+                    if (currentMode == 'All') {
+                        return 'All activities';
+                    } else {
+                        if (currentMode == 'Runs') {
+                            return 'Just runs';
+                        } else {
+                            return 'Just passive';
+                        }
+                    }
+                }
+
+        const handleModeChange = (dir) => {
+            setCurrentMode((prevMode) => (prevMode + dir + modes.length) % modes.length);
+
+            if (currentMode === 'All')
+            {
+                const stepsArray = response.data.map(item => item.steps);
+                const distArray = response.data.map(item => item.dist);
+                const timeArray = response.data.map(item => item.time);
+
+                const sumSteps = stepsArray.reduce((acc, steps) => acc + steps, 0);
+                const sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
+                const sumTime = timeArray.reduce((acc, time) => acc + time, 0);
+
+                const aveSpeed = sumDist / sumTime;
+                const aveTime = sumTime / timeArray.length;
+
+                const maxSteps = Math.max(...response.data.map(item => item.steps));
+                const maxSpeed = Math.max(...response.data.map(item => item.speed));
+                const maxDist = Math.max(...response.data.map(item => item.dist));
+                const maxTime = Math.max(...response.data.map(item => item.time));
+
+                setTotalSteps(sumSteps);
+                setTotalDist(sumDist);
+                setTotalTime(sumTime);
+                setAvgSpeed(aveSpeed);
+                setAvgTime(aveTime);
+
+                setBestSteps(maxSteps);
+                setBestSpeed(maxSpeed);
+                setBestDist(maxDist);
+                setBestTime(maxTime);
+
+                setCurrentMode('All');
+            } else {
+                if (currentMode === 'Runs') {
+                    const filteredData = data.filter(item => item.type === 'run');
+
+                    const stepsArray = filteredData.map(item => item.steps);
+                    const distArray = filteredData.map(item => item.dist);
+                    const timeArray = filteredData.map(item => item.time);
+
+                    const sumSteps = stepsArray.reduce((acc, steps) => acc + steps, 0);
+                    const sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
+                    const sumTime = timeArray.reduce((acc, time) => acc + time, 0);
+
+                    const aveSpeed = sumDist / sumTime;
+                    const aveTime = sumTime / timeArray.length;
+
+                    const maxSteps = Math.max(...filteredData.map(item => item.steps));
+                    const maxSpeed = Math.max(...filteredData.map(item => item.speed));
+                    const maxDist = Math.max(...filteredData.map(item => item.dist));
+                    const maxTime = Math.max(...filteredData.map(item => item.time));
+
+                    setTotalSteps(sumSteps);
+                    setTotalDist(sumDist);
+                    setTotalTime(sumTime);
+                    setAvgSpeed(aveSpeed);
+                    setAvgTime(aveTime);
+
+                    setBestSteps(maxSteps);
+                    setBestSpeed(maxSpeed);
+                    setBestDist(maxDist);
+                    setBestTime(maxTime);
+                } else {
+                    const filteredData = data.filter(item => item.type === 'passive');
+
+                    const stepsArray = filteredData.map(item => item.steps);
+                    const distArray = filteredData.map(item => item.dist);
+                    const timeArray = filteredData.map(item => item.time);
+
+                    const sumSteps = stepsArray.reduce((acc, steps) => acc + steps, 0);
+                    const sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
+                    const sumTime = timeArray.reduce((acc, time) => acc + time, 0);
+
+                    const aveSpeed = sumDist / sumTime;
+                    const aveTime = sumTime / timeArray.length;
+
+                    const maxSteps = Math.max(...filteredData.map(item => item.steps));
+                    const maxSpeed = Math.max(...filteredData.map(item => item.speed));
+                    const maxDist = Math.max(...filteredData.map(item => item.dist));
+                    const maxTime = Math.max(...filteredData.map(item => item.time));
+
+                    setTotalSteps(sumSteps);
+                    setTotalDist(sumDist);
+                    setTotalTime(sumTime);
+                    setAvgSpeed(aveSpeed);
+                    setAvgTime(aveTime);
+
+                    setBestSteps(maxSteps);
+                    setBestSpeed(maxSpeed);
+                    setBestDist(maxDist);
+                    setBestTime(maxTime);
+                }
+            }
+          };
 
       return (
 
@@ -87,7 +204,24 @@ export function Statistics({ navigation }) {
                   }}>
 
             <View style={styles.panel}>
+                <View style={styles.switcher}>
+                      <TouchableOpacity onPress={() => handleModeChange(-1)}>
+                        <Text style={styles.switcherText}>{'<'}</Text>
+                      </TouchableOpacity>
+
+                      <Text style={styles.switcherText}>{whatMode()}</Text>
+
+                      <TouchableOpacity onPress={() => handleModeChange(1)}>
+                        <Text style={styles.switcherText}>{'>'}</Text>
+                      </TouchableOpacity>
+                </View>
+            </View>
+
+
+            <View style={styles.panel}>
                 <Text style={styles.panelTitle}>Lifetime summary</Text>
+
+
                 <View style={styles.stats}>
                     <Text style={styles.statsLeft}>Steps:</Text>
                     <Text style={styles.statsRight}>
@@ -156,6 +290,13 @@ export function Statistics({ navigation }) {
             </View>
 
             {/* Tu muszę umieścić jeszcze wykres (jakiś?) */}
+            {/*
+            <View style={styles.panel}>
+                <Image style={styles.chart}
+                  source={require('../../img/temp/exampleChart.png')}
+                />
+            </View>
+            */}
 
           </ScrollView>
           </View>

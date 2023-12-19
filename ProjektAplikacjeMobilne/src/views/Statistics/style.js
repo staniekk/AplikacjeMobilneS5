@@ -105,5 +105,23 @@ export const styles = StyleSheet.create({
         fontSize: 40,
         margin: 12
     },
+    switcher: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 10,
+        paddingLeft: 75,
+        paddingRight: 75,
+        margin: 6
+    },
+    switcherText: {
+        textAlign: 'center',
+        color: '#11B5E4',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    chart: {
+        width: Dimensions.get('window').width - 80
+    }
 
 })
