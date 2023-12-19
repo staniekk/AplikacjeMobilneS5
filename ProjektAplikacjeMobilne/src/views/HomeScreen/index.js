@@ -4,6 +4,8 @@ import { Text, View, Pressable, TextInput, Alert, BackHandler, Image } from "rea
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export function HomeScreen({ navigation }) {
@@ -32,7 +34,9 @@ export function HomeScreen({ navigation }) {
     }, []);
 
     return (
+        
         <View style={styles.mainContainer}>
+
 
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Image style={styles.logo}
@@ -42,13 +46,10 @@ export function HomeScreen({ navigation }) {
             <View style={{ flex: 5, alignItems: 'center', justifyContent: 'center' }}>
 
                 <Text style={styles.textInfoT}> Today:</Text>
-                <Text style={styles.textInfoT}> 3.16</Text>
+                <Text style={styles.textInfoT}> 3.16 km</Text>
 
-                <TextInput
-                    style={styles.loginTextInput}
-                    onChangeText={setLogin}
-                    value={textLogin}
-                    placeholder='Tutaj będzie ten licznik'
+                <Image style={styles.licznik}
+                    source={require('../../img/logo/licznik.png')}
                 />
 
 
@@ -77,5 +78,7 @@ export function HomeScreen({ navigation }) {
 
             </View>
         </View>
+      
+        
     );
 }

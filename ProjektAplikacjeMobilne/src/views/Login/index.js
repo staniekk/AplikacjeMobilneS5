@@ -39,7 +39,7 @@ export function Login({ navigation }) {
         //     login: textLogin,
         //     password: textPassword
         // })
-        axios.get('http://192.168.0.8:3000/users')
+         axios.get('http://192.168.0.8:3000/users')
             .then(response => {
                 const users = response.data;
                  authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
@@ -47,7 +47,8 @@ export function Login({ navigation }) {
                  if (authenticatedUser) {
                     // Zapisz aktualny czas jako czas ostatniego logowania
                     AsyncStorage.setItem('lastLoginTime', JSON.stringify(new Date().getTime()));
-                    navigation.navigate("TabNav");
+                    navigation.navigate('DrawerNav');
+                    //navigation.navigate("TabNav");
                 } 
             })
             .catch(error => {

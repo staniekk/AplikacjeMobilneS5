@@ -6,24 +6,14 @@ export const styles = StyleSheet.create({
         padding: 5,
         backgroundColor: '#F4F7F8',
         width: 150,
-        marginBottom: 30,
+        marginBottom: 10,
         borderRadius: 30,
-        marginTop: 30,
-        justifyContent: 'bottom'
+        marginTop: 30
 
-    },
-    drawerBtn: {
-        padding: 5,
-        backgroundColor: '#F4F7F8',
-        width: 150,
-        marginBottom: 0,
-        borderRadius: 30,
-        marginTop: 30,
-        alignItems: "flex-start"
     },
     loginText: {
         color: '#564949',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         textAlign: 'center',
         fontSize: 25
     },
@@ -38,7 +28,6 @@ export const styles = StyleSheet.create({
         width: 300,
         height: 60,
         marginBottom: 15,
-        marginTop: 15,
         borderRadius: 20
 
     },
@@ -46,44 +35,50 @@ export const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 28,
         padding: 30
     },
-    textInfoT: {
-        color: '#fff',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: 28,
-
-    },
     textInfoAcc: {
-        color: '#fff',
-        fontWeight: 'bold',
+        color: '#564949',
+        fontWeight: 'normal',
         textAlign: 'center',
-        fontSize: 15,
+        fontSize: 25,
         marginTop: 15
     },
     mainContainer:
     {
-        flex: 7,
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: '#11B5E4'
-    },
-    licznik: {
-        marginTop: 5,
-        width: 270,
-        height:270
+
     },
     logo: {
-        marginTop: 50,
-        width: 55,
-        height: 45
+
+        width: 240,
+        height: 200
     },
     FP: {
         marginTop: 30,
         width: 55,
         height: 55
+    },
+    historyInfo: {
+        padding: 5,
+        backgroundColor: '#F4F7F8',
+        width: 250,
+        marginBottom: 10,
+        borderRadius: 30,
+        marginTop: 30,
+        fontSize: 15
+    },
+    historyInfoText: {
+        color: '#564949',
+        fontWeight: 'normal',
+        textAlign: 'center',
+        fontSize: 14
+    },
+    historyInfoText2: {
+        color: '#564949',
+        fontWeight: 'normal',
+        textAlign: 'center',
+        fontSize: 10
     }
-
 })
