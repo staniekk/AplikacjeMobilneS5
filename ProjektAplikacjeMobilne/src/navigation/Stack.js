@@ -1,3 +1,4 @@
+// navigation/Stack.js
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from "../views/Login";
 import TabNav from "./Tab";
@@ -8,6 +9,7 @@ import { Calendar } from '../views/Calendar';
 import { MapActive } from '../views/Map';
 import { Statistics } from '../views/Statistics';
 import { Summary } from '../views/Summary';
+import { Settings } from '../views/Settings';
 
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +32,7 @@ export default function StackNav() {
             <Stack.Screen name="Map" component={MapActive} options={optionScreen} />
             <Stack.Screen name="Statistics" component={Statistics} options={optionScreen} />
             <Stack.Screen name="Summary" component={Summary} options={optionScreen} />
+            <Stack.Screen name="Settings" component={Settings} options={optionScreen} />
         </Stack.Navigator>
 
     );

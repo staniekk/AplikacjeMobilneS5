@@ -1,3 +1,4 @@
+// navigation/Tab.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MapActive } from "../views/Map";
@@ -26,6 +27,7 @@ export default function TabNav() {
             <Tab.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
             <Tab.Screen name="Map" component={MapActive} options={optionScreen} />
             <Tab.Screen name="Calendar" component={Calendar} options={optionScreen} />
+
         </Tab.Navigator>
     );
 }

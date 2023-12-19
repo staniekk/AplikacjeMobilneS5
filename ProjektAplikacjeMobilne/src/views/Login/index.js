@@ -1,3 +1,4 @@
+// views/Login/index.js
 import React from 'react';
 import { Text, View, Pressable, TextInput, Alert, BackHandler, Image, ScrollView } from "react-native";
 import { styles } from "./style";
@@ -38,7 +39,7 @@ export function Login({ navigation }) {
         //     login: textLogin,
         //     password: textPassword
         // })
-        axios.get('http://192.168.7.140:3000/users')
+        axios.get('http://192.168.0.8:3000/users')
             .then(response => {
                 const users = response.data;
                  authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
