@@ -1,10 +1,11 @@
+// navigation/Tab.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MapActive } from "../views/Map";
 import { BottomTabIcon } from "../components/BottomTabIcon";
 import { HomeScreen } from '../views/HomeScreen';
 import { Calendar } from '../views/Calendar';
-
+import { HomeStackNav, MapStackNav } from './Stack';
 
 
 const optionScreen = {
@@ -12,20 +13,20 @@ const optionScreen = {
     tabBarShowLabel: false
 }
 
-const Tab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator();
 
-export default function TabNav() {
+export default function BottomTabNav() {
     return (
-        <Tab.Navigator screenOptions={({ route }) => ({
+        <BottomTab.Navigator screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, }) => {
 
                 return <BottomTabIcon routeName={route?.name} focused={focused} />;
             }
         })}>
 
-            <Tab.Screen name="HomeScreen" component={HomeScreen} options={optionScreen} />
-            <Tab.Screen name="Map" component={MapActive} options={optionScreen} />
-            <Tab.Screen name="Calendar" component={Calendar} options={optionScreen} />
-        </Tab.Navigator>
+            <BottomTab.Screen name="HomeScreenTab" component={HomeStackNav} options={optionScreen}/>
+            <BottomTab.Screen name="Map" component={MapStackNav} options={optionScreen}/>
+            <BottomTab.Screen name="Calendar" component={Calendar} options={optionScreen}/>
+        </BottomTab.Navigator>
     );
 }

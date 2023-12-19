@@ -1,4 +1,3 @@
-// views/Login/style.js
 import { StyleSheet } from "react-native";
 
 
@@ -60,6 +59,26 @@ export const styles = StyleSheet.create({
         marginTop: 30,
         width: 55,
         height: 55
+    },
+    historyInfo: {
+        padding: 5,
+        backgroundColor: '#F4F7F8',
+        width: 250,
+        marginBottom: 10,
+        borderRadius: 30,
+        marginTop: 30,
+        fontSize: 15
+    },
+    historyInfoText: {
+        color: '#564949',
+        fontWeight: 'normal',
+        textAlign: 'center',
+        fontSize: 14
+    },
+    historyInfoText2: {
+        color: '#564949',
+        fontWeight: 'normal',
+        textAlign: 'center',
+        fontSize: 10
     }
-
 })

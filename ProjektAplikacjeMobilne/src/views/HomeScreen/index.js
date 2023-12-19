@@ -1,8 +1,11 @@
+// navigation/views/HomeScreen/index.js
 import React from 'react';
 import { Text, View, Pressable, TextInput, Alert, BackHandler, Image } from "react-native";
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export function HomeScreen({ navigation }) {
@@ -16,33 +19,6 @@ export function HomeScreen({ navigation }) {
             setPassword('');
         }, [])
     );
-
-    const handleJoinAccount = () => {
-        if (!textLogin.trim()) {
-            Alert.alert("Error", "Login is required.");
-            return;
-        }
-        if (!textPassword.trim()) {
-            Alert.alert("Error", "Password is required.");
-            return;
-        }
-
-
-        axios.get('http://192.168.1.12:3000/users')
-            .then(response => {
-                const users = response.data;
-                const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
-
-                if (authenticatedUser) {
-                    navigation.navigate("TaskList");
-                } else {
-
-                    alert("Nieprawidłowy login lub hasło");
-                }
-            })
-
-        navigation.navigate('TabNav');
-    };
 
     React.useEffect(() => {
         const backAction = () => {
@@ -58,7 +34,9 @@ export function HomeScreen({ navigation }) {
     }, []);
 
     return (
+        
         <View style={styles.mainContainer}>
+
 
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Image style={styles.logo}
@@ -68,13 +46,10 @@ export function HomeScreen({ navigation }) {
             <View style={{ flex: 5, alignItems: 'center', justifyContent: 'center' }}>
 
                 <Text style={styles.textInfoT}> Today:</Text>
-                <Text style={styles.textInfoT}> 3.16</Text>
+                <Text style={styles.textInfoT}> 3.16 km</Text>
 
-                <TextInput
-                    style={styles.loginTextInput}
-                    onChangeText={setLogin}
-                    value={textLogin}
-                    placeholder='Tutaj będzie ten licznik'
+                <Image style={styles.licznik}
+                    source={require('../../img/logo/licznik.png')}
                 />
 
 
@@ -94,5 +69,7 @@ export function HomeScreen({ navigation }) {
 
             </View>
         </View>
+      
+        
     );
 }
