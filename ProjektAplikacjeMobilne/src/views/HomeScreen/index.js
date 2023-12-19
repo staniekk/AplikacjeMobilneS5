@@ -3,6 +3,8 @@ import { Text, View, Pressable, TextInput, Alert, BackHandler, Image } from "rea
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export function HomeScreen({ navigation }) {
@@ -31,7 +33,9 @@ export function HomeScreen({ navigation }) {
     }, []);
 
     return (
+        
         <View style={styles.mainContainer}>
+
 
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Image style={styles.logo}
@@ -67,5 +71,7 @@ export function HomeScreen({ navigation }) {
 
             </View>
         </View>
+      
+        
     );
 }

@@ -12,6 +12,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'bottom'
 
     },
+    drawerBtn: {
+        padding: 5,
+        backgroundColor: '#F4F7F8',
+        width: 150,
+        marginBottom: 0,
+        borderRadius: 30,
+        marginTop: 30,
+        alignItems: "flex-start"
+    },
     loginText: {
         color: '#564949',
         fontWeight: 'bold',

@@ -1,12 +1,12 @@
-import { Pressable, TouchableHighlight } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Pressable, TouchableHighlight, Text, View } from "react-native";
+
 
 export function Settings() {
     return(
-        <ScrollView>
+        <View>
             <Pressable>
                 <Text>Hello</Text>
             </Pressable>
-        </ScrollView>
+        </View>
     );
 }

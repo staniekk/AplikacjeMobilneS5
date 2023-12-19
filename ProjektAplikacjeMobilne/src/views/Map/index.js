@@ -1,4 +1,4 @@
-import { Text, ScrollView, BackHandler } from "react-native";
+import { Text, ScrollView, BackHandler, StyleSheet, Image } from "react-native";
 import { styles } from "./style";
 import React from "react";
 
@@ -27,7 +27,23 @@ export function MapActive({ navigation }) {
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
-      <Text style={styles.textInfo}>Cześć tutaj zrób Mapę</Text>
+      <Image
+        source={require('../../img/temp/temp.png')} // replace with your image URL
+        style={tempStyle.image}
+      />
     </ScrollView>
   );
 }
+
+const tempStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 300,
+    height: 300,
+    resizeMode: 'cover', // or 'contain' or 'stretch'
+  },
+});

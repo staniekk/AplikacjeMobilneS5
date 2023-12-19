@@ -19,7 +19,7 @@ export function Register({ navigation }) {
 
     const checkUserExists = async (username) => {
         try {
-            const response = await axios.get('http://192.168.7.140:3000/users');
+            const response = await axios.get('http://192.168.0.17:3000/users');
             const users = response.data;
             return users.some(user => user.login === username);
         } catch (error) {
