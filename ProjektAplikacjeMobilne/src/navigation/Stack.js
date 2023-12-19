@@ -1,8 +1,6 @@
 // navigation/Stack.js
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from "../views/Login";
-import TabNav from "./BottomTab";
-import DrawerNav from "./Drawer";
 import { Register } from "../views/Register";
 import { HomeScreen } from '../views/HomeScreen';
 import React from 'react';

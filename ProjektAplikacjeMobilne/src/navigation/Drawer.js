@@ -19,7 +19,7 @@ export default function DrawerNav() {
             <Drawer.Screen name="Home" component={BottomTabNav} options={optionScreen}/>
             <Drawer.Screen name="History" component={HistoryS} options={optionScreen}/>
             <Drawer.Screen name="Statistics" component={Statistics} options={optionScreen}/>
-            <Drawer.Screen name="Settings" component={Settings} options={optionScreen}/>
+            {/*<Drawer.Screen name="Settings" component={Settings} options={optionScreen}/>*/}
 
         </Drawer.Navigator>
       );
