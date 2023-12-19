@@ -9,8 +9,8 @@ export function Settings({ navigation }) {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext); // Get isDarkMode and toggleTheme
     const [volume, setVolume] = useState(50); // State for volume slider
     const [dailyStepsGoal, setDailyStepsGoal] = useState('10000'); // State for daily steps goal
-    const [pauseTime, setPauseTime] = useState(''); // State for pause time
-    const [finishTime, setFinishTime] = useState(''); // State for finish time
+    const [pauseTime, setPauseTime] = useState('10'); // State for pause time
+    const [finishTime, setFinishTime] = useState('120'); // State for finish time
 
 
     const handleLogout = async () => {
@@ -36,7 +36,8 @@ export function Settings({ navigation }) {
     }, []);
 
     return (
-        <ScrollView style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
+        <View style={styles.container}>
+            <ScrollView style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
             <Text style={styles.textInfo}>Settings</Text>
 
             {/* Dark Theme Toggle */}
@@ -75,33 +76,35 @@ export function Settings({ navigation }) {
 
             {/* Pause Time Input */}
             <View style={styles.settingItem}>
-                <Text style={styles.settingText}>Pause Time</Text>
+                <Text style={styles.settingText}>Pause Time (s)</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setPauseTime}
                     value={pauseTime}
                     placeholderTextColor="#FFFFFF"
-                    placeholder="HH:MM"
                 />
             </View>
 
             {/* Finish Time Input */}
             <View style={styles.settingItem}>
-                <Text style={styles.settingText}>Finish Time</Text>
+                <Text style={styles.settingText}>Finish Time (s)</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={setFinishTime}
                     value={finishTime}
                     placeholderTextColor="#FFFFFF"
-                    placeholder="HH:MM"
                 />
             </View>
 
+            </ScrollView>
 
-            <Pressable style={styles.logoutBtn} onPress={handleLogout}>
-                <Text style={styles.logoutText}>Log out</Text>
-            </Pressable>
+
+            <View style={styles.footer}>
+                <Pressable style={styles.logoutBtn} onPress={handleLogout}>
+                    <Text style={styles.logoutText}>Log out</Text>
+                </Pressable>
+            </View>
+        </View>
         
-        </ScrollView>
     );
 }
