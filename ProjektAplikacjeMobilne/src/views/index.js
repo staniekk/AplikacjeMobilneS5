@@ -5,8 +5,7 @@ import { Calendar } from "./Calendar";
 import { HomeScreen } from "./HomeScreen";
 import { Statistics } from "./Statistics";
 import { Summary } from "./Summary";
-import { Settings } from "./Settings";
 import { HistoryS } from "./HistoryS";
 
 
-export { Login, Register, MapActive, Calendar, HomeScreen, Statistics, Summary, Settings, HistoryS }
+export { Login, Register, MapActive, Calendar, HomeScreen, Statistics, Summary, HistoryS }
