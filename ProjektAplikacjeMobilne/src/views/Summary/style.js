@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Dimensions } from 'react-native';
 
 
 export const styles = StyleSheet.create({
@@ -52,6 +51,7 @@ export const styles = StyleSheet.create({
 
     },
     logo: {
+
         marginTop: 50,
         width: 55,
         height: 45
@@ -62,51 +62,24 @@ export const styles = StyleSheet.create({
         height: 55
     },
     panel: {
-            backgroundColor: '#F4F7F8',
-            padding: 5,
-            borderRadius: 12,
-            elevation: 8,
-            margin: 15,
-            width: Dimensions.get('window').width - 50
-        },
+        backgroundColor: '#F4F7F8',
+        padding: 25,
+        borderRadius: 5,
+        elevation: 3
+    },
     stats: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 5,
-        },
-        statsLeft: {
-            flex: 1,
-            textAlign: 'left',
-            color: '#564949',
-            fontWeight: 'bold',
-            fontSize: 21,
-            paddingLeft: 10
-        },
-        statsRight: {
-            flex: 1,
-            textAlign: 'right',
-            paddingRight: 10
-        },
-        statsData: {
-            color: '#11B5E4',
-           fontWeight: 'bold',
-           fontSize: 40,
-        },
-        statsUnit: {
-            color: '#564949',
-           fontWeight: 'bold',
-           fontSize: 15,
-        },
-        panelTitle:
-        {
-            textAlign: 'center',
-            color: '#11B5E4',
-            fontWeight: 'bold',
-            fontSize: 40,
-            margin: 12
-        },
-        chart: {
-                  width: Dimensions.get('window').width - 80
-              }
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    },
+    statsLeft: {
+        flex: 1,
+        textAlign: 'left',
+        marginRight: 10,
+    },
+    statsRight: {
+        flex: 1,
+        textAlign: 'right',
+    },
 
 })
