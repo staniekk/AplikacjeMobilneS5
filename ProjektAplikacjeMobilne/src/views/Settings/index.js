@@ -1,11 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, BackHandler, Switch} from 'react-native';
 import { styles } from './style';
-import { ThemeProvider, ThemeContex } from '../../Constants/ThemeContext';
-
-
-
-
 
 
 export function Settings() {
@@ -13,8 +8,6 @@ export function Settings() {
         const backAction = () => {
           return true;
         };
-        
-        const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
         const backHandler = BackHandler.addEventListener(
           "hardwareBackPress",
@@ -27,8 +20,6 @@ export function Settings() {
         <ScrollView style={styles.mainContainer}
                 keyboardShouldPersistTaps='handled'>
                 
-                <Switch onValueChange={toggleTheme} value={isDarkMode} />
-
           <Text style={styles.textInfo}>Ustawienia</Text>
         </ScrollView>
       );
