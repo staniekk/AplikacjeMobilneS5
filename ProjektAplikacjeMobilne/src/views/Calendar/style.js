@@ -1,64 +1,93 @@
-import { StyleSheet } from "react-native";
-
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    loginBtn: {
-        padding: 5,
-        backgroundColor: '#F4F7F8',
-        width: 150,
-        marginBottom: 10,
-        borderRadius: 30,
-        marginTop: 30
-
-    },
-    loginText: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25
-    },
-    loginTextInput: {
-        color: '#564949',
-        fontWeight: '200',
-        textAlign: 'left',
-        fontSize: 25,
-        elevation: 8,
-        backgroundColor: '#F4F7F8',
-        padding: 10,
-        width: 300,
-        height: 60,
-        marginBottom: 15,
-        borderRadius: 20
-
-    },
-    textInfo: {
-        color: '#fff',
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  textInfo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  calendarContainer: {
+    alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    width: 300,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  modalButton: {
+    backgroundColor: '#11B5E4',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  modalButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  saveButton: {
+    backgroundColor: '#013442', 
+    padding: 10,
+    borderRadius: 5,
+    width: '45%', 
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  closeButton: {
+    backgroundColor: '#aaa', 
+    padding: 10,
+    borderRadius: 5,
+    width: '45%', 
+    alignItems: 'center',
+  },
+  closeButtonText: {
+    color: 'white', 
+    fontWeight: 'bold',
+  },
+  dateText: {
+    fontSize: 16, 
+    fontWeight: 'bold',
+    marginBottom: 10, 
+    color: '#333',
+  },
+  calendarTitle: {
+    fontSize: 20,
         fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
         textAlign: 'center',
-        fontSize: 28,
-        padding: 30
-    },
-    textInfoAcc: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 15
-    },
-    mainContainer:
-    {
-        backgroundColor: '#11B5E4'
-
-    },
-    logo: {
-
-        width: 240,
-        height: 200
-    },
-    FP: {
-        marginTop: 30,
-        width: 55,
-        height: 55
-    }
-
-})
+        color: 'white',
+  },
+});

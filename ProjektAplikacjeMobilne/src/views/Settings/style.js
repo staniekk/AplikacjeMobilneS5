@@ -10,11 +10,11 @@ export const styles = StyleSheet.create({
         padding: 30,
     },
     textInfo: {
-        color: '#fff',
+        fontSize: 20,
         fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
         textAlign: 'center',
-        fontSize: 28,
-        padding: 30,
     },
 
     settingItem: {
@@ -23,6 +23,24 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
     },
+    calendarContainer: {
+        alignSelf: 'center',
+        marginTop: 10,
+      },
+    
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+      
+      modalContent: {
+        backgroundColor: '#FFF',
+        padding: 20,
+        borderRadius: 10,
+        width: '80%',
+      },
 
     settingText: {
         color: '#fff',

@@ -9,7 +9,7 @@ const HistoryS = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://192.168.7.140:3000/history')
+    axios.get('http://192.168.127.142:3000/history')
       .then(response => {
         setHistory(response.data);
         setLoading(false);

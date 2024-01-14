@@ -10,6 +10,11 @@
       "login": "123",
       "password": "123",
       "id": 2
+    },
+    {
+      "login": "q",
+      "password": "q",
+      "id": 3
     }
   ],
   "history": [
