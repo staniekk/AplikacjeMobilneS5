@@ -19,7 +19,7 @@ export function Register({ navigation }) {
 
     const checkUserExists = async (username) => {
         try {
-            const response = await axios.get('http://192.168.0.8:3000/users');
+            const response = await axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users');
             const users = response.data;
             return users.some(user => user.login === username);
         } catch (error) {
@@ -50,7 +50,7 @@ export function Register({ navigation }) {
         if (userExists) {
             Alert.alert("Error", "Username already exists. Please choose a different one.");
         } else {
-            axios.post('http://192.168.0.8:3000/users', {
+            axios.post('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users', {
                 login: textLoginR,
                 password: textPasswordR
             })
@@ -63,9 +63,6 @@ export function Register({ navigation }) {
                 });
         }
     };
-
-
-
 
 
 

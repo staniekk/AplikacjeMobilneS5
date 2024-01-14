@@ -40,7 +40,7 @@ export function Login({ navigation }) {
         //     login: textLogin,
         //     password: textPassword
         // })
-         axios.get('http://192.168.0.8:3000/users')
+         axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users')
             .then(response => {
                 const users = response.data;
                  authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);

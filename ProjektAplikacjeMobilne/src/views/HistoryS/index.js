@@ -9,7 +9,7 @@ const HistoryS = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://192.168.127.142:3000/history')
+    axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history')
       .then(response => {
         setHistory(response.data);
         setLoading(false);

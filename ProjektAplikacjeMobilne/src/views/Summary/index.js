@@ -19,7 +19,7 @@ export function Summary({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.7.140:3000/history')
+        axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history')
               .then(response => {
                    const data = response.data;
 

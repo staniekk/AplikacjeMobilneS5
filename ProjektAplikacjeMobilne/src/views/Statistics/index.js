@@ -28,7 +28,7 @@ export function Statistics({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.0.17:3000/history')
+        axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history')
               .then(response => {
                     const stepsArray = response.data.map(item => item.steps);
                     const distArray = response.data.map(item => item.dist);
