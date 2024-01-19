@@ -33,17 +33,8 @@ export function Login({ navigation }) {
             Alert.alert("Error", "Login and password are required.");
             return;
         }
-<<<<<<< Updated upstream
-        // // Walidacja loginu i hasła
-        // apiClient.post('/login', {
-        //     login: textLogin,
-        //     password: textPassword
-        // })
-        axios.get('http://192.168.7.140:3000/users')
-=======
         
-         axios.get('http://192.168.7.140:3000/users')
->>>>>>> Stashed changes
+         axios.get('http://192.168.221.140:3000/users')
             .then(response => {
                 const users = response.data;
                  authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
@@ -51,12 +42,8 @@ export function Login({ navigation }) {
                  if (authenticatedUser) {
                     // Zapisz aktualny czas jako czas ostatniego logowania
                     AsyncStorage.setItem('lastLoginTime', JSON.stringify(new Date().getTime()));
-<<<<<<< Updated upstream
-                    navigation.navigate("TabNav");
-=======
                     navigation.navigate('DrawerNav');
                     
->>>>>>> Stashed changes
                 } 
             })
             .catch(error => {

@@ -19,7 +19,7 @@ export function Summary({ navigation }) {
           backAction
         );
 
-        axios.get('http://192.168.7.140:3000/history')
+        axios.get('http://192.168.221.140:3000/history')
               .then(response => {
                    const data = response.data;
 
