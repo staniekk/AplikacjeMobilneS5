@@ -2,11 +2,12 @@ import { Text, ScrollView, BackHandler, StyleSheet, Image } from "react-native";
 import { styles } from "./style";
 import React from "react";
 
-
-
 const MapActive = ({ navigation, route }) => {
-  const { shouldRun } = route.params?.shouldRun;
+  // Provide a default value for route.params
+  const { shouldRun } = route.params || { shouldRun: false };
+
   console.log(shouldRun);
+
   React.useEffect(() => {
     const backAction = () => {
       return true;
@@ -20,42 +21,31 @@ const MapActive = ({ navigation, route }) => {
     return () => backHandler.remove();
   }, []);
 
-  if(shouldRun === true){
-    return (
-      <ScrollView style={styles.mainContainer}
-              keyboardShouldPersistTaps='handled'
-              contentContainerStyle={{
-                  flexGrow: 1,
-                  flex: 6,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-              }}>
-        <Image
-          source={require('../../img/temp/temp.png')} // replace with your image URL
-          style={tempStyle.image}
-        />
-      </ScrollView>
-    ) ;
-  }
-  else{
-    return (
-      <ScrollView style={styles.mainContainer}
-              keyboardShouldPersistTaps='handled'
-              contentContainerStyle={{
-                  flexGrow: 1,
-                  flex: 6,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-              }}>
-        <Text>AAA</Text>
-      </ScrollView>
-    ) ;
-  }
- 
+  const content = shouldRun ? (
+    <Image
+      source={require('../../img/temp/temp.png')} // replace with your image URL
+      style={tempStyle.image}
+    />
+  ) : (
+    <Text>AAA</Text>
+  );
 
+  return (
+    <ScrollView 
+      style={styles.mainContainer}
+      keyboardShouldPersistTaps='handled'
+      contentContainerStyle={{
+          flexGrow: 1,
+          flex: 6,
+          alignItems: 'center',
+          justifyContent: 'center',
+      }}>
+      {content}
+    </ScrollView>
+  );
 }
 
-export {MapActive};
+export { MapActive };
 
 const tempStyle = StyleSheet.create({
   container: {
