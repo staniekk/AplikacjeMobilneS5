@@ -56,10 +56,10 @@ export const styles = StyleSheet.create({
     },
     footprint: {
 
-        width: 55.2,
-        height: 78.4,
+        width: 69,
+        height: 98,
         position: 'absolute', 
-        top: -30,
+        top: -45,
         resizeMode: 'contain',
          
     },

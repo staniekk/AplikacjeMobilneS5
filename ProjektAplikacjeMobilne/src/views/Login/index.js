@@ -16,7 +16,7 @@ export function Login({ navigation }) {
                 const timeNow = new Date().getTime();
                 const timeElapsed = timeNow - JSON.parse(lastLoginTime);
 
-                if (timeElapsed >= 150000) {
+                if (timeElapsed >= 1500000) {
                     setLogin('');
                     setPassword('');
                 }

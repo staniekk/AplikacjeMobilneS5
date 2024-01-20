@@ -2,83 +2,63 @@ import { StyleSheet } from "react-native";
 
 
 export const styles = StyleSheet.create({
-    loginBtn: {
-        padding: 5,
-        backgroundColor: '#F4F7F8',
-        width: 150,
-        marginBottom: 10,
-        borderRadius: 30,
-        marginTop: 30
 
-    },
-    loginText: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25
-    },
-    loginTextInput: {
-        color: '#564949',
-        fontWeight: '200',
-        textAlign: 'left',
-        fontSize: 25,
-        elevation: 8,
-        backgroundColor: '#F4F7F8',
-        padding: 10,
-        width: 300,
-        height: 60,
-        marginBottom: 15,
-        borderRadius: 20
-
-    },
-    textInfo: {
-        color: '#fff',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: 28,
-        padding: 30
-    },
-    textInfoAcc: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 15
-    },
-    mainContainer:
-    {
-        backgroundColor: '#11B5E4'
-
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#11B5E4', 
+        paddingTop: 40, 
+        paddingBottom:40,
     },
     logo: {
-
-        width: 240,
-        height: 200
-    },
-    FP: {
-        marginTop: 30,
+        marginBottom:15,
         width: 55,
-        height: 55
+        height: 45
     },
+    runner: {
+
+        width: 49.48,
+        height: 64,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+   
     historyInfo: {
-        padding: 5,
-        backgroundColor: '#F4F7F8',
-        width: 250,
-        marginBottom: 10,
-        borderRadius: 30,
-        marginTop: 30,
-        fontSize: 15
+        backgroundColor: '#FFFFFF', 
+        width: '85%', 
+        borderRadius: 25, 
+        marginVertical: 10, 
+        padding: 15, 
+        shadowColor: '#000', 
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1, 
+        shadowRadius: 5, 
+        elevation: 3, 
+        
+    },
+    historyInfo2: {
+        backgroundColor: '#b1e1f0', 
+        width: '100%', 
+        borderRadius: 25, 
+        padding: 10, 
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row', // Dodać tę linię
+       
+       
+        
     },
     historyInfoText: {
-        color: '#564949',
-        fontWeight: 'normal',
+        color: '#034748', 
+        fontSize: 16, 
+        fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 14
+        marginBottom: 15, 
     },
+
     historyInfoText2: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 10
-    }
+        
+        color: '#034748',
+        fontSize: 14, 
+        textAlign: 'center', 
+    },
 })
