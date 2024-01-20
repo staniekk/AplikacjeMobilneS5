@@ -37,7 +37,7 @@ const MapActive = ({ navigation, route }) => {
   const followLocation = () => {
     console.log(location.latitude + ' aa');
     mapRef.current.animateCamera({center:{
-      latitude: location?.latitude || initialRegion.latitude , longitude: location?.longitude || initialRegion.longitude, 
+      latitude: location?.coords.latitude || initialRegion.latitude , longitude: location?.coords.longitude || initialRegion.longitude, 
       latitudeDelta:initialRegion.latitudeDelta, longitudeDelta: initialRegion.longitudeDelta}},
       {duration:  200})
     }
