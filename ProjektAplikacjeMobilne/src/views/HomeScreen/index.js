@@ -1,47 +1,22 @@
-// navigation/views/HomeScreen/index.js
-import React, {useState,useEffect} from 'react';
-import { Text, View, Pressable, TextInput, Alert, BackHandler, Image } from "react-native";
-import { styles } from "./style";
-import { Pedometer } from 'expo-sensors';
+// HomeScreen.js
+import React, { useContext, useEffect } from 'react';
+import { Text, View, Pressable, Image, BackHandler } from 'react-native';
+import { styles } from './style';
+import { StepContext } from '../StepContext';
 
 export function HomeScreen({ navigation }) {
+  const { currentStepCount, isPedometerAvailable } = useContext(StepContext);
 
-    const [currentStepCount, setCurrentStepCount] = useState(0);
+  useEffect(() => {
+    const backAction = () => {
+      return true;
+    };
 
-    useEffect(() => {
-        const subscription = Pedometer.watchStepCount(result => {
-            setCurrentStepCount(result.steps);
-        });
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => backHandler.remove();
+  }, []);
 
-        Pedometer.isAvailableAsync().then(
-            available => {
-                if (!available) {
-                    Alert.alert("Pedometer", "Pedometr niedostępny na tym urządzeniu");
-                }
-            },
-            error => {
-                Alert.alert("Pedometer", "Błąd związany ze sprawdzaniem dostępności");
-            }
-        );
-
-        return () => subscription.remove();
-    }, []);
-
-
-    React.useEffect(() => {
-        const backAction = () => {
-            return true;
-        };
-
-        const backHandler = BackHandler.addEventListener(
-            "hardwareBackPress",
-            backAction
-        );
-
-        return () => backHandler.remove();
-    }, []);
-
-    const distance = (currentStepCount / 2000).toFixed(2); 
+  const distance = (currentStepCount / 2000).toFixed(2);
     
     return (
         
@@ -62,6 +37,9 @@ export function HomeScreen({ navigation }) {
                 <Image style={styles.footprint}
                     source={require('../../img/logo/footprint.png')}
                 />
+                 
+                 <Text>Dostępność pedometru: {isPedometerAvailable}</Text>
+      <Text>Walk! And watch this go up: {currentStepCount}</Text>
                 <Text style={styles.stepCount}>{currentStepCount}</Text>
                 <View style={styles.line} />
                 <Text style={styles.goalText}>8000</Text>
