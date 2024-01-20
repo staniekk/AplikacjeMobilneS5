@@ -1,12 +1,10 @@
-// views/Login/index.js
 import React from 'react';
-import { Text, View, Pressable, TextInput, Alert, BackHandler, Image, ScrollView } from "react-native";
+import { Text, TextInput, Pressable, Alert, BackHandler, Image, ScrollView } from "react-native";
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import * as LocalAuthentication from 'expo-local-authentication';
 
 export function Login({ navigation }) {
     const [textLogin, setLogin] = React.useState('');
@@ -14,49 +12,66 @@ export function Login({ navigation }) {
 
     useFocusEffect(
         React.useCallback(() => {
-
             AsyncStorage.getItem('lastLoginTime').then(lastLoginTime => {
                 const timeNow = new Date().getTime();
                 const timeElapsed = timeNow - JSON.parse(lastLoginTime);
 
-                if (timeElapsed < 150000) { // 15 sekund = 15000 milisekund
-                    //navigation.navigate("BottomTabNav");
-                    ;
-                } else {
+                if (timeElapsed >= 150000) {
                     setLogin('');
                     setPassword('');
                 }
             });
-        }, [navigation])
+        }, [])
     );
+
+    const authenticateBiometrics = async () => {
+        const compatible = await LocalAuthentication.hasHardwareAsync();
+        if (!compatible) {
+            Alert.alert('Urządzenie jest nie przystosowane');
+            return;
+        }
+
+        const enrolled = await LocalAuthentication.isEnrolledAsync();
+        if (!enrolled) {
+            Alert.alert('Nie ma ustawionego przycisku palca');
+            return;
+        }
+
+        const result = await LocalAuthentication.authenticateAsync({
+            promptMessage: 'Uwierzytelnij',
+            cancelLabel: 'Anuluj',
+            fallbackLabel: 'Wpisz hasło ręcznie',
+        });
+
+        if (result.success) {
+            navigation.navigate('DrawerNav');
+        } else {
+            Alert.alert('Błąd uwierzytelnienia', 'Spróbuj jeszcze raz lub wpisz hasło ręcznie.');
+        }
+    };
 
     const handleLogin = () => {
         if (!textLogin.trim() || !textPassword.trim()) {
             Alert.alert("Error", "Login and password are required.");
             return;
         }
-        // // Walidacja loginu i hasła
-        // apiClient.post('/login', {
-        //     login: textLogin,
-        //     password: textPassword
-        // })
-         axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users')
+
+        axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users')
             .then(response => {
                 const users = response.data;
-                 authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
+                const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
 
-                 if (authenticatedUser) {
-                    // Zapisz aktualny czas jako czas ostatniego logowania
+                if (authenticatedUser) {
                     AsyncStorage.setItem('lastLoginTime', JSON.stringify(new Date().getTime()));
                     navigation.navigate('DrawerNav');
-                    //navigation.navigate("TabNav");
-                } 
+                } else {
+                    Alert.alert("Error", "Login or password mismatch.");
+                }
             })
             .catch(error => {
                 Alert.alert("Login Error", error.message);
             });
-            
-        };
+    };
 
     React.useEffect(() => {
         const backAction = () => true;
@@ -96,24 +111,15 @@ export function Login({ navigation }) {
             />
             <Pressable style={styles.loginBtn} onPress={handleLogin}>
                 <Text style={styles.loginText}>Log in!</Text>
-            </Pressable >
+            </Pressable>
             <Pressable onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.textInfoAcc}>Don't have an account? </Text>
             </Pressable>
 
-            <Pressable >
-
+            <Pressable onPress={authenticateBiometrics}>
                 <Image style={styles.FP}
                     source={require('../../img/logo/FP.png')} />
             </Pressable>
-
-
-            {/* <Pressable style={styles.textInfo} onPress={() => navigation.navigate('TabNav')}>
-                <Text>Go to Home screen</Text>
-            </Pressable> */}
-
-
         </ScrollView>
-
     );
 }
