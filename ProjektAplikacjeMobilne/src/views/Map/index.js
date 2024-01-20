@@ -1,18 +1,47 @@
-import { Text, ScrollView, BackHandler, StyleSheet, Image } from "react-native";
+import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert } from "react-native";
 import { styles } from "./style";
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
+import * as Location from 'expo-location';
+import { Accelerometer } from 'expo-sensors';
+import MapView, { Callout, Marker } from 'react-native-maps';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MapActive = ({ navigation, route }) => {
-  // Provide a default value for route.params
-  const { shouldRun } = route.params;
-
+  
+  const mapRef = useRef();
+  const [ shouldRun, setShouldRun] = useState([route.params]) ;
+  const [ {x, y, z}, setData] = useState({x:0, y:0, z:0});
+  const [location, setLocation] = useState();
   console.log(shouldRun);
 
-  React.useEffect(() => {
+  const onRegionChange = (region) => {
+    console.log("Region");
+    console.log(region);
+  }
+
+
+  /*//Location
+  useEffect(() =>{
+    const getPermissions = async () =>{
+      let {status} = await Location.requestBackgroundPermissionsAsync();
+      if(status !== 'granted'){
+        return <Alert>Please grant permission for the Location</Alert> 
+      }
+
+      let currentLocation = await Location.getCurrentPositionAsync({});
+      setLocation(currentLocation);
+      console.log("location:");
+      console.log(location);
+      getPermissions();
+   }
+  }, [])*/
+
+  //Back button
+  useEffect(() => {
     const backAction = () => {
       return true;
     };
-
+    
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
       backAction
@@ -21,13 +50,28 @@ const MapActive = ({ navigation, route }) => {
     return () => backHandler.remove();
   }, []);
 
+
+  //Content
   const content = shouldRun ? (
-    <Image
-      source={require('../../img/temp/temp.png')} // replace with your image URL
-      style={tempStyle.image}
-    />
+    <View style={styles.mainContainer}>
+       <MapView
+        ref={mapRef} 
+        style={styles.map}
+        onRegionChange={onRegionChange}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+       >
+      </MapView>
+    </View>
+   
   ) : (
-    <Text>AAA</Text>
+    <View>
+      <Text>{shouldRun.toString()} AAA</Text>
+    </View>
   );
 
   return (
@@ -46,16 +90,3 @@ const MapActive = ({ navigation, route }) => {
 }
 
 export { MapActive };
-
-const tempStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: 300,
-    height: 300,
-    resizeMode: 'cover', // or 'contain' or 'stretch'
-  },
-});
