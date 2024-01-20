@@ -4,7 +4,7 @@ import React from "react";
 
 const MapActive = ({ navigation, route }) => {
   // Provide a default value for route.params
-  const { shouldRun } = route.params || { shouldRun: false };
+  const { shouldRun } = route.params;
 
   console.log(shouldRun);
 
