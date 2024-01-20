@@ -1,8 +1,8 @@
 import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert } from "react-native";
 import { styles } from "./style";
 import React, { useRef, useEffect, useState } from "react";
-import * as Location from 'expo-location';
-import { Accelerometer } from 'expo-sensors';
+//import * as Location from 'expo-location';
+//import { Accelerometer } from 'expo-sensors';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { SafeAreaView } from "react-native-safe-area-context";
 
