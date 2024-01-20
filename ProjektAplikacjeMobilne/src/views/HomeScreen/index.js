@@ -58,8 +58,8 @@ export function HomeScreen({ navigation }) {
                 <Text style={styles.textInfo}>Lorem ipsum lorem ipsum </Text>
 
                 </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map')}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
+                <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map', {shouldRun:true})}>
                     <Text style={styles.loginText}>Run!</Text>
                 </Pressable >
 

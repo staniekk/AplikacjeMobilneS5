@@ -32,7 +32,7 @@ const MapStackNav = () => {
     return (
         <Stack.Navigator>
             
-            <Stack.Screen name="MapStack" component={MapActive} options={optionScreen} />
+            <Stack.Screen name="MapStack" component={MapActive} options={{optionScreen:{headerShown:false}, initialParams:{shouldRun: false}}} />
         </Stack.Navigator>
 
     );

@@ -4,8 +4,9 @@ import React from "react";
 
 
 
-
-export function MapActive({ navigation }) {
+const MapActive = ({ navigation, route }) => {
+  const { shouldRun } = route.params?.shouldRun;
+  console.log(shouldRun);
   React.useEffect(() => {
     const backAction = () => {
       return true;
@@ -18,22 +19,43 @@ export function MapActive({ navigation }) {
 
     return () => backHandler.remove();
   }, []);
-  return (
-    <ScrollView style={styles.mainContainer}
-            keyboardShouldPersistTaps='handled'
-            contentContainerStyle={{
-                flexGrow: 1,
-                flex: 6,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-      <Image
-        source={require('../../img/temp/temp.png')} // replace with your image URL
-        style={tempStyle.image}
-      />
-    </ScrollView>
-  );
+
+  if(shouldRun === true){
+    return (
+      <ScrollView style={styles.mainContainer}
+              keyboardShouldPersistTaps='handled'
+              contentContainerStyle={{
+                  flexGrow: 1,
+                  flex: 6,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+              }}>
+        <Image
+          source={require('../../img/temp/temp.png')} // replace with your image URL
+          style={tempStyle.image}
+        />
+      </ScrollView>
+    ) ;
+  }
+  else{
+    return (
+      <ScrollView style={styles.mainContainer}
+              keyboardShouldPersistTaps='handled'
+              contentContainerStyle={{
+                  flexGrow: 1,
+                  flex: 6,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+              }}>
+        <Text>AAA</Text>
+      </ScrollView>
+    ) ;
+  }
+ 
+
 }
+
+export {MapActive};
 
 const tempStyle = StyleSheet.create({
   container: {
