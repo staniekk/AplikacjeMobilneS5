@@ -1,10 +1,11 @@
 import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert } from "react-native";
 import { styles } from "./style";
 import React, { useRef, useEffect, useState } from "react";
-//import * as Location from 'expo-location';
+import * as Location from 'expo-location';
 //import { Accelerometer } from 'expo-sensors';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const MapActive = ({ navigation, route }) => {
   
@@ -12,34 +13,76 @@ const MapActive = ({ navigation, route }) => {
   const [ shouldRun, setShouldRun] = useState([route.params]) ;
   const [ {x, y, z}, setData] = useState({x:0, y:0, z:0});
   const [location, setLocation] = useState();
+  const [initialRegion, setInitialRegion] = useState({ latitude: 50.8795,
+    longitude: 20.6400,
+    latitudeDelta: 0.005,
+    longitudeDelta: 0.005,});
+
   console.log(shouldRun);
 
   const onRegionChange = (region) => {
     console.log("Region");
     console.log(region);
+
   }
 
+  function getCurrentLocation() {
+    const timeout = 10000;
+    return new Promise(async (resolve, reject) => {
+      setTimeout(() => { reject(new Error(`Error getting gps location after ${(timeout * 2) / 1000} s`)) }, timeout * 2);
+      setTimeout(async () => { resolve(await Location.getLastKnownPositionAsync()) }, timeout);
+      resolve(await Location.getCurrentPositionAsync());
+    });
+  }
+  const followLocation = () => {
+    console.log(location.latitude + ' aa');
+    mapRef.current.animateCamera({center:{
+      latitude: location?.latitude || initialRegion.latitude , longitude: location?.longitude || initialRegion.longitude, 
+      latitudeDelta:initialRegion.latitudeDelta, longitudeDelta: initialRegion.longitudeDelta}},
+      {duration:  200})
+    }
 
-  /*//Location
+  //Location
   useEffect(() =>{
-    const getPermissions = async () =>{
-      let {status} = await Location.requestBackgroundPermissionsAsync();
-      if(status !== 'granted'){
-        return <Alert>Please grant permission for the Location</Alert> 
-      }
+    const getLoc = async () =>{
 
-      let currentLocation = await Location.getCurrentPositionAsync({});
+      let { status } = await Location.getForegroundPermissionsAsync();
+      if (status !== 'granted') {
+          status = await Location.requestForegroundPermissionsAsync();
+          if(status !== 'granted'){
+            console.log("still no permissions");
+            return false;    
+          }
+          else{
+            console.log("access granted")
+          }
+      }
+      console.log("access granted")
+
+      
+      let currentLocation = await Location.getCurrentPositionAsync();
       setLocation(currentLocation);
+      setInitialRegion({
+        latitude: currentLocation?.coords?.latitude,
+        longitude: currentLocation?.coords?.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      });
+
       console.log("location:");
       console.log(location);
-      getPermissions();
+      return true;
    }
-  }, [])*/
+   if(getLoc()){
+     //followLocation();
+   }
+
+  }, [])
 
   //Back button
   useEffect(() => {
     const backAction = () => {
-      return true;
+      navigation.navigate('DrawerNav');
     };
     
     const backHandler = BackHandler.addEventListener(
@@ -57,14 +100,20 @@ const MapActive = ({ navigation, route }) => {
        <MapView
         ref={mapRef} 
         style={styles.map}
-        onRegionChange={onRegionChange}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-       >
+        showsMyLocationButton={true}
+        showsUserLocation={true}
+        rotateEnabled={false}
+        followsUserLocation={true}
+        maxDelta={0.005}
+        initialRegion={initialRegion}
+       >{location &&  (
+        <Marker
+                coordinate={{
+                  longitude: location?.coords.longitude,
+                  latitude: location?.coords.latitude
+                }}
+              ></Marker>
+       )}
       </MapView>
     </View>
    
