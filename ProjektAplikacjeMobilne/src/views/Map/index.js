@@ -25,7 +25,7 @@ const MapActive = ({ navigation, route }) => {
   }
 
   function getCurrentLocation() {
-    const timeout = 10000;
+    const timeout = 1000;
     return new Promise(async (resolve, reject) => {
       setTimeout(() => { reject(new Error(`Error getting gps location after ${(timeout * 2) / 1000} s`)) }, timeout * 2);
       setTimeout(async () => { resolve(await Location.getLastKnownPositionAsync()) }, timeout);
@@ -40,16 +40,18 @@ const MapActive = ({ navigation, route }) => {
            setLocation(currentLocation);
         }
         console.log(currentLocation.coords.latitude + ' aa');
-        mapRef.current.animateCamera({center:{
-          latitude: currentLocation?.coords.latitude, longitude: currentLocation?.coords.longitude, 
-          latitudeDelta:initialRegion.latitudeDelta, longitudeDelta: initialRegion.longitudeDelta}},
-          {duration:  200})
+        mapRef.current.animateToRegion({
+          latitude: currentLocation.coords.latitude,
+          longitude: currentLocation.coords.longitude,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
+        });
       }
       catch(error){ 
           console.log("Follow error: " + error);
       }
       finally{
-          setTimeout(followLocation, 1500);
+          setTimeout(followLocation, 1000);
       }
 
     }
@@ -83,7 +85,7 @@ const MapActive = ({ navigation, route }) => {
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
         });
-        
+        followLocation();
         console.log("location:");
         console.log(location);
       }
@@ -121,6 +123,7 @@ const MapActive = ({ navigation, route }) => {
         showsMyLocationButton={true}
         showsUserLocation={true}
         rotateEnabled={false}
+        zoomEnabled={false}
         followsUserLocation={true}
         maxDelta={0.005}
         initialRegion={initialRegion}
