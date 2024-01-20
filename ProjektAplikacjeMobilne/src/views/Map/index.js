@@ -10,15 +10,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const MapActive = ({ navigation, route }) => {
   
   const mapRef = useRef();
-  const [ shouldRun, setShouldRun] = useState([route.params]) ;
+  const [ shouldRun, setShouldRun] = useState([route.params]);
   const [ {x, y, z}, setData] = useState({x:0, y:0, z:0});
   const [location, setLocation] = useState();
   const [initialRegion, setInitialRegion] = useState({ latitude: 50.8795,
     longitude: 20.6400,
     latitudeDelta: 0.005,
     longitudeDelta: 0.005,});
-
-  console.log(shouldRun);
 
   const onRegionChange = (region) => {
     console.log("Region");
@@ -34,12 +32,26 @@ const MapActive = ({ navigation, route }) => {
       resolve(await Location.getCurrentPositionAsync());
     });
   }
-  const followLocation = () => {
-    console.log(location.latitude + ' aa');
-    mapRef.current.animateCamera({center:{
-      latitude: location?.coords.latitude || initialRegion.latitude , longitude: location?.coords.longitude || initialRegion.longitude, 
-      latitudeDelta:initialRegion.latitudeDelta, longitudeDelta: initialRegion.longitudeDelta}},
-      {duration:  200})
+  const followLocation = async () => {
+
+      try{
+        let currentLocation = await getCurrentLocation();
+        if(currentLocation){
+           setLocation(currentLocation);
+        }
+        console.log(currentLocation.coords.latitude + ' aa');
+        mapRef.current.animateCamera({center:{
+          latitude: currentLocation?.coords.latitude, longitude: currentLocation?.coords.longitude, 
+          latitudeDelta:initialRegion.latitudeDelta, longitudeDelta: initialRegion.longitudeDelta}},
+          {duration:  200})
+      }
+      catch(error){ 
+          console.log("Follow error: " + error);
+      }
+      finally{
+          setTimeout(followLocation, 1500);
+      }
+
     }
 
   //Location
@@ -54,29 +66,35 @@ const MapActive = ({ navigation, route }) => {
             return false;    
           }
           else{
-            console.log("access granted")
+            console.log("access granted") 
           }
       }
       console.log("access granted")
 
-      
-      let currentLocation = await Location.getCurrentPositionAsync();
-      setLocation(currentLocation);
-      setInitialRegion({
-        latitude: currentLocation?.coords?.latitude,
-        longitude: currentLocation?.coords?.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-      });
+      try{
+        let currentLocation = await getCurrentLocation();
+        if(currentLocation){
+           setLocation(currentLocation);
+        }
+        
+        setInitialRegion({
+          latitude: currentLocation?.coords?.latitude,
+          longitude: currentLocation?.coords?.longitude,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
+        });
+        
+        console.log("location:");
+        console.log(location);
+      }
+      catch(error){
+          console.log("error: " + error);
+      }
+     
 
-      console.log("location:");
-      console.log(location);
-      return true;
    }
-   if(getLoc()){
-     //followLocation();
-   }
-
+    getLoc();
+   
   }, [])
 
   //Back button
@@ -95,7 +113,7 @@ const MapActive = ({ navigation, route }) => {
 
 
   //Content
-  const content = shouldRun ? (
+  const content = shouldRun ? ( 
     <View style={styles.mainContainer}>
        <MapView
         ref={mapRef} 
