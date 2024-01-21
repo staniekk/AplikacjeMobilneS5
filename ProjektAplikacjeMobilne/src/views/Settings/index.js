@@ -4,15 +4,18 @@ import Slider from '@react-native-community/slider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './style';
 import { ThemeContext } from '../../Constants/ThemeContext';
+import { SettingsContext } from '../../Context/settingsContext';
 
 export function Settings({ navigation }) {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext); // Get isDarkMode and toggleTheme
     const [volume, setVolume] = useState(50); // State for volume slider
-    const [dailyStepsGoal, setDailyStepsGoal] = useState('10000'); // State for daily steps goal
     const [pauseTime, setPauseTime] = useState('10'); // State for pause time
     const [finishTime, setFinishTime] = useState('120'); // State for finish time
+    
+    const {dailyStepGoal, setDailyStepGoal, userID} = useContext(SettingsContext)
+    const [tempStepGoal, setTempStepGoal] = useState(dailyStepGoal); 
 
-
+ 
     const handleLogout = async () => {
         try {
             await AsyncStorage.removeItem('lastLoginTime');
@@ -21,6 +24,11 @@ export function Settings({ navigation }) {
             console.error('Logout failed', error);
         }
     };
+
+    const handleStepGoalChange = () =>{
+        setTempStepGoal(Math.round( tempStepGoal))
+        setDailyStepGoal(Math.round( tempStepGoal))
+    }
 
     React.useEffect(() => {
         const backAction = () => {
@@ -68,9 +76,11 @@ export function Settings({ navigation }) {
                 <Text style={styles.settingText}>Daily Steps Goal</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={setDailyStepsGoal}
-                    value={dailyStepsGoal}
+                    onChangeText={setTempStepGoal}
+                    value={tempStepGoal.toString()}
+                    inputMode='numeric'
                     keyboardType="numeric"
+                    onSubmitEditing={handleStepGoalChange}
                 />
             </View>
 
@@ -94,6 +104,10 @@ export function Settings({ navigation }) {
                     value={finishTime}
                     placeholderTextColor="#FFFFFF"
                 />
+            </View>
+
+            <View style={styles.settingItem}>
+                <Text style={styles.settingText}>{userID}</Text>
             </View>
 
             </ScrollView>

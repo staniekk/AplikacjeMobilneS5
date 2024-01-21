@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, TextInput, Pressable, Alert, BackHandler, Image, ScrollView } from "react-native";
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as LocalAuthentication from 'expo-local-authentication';
+import { SettingsContext } from '../../Context/settingsContext';
 
 export function Login({ navigation }) {
     const [textLogin, setLogin] = React.useState('');
     const [textPassword, setPassword] = React.useState('');
+    const {setUserID} = useContext(SettingsContext)
 
     useFocusEffect(
         React.useCallback(() => {
@@ -25,7 +27,7 @@ export function Login({ navigation }) {
             });
         }, [])
     );
-
+    
     const authenticateBiometrics = async () => {
         const compatible = await LocalAuthentication.hasHardwareAsync();
         if (!compatible) {
@@ -47,6 +49,7 @@ export function Login({ navigation }) {
 
         if (result.success) {
             navigation.navigate('DrawerNav');
+            setUserID(1);
         } else {
             Alert.alert('Błąd uwierzytelnienia', 'Spróbuj jeszcze raz lub wpisz hasło ręcznie.');
         }
@@ -61,10 +64,14 @@ export function Login({ navigation }) {
         axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users')
             .then(response => {
                 const users = response.data;
+
                 const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
 
                 if (authenticatedUser) {
                     AsyncStorage.setItem('lastLoginTime', JSON.stringify(new Date().getTime()));
+                    setUserID(authenticatedUser.id);
+                    console.log('Authenticated user ID:' +  authenticatedUser.id);
+                    console.log('Authenticated user:' +  authenticatedUser);
                     navigation.navigate('DrawerNav');
                 } else {
                     Alert.alert("Error", "Login or password mismatch.");

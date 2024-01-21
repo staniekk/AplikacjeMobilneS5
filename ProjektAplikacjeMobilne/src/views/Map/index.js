@@ -27,7 +27,7 @@ const MapActive = ({ navigation }) => {
      setRunningStepCount(0);
      const distance = runningStepCount * stepLength;
      Alert.alert("End of the run!", "You travelled " + distance.toString() + " meters",  [
-      { text: 'OK', onPress: () => navigation.navigate('Map')},
+      { text: 'OK'},
     ],
     { cancelable: true });
   }
@@ -58,14 +58,10 @@ const MapActive = ({ navigation }) => {
         catch(error){ 
             console.log("Follow error: " + error);
         }
-        finally{
-            setTimeout(followLocation, 1000);
-        }
+      }
 
-      }
-      else{
-        setTimeout(followLocation, 1000);
-      }
+      setTimeout(followLocation, 1000);
+      
       
     }
 
@@ -167,7 +163,7 @@ const MapActive = ({ navigation }) => {
         rotateEnabled={true}
         zoomEnabled={true}
         followsUserLocation={true}
-        maxDelta={0.010}
+        maxDelta={0.006}
         initialRegion={initialRegion}
        >
       </MapView>
