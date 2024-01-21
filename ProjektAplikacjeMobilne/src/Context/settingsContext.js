@@ -4,7 +4,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 export const SettingsContext = createContext({
     stepLength: 1.00,
-    userID: -1,
+    userID: 1,
     dailyStepGoal: 10000,
 });
 
