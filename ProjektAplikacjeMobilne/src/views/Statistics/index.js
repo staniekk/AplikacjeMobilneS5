@@ -1,13 +1,13 @@
-import { Text,ScrollView, BackHandler, View, Image, TouchableOpacity } from "react-native";
+import { Text,ScrollView, BackHandler, View, Image } from "react-native";
 import { styles } from "./style";
-import React, { useRef, useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import axios from 'axios';
-import { SettingsContext, useSettings } from "../../Context/settingsContext";
+import { SettingsContext } from "../../Context/settingsContext";
 
 
 
 
-export function Statistics({ navigation }) {
+export function Statistics({ }) {
 
     const {userID} = useContext(SettingsContext);
     const [data, setData] = React.useState([]);

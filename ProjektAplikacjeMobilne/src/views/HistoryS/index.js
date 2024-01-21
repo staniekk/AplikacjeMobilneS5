@@ -70,8 +70,7 @@ const HistoryS = () => {
     </View>
     //Wyświetla wszystkie znalezione rekordy z bazy danych
     //Dla każdego rekordu wyświetla jego dane
-   
-    
+  
   );
 };
 export { HistoryS }; 

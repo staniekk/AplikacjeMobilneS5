@@ -1,6 +1,5 @@
-import { func } from 'prop-types';
 import axios from 'axios';
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 
