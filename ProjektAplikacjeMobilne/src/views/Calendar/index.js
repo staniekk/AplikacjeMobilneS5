@@ -25,7 +25,7 @@ export function Calendar({ navigation }) {
   // wstepne wczytywanie danych aby zaznaczyc kropki na kalendarzu
   // obsluga powrotu
   useEffect(() => {
-    fetchAllActivities();
+    refreshActivities();
     const backAction = () => true;
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => backHandler.remove();
@@ -79,22 +79,23 @@ export function Calendar({ navigation }) {
   
     let request;
     if (activityData.id) {
-      // jesli dane id juz na serwerze to nadpisz dane
+      // jesli dane id juz na serwerze to nadpisz dane // Calendar
       request = axios.put(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities/${activityData.id}`, dataToSend);
     } else {
-      // jelsli nie ma takiego id, to dodaj aktywnosc
+      // jelsli nie ma takiego id, to dodaj aktywnosc // Calendar
       request = axios.post('https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities', dataToSend);
     }
     request.then(response => {
       setShowModal(false); // zamknij okno modalne po dodaniu aktywnosci
-      fetchAllActivities(); // pobierz liste aktywnosci
+      refreshActivities(); // pobierz liste aktywnosci
     }).catch(error => {
       console.error('Error saving activity:', error);
     });
+    
     refreshActivities(); // odswiez liste aktywnosci
   };
 
-  // pobieranie danych usera o danym ID
+  // pobieranie danych usera o danym ID // Calendar
   const retrieveActivityData = (date) => {
     axios.get(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities?date=${date}&userID=${userID}`)
       .then(response => {
@@ -116,7 +117,7 @@ export function Calendar({ navigation }) {
     }
 };
 
-  // usuwanie aktywnosci z listy i serwera
+  // usuwanie aktywnosci z listy i serwera // Calendar 
   const removeActivity = (activityId) => {
     axios.delete(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities/${activityId}`)
       .then(response => {
