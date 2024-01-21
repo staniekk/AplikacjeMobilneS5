@@ -23,6 +23,7 @@ export function Statistics({ }) {
     const [bestSpeed, setBestSpeed] = React.useState('');
     const [bestDist, setBestDist] = React.useState('');
     const [bestTime, setBestTime] = React.useState('');
+    const [howManyRuns, setHowManyRuns] = React.useState('');
 
     React.useEffect(() => {
         const backAction = () => {
@@ -38,6 +39,7 @@ export function Statistics({ }) {
               .then(response => {
                     const readData = response.data;
                     const filteredData = readData.filter(item => item.userID === userID);
+                    const runsNo = filteredData.length;
 
                     const stepsArray = filteredData.map(item => item.steps);
                     const distArray = filteredData.map(item => item.dist);
@@ -68,6 +70,7 @@ export function Statistics({ }) {
                     setBestDist(maxDist);
                     setBestTime(maxTime);
 
+                    setHowManyRuns(runsNo);
 
                     setData(filteredData);
               })
@@ -85,8 +88,31 @@ export function Statistics({ }) {
             }
         }
 
+        if (howManyRuns === 0)
+        {
+         return (
 
-      return (
+            <View style={{ backgroundColor: '#11B5E4', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                              <Image style={styles.logo}
+                                  source={require('../../img/logo/Logo.png')}
+                              />
+
+                <ScrollView style={styles.mainContainer}>
+
+
+                  <View>
+                        <Text style={styles.textInfoB}>You have no runs!</Text>
+                        <Text style={styles.textInfoS}>Start running to track your statistics!</Text>
+                  </View>
+
+
+                </ScrollView>
+                </View>
+              );
+           }
+           else
+           {
+            return (
 
             <View style={{ backgroundColor: '#11B5E4', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                           <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>    
@@ -169,4 +195,5 @@ export function Statistics({ }) {
                 </ScrollView>
                 </View>
               );
+          }
       }
