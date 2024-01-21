@@ -128,12 +128,25 @@ export const styles = StyleSheet.create({
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: 10,
-        },
-        settingText: {
-                color: '#fff',
-                fontSize: 18,
-                marginBottom: 10,
-                fontWeight: 'bold',
-            }
+    },
+    settingText: {
+            color: '#fff',
+            fontSize: 18,
+            marginBottom: 10,
+            fontWeight: 'bold',
+    },
+    textInfoB: {
+            color: '#fff',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            fontSize: 48,
+            marginTop: 30,
+    },
+    textInfoS: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 28,
+        marginTop: 30,
+    }
 
 })
