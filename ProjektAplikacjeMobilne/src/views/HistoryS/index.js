@@ -10,20 +10,27 @@ const HistoryS = () => {
   const [loading, setLoading] = useState(true);
   const [hasHistory, setHasHistory] = useState(false);
   const {userID} = useContext(SettingsContext)
+
   //Pobieranie danych z bazy danych
   useEffect(() => {
+    try{
     axios.get(`https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history?userID=${userID}`)
-      .then(response => {
-        setHasHistory(true);
-        setHistory(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setHasHistory(false);
-        console.error("Wystąpił błąd podczas pobierania danych historii", error);
-        console.error("ID" + userID);
-        setLoading(false);
-      });
+    .then(response => {
+      setHasHistory(true);
+      setHistory(response.data);
+      setLoading(false);
+    })
+    .catch(error => {
+      setHasHistory(false);
+      console.error("Wystąpił błąd podczas pobierania danych historii", error);
+      console.error("ID" + userID);
+      setLoading(false);
+    });}
+    catch(error){
+      console.error('Error sending data', error);
+      setHasHistory(false);
+    }
+    
   }, []);
 
 
@@ -33,7 +40,7 @@ const HistoryS = () => {
 
 
   const content = hasHistory ? (
-    <ScrollView style={styles.mainContainer}>
+    
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
     <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
    {history.map((entry) => (
@@ -52,25 +59,31 @@ const HistoryS = () => {
      </View>
    ))}
    </View>
- </ScrollView>
+
   ) : 
   (
-    <View>
-        <Text style={styles.historyInfo}>
+    
+    <View style ={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+  
+  <View  style={styles.historyInfo}>
+           <View  style={styles.historyInfo2}>
+           <Text>
           You have no history
         </Text>
+    
+    </View>
+    </View>
     </View>
   );
 
   return (
-
-    <View>
+    <ScrollView style={styles.mainContainer}>
+    
       {content}
 
-    </View>
-    //Wyświetla wszystkie znalezione rekordy z bazy danych
-    //Dla każdego rekordu wyświetla jego dane
-  
+    
+
+    </ScrollView>
   );
 };
 export { HistoryS }; 
