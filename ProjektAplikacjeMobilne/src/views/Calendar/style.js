@@ -5,12 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#11B5E4',
   },
-  textInfo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 20,
-  },
+
   calendarContainer: {
     alignItems: 'center',
   },
@@ -37,17 +32,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
-  },
-  modalButton: {
-    backgroundColor: '#11B5E4',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  modalButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -100,10 +84,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     width: '90%', 
   },
-  activityTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+
   activityDetails: {
     fontSize: 14,
   },
@@ -130,13 +111,6 @@ export const styles = StyleSheet.create({
   activityText: {
     fontSize: 14,
     marginBottom: 5,
-  },
-  emptyDayText: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginTop: 20,
-    color: '#666',
-    fontStyle: 'italic',
   },
   noActivitiesText: {
     textAlign: 'center',

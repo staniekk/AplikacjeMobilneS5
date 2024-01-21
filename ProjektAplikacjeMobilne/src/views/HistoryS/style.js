@@ -44,16 +44,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row', // Dodać tę linię    
     },
-    runBtn: {
-        padding: 5,
-        backgroundColor: '#F4F7F8',
-        width: 150,
-        marginBottom: 30,
-        borderRadius: 30,
-        marginTop: 30,
-        justifyContent: 'bottom'
 
-    },
     historyInfoText: {
         color: '#034748', 
         fontSize: 16, 

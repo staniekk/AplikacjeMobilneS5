@@ -11,20 +11,6 @@ export const styles = StyleSheet.create({
         bottom: 0,
         marginTop:40
       },
-    textInfo: {
-        color: '#fff',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: 28,
-        padding: 30
-    },
-    textInfoAcc: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 15
-    },
     mainContainer:
     {
         backgroundColor: '#11B5E4'
@@ -35,11 +21,7 @@ export const styles = StyleSheet.create({
         width: 240,
         height: 200
     },
-    FP: {
-        marginTop: 30,
-        width: 55,
-        height: 55
-    },
+
     runText: {
         
         color: '#564949',

@@ -16,7 +16,7 @@ export const SettingsContext = createContext({
 export default function SettingsContextProvider({ children }) {
 
   const [stepLength, setStepLength] = useState(1.00);
-  const [userID, setUserID] = useState(-1);
+  const [userID, setUserID] = useState(1);
   const [dailyStepGoal, setDailyStepGoal] = useState(10000);
 
 

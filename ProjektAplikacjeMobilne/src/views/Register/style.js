@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 30,
         marginTop: 30
-
     },
     loginText: {
         color: '#564949',
@@ -29,7 +28,6 @@ export const styles = StyleSheet.create({
         height: 60,
         marginBottom: 15,
         borderRadius: 20
-
     },
     textInfo: {
         color: '#fff',
@@ -37,13 +35,6 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 28,
         padding: 30
-    },
-    textInfoAcc: {
-        color: '#564949',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 15
     },
     mainContainer:
     {
@@ -55,10 +46,4 @@ export const styles = StyleSheet.create({
         width: 240,
         height: 200
     },
-    FP: {
-        marginTop: 30,
-        width: 55,
-        height: 55
-    }
-
 })

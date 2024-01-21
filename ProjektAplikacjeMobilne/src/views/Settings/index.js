@@ -165,7 +165,7 @@ export function Settings({ navigation }) {
 
                 {/* dlugosc kroku */}
                 <View style={styles.settingItem}>
-                    <Text style={styles.settingText}>Step Length</Text>
+                    <Text style={styles.settingText}>Step Length in meter</Text>
                     <TextInput
                         style={styles.input}
                         onChangeText={setTempLength}
