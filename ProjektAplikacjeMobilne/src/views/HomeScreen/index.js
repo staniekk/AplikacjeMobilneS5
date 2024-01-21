@@ -60,7 +60,7 @@ const onPress = () => {
           </View>
         </View>
 
-        <Text style={styles.totd}>Porada dnia</Text>
+        <Text style={styles.totd}>Tip of the day</Text>
         <Text style={styles.tipInfo}>{tip}</Text>
       </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

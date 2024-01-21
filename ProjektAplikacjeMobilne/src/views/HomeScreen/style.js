@@ -63,12 +63,7 @@ export const styles = StyleSheet.create({
         resizeMode: 'contain',
          
     },
- 
-    stepCounterContainer: {
-        marginTop: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+
     pedometerContainer: {
         backgroundColor: '#FFFFFF', 
         width: 200, 
