@@ -77,7 +77,7 @@ export const StepProvider = ({ children }) => {
             console.log(result.steps);
             setCurrentStepCount(result.steps);
             console.log("Zmienna trzymajaca kroki");
-            console.log(currentStepCount.toString());
+            console.log(currentStepCount);
           });
           
         }
