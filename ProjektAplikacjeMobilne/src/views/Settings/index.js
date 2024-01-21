@@ -55,10 +55,10 @@ export function Settings({ navigation }) {
         changeSettings();
     }
 
-    const handleStepLenghtChange = () =>{
+    const handleStepLengthChange = () =>{
 
-        setTempLength(Math.round(tempStepLength))
-        setStepLength(Math.round(tempStepLength))
+        setTempLength(tempStepLength)
+        setStepLength(tempStepLength)
 
         const changeSettings = async () => {
             axios.put(`https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings/${userID}`,{
@@ -146,7 +146,7 @@ export function Settings({ navigation }) {
                         value={tempStepGoal.toString()}
                         inputMode='numeric'
                         keyboardType="numeric"
-                        onSubmitEditing={handleStepLenghtChange}
+                        onSubmitEditing={handleStepGoalChange}
                     />
                 </View> 
 
@@ -159,7 +159,7 @@ export function Settings({ navigation }) {
                         value={tempStepLength.toString()}
                         inputMode='numeric'
                         keyboardType="numeric"
-                        onSubmitEditing={handleStepLenghtChange}
+                        onSubmitEditing={handleStepLengthChange}
                     />
                 </View> 
 
