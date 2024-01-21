@@ -3,7 +3,7 @@ import { StyleSheet, Image } from "react-native";
 export const BottomTabIcon = ({ routeName, focused }) => {
 
     switch (routeName) {
-        case 'HomeScreen':
+        case 'HomeScreenTab':
             if (focused) {
                 return <Image
                     style={styles.imgActive}

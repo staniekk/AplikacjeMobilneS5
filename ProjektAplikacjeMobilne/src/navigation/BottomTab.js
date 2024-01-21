@@ -1,9 +1,7 @@
 // navigation/Tab.js
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MapActive } from "../views/Map";
 import { BottomTabIcon } from "../components/BottomTabIcon";
-import { HomeScreen } from '../views/HomeScreen';
 import { Calendar } from '../views/Calendar';
 import { HomeStackNav, MapStackNav } from './Stack';
 

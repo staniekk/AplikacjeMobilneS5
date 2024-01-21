@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, Image } from 'react-native';
 import axios from 'axios';
 import { styles } from "./style";
 
@@ -20,6 +20,7 @@ const HistoryS = () => {
       });
   }, []);
 
+
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
@@ -28,14 +29,20 @@ const HistoryS = () => {
    
     <ScrollView style={styles.mainContainer}>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+       <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
       {history.map((entry) => (
         <View key={entry.id} style={styles.historyInfo}>
+          <View key={entry.id} style={styles.historyInfo2}>
+          <Image style={styles.runner} source={require('../../img/logo/runner.png')}/>
+          <View style={{flex: 1}}>
           <Text style={styles.historyInfoText}>
-            Dystans: {entry.dist} km - Prędkość: {entry.speed} km/h
+            {entry.dist} km - {entry.speed} km/h
           </Text>
           <Text style={styles.historyInfoText2}>
             Czas: {entry.time} h - Kroki: {entry.steps}
           </Text>
+        </View>
+        </View>
         </View>
       ))}
       </View>

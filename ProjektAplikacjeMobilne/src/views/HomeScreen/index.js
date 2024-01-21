@@ -1,76 +1,48 @@
-// navigation/views/HomeScreen/index.js
-import React from 'react';
-import { Text, View, Pressable, TextInput, Alert, BackHandler, Image } from "react-native";
-import { styles } from "./style";
-import { useFocusEffect } from '@react-navigation/native';
-import axios from 'axios';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, { useContext, useEffect } from 'react';
+import { Text, View, Pressable, Image, BackHandler } from 'react-native';
+import { styles } from './style';
+import { StepContext } from '../Context';
 
 
 export function HomeScreen({ navigation }) {
+  const { currentStepCount} = useContext(StepContext);
 
-    const [textLogin, setLogin] = React.useState('');
-    const [textPassword, setPassword] = React.useState('');
+  useEffect(() => {
+    const backAction = () => true;
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => backHandler.remove();
+  }, []);
 
-    useFocusEffect(
-        React.useCallback(() => {
-            setLogin('');
-            setPassword('');
-        }, [])
-    );
+  const distance = (currentStepCount / 2000).toFixed(2);
 
-
-    React.useEffect(() => {
-        const backAction = () => {
-            return true;
-        };
-
-        const backHandler = BackHandler.addEventListener(
-            "hardwareBackPress",
-            backAction
-        );
-
-        return () => backHandler.remove();
-    }, []);
-
-    return (
-        
-        <View style={styles.mainContainer}>
-
-
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Image style={styles.logo}
-                    source={require('../../img/logo/Logo.png')}
-                />
-            </View>
-            <View style={{ flex: 5, alignItems: 'center', justifyContent: 'center' }}>
-
-                <Text style={styles.textInfoT}> Today:</Text>
-                <Text style={styles.textInfoT}> 3.16 km</Text>
-
-                <Image style={styles.licznik}
-                    source={require('../../img/logo/licznik.png')}
-                />
-
-
-
-                <Text style={styles.textInfoAcc}>tip of the day </Text>
-                <Text style={styles.textInfo}>Lorem ipsum lorem ipsum </Text>
-
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
-                <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map', {shouldRun:true})}>
-                    <Text style={styles.loginText}>Run!</Text>
-                </Pressable >
-
-                {/* <Pressable style={styles.textInfo} onPress={() => navigation.navigate('TabNav')}>
-                <Text>Go to Home screen</Text>
-            </Pressable> */}
-
-            </View>
+  return (
+    <View style={styles.mainContainer}>
+      <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+        <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
+        <Text style={styles.textInfoT}> Today:</Text>
+        <Text style={styles.distanceText}>{`${distance} km`}</Text>
+      </View>
+      <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.backgroundCircle}>
+          <View style={styles.pedometerContainer}>
+            <Image style={styles.footprint} source={require('../../img/logo/footprint.png')}/>
+            <Text style={styles.stepCount}>
+             {currentStepCount}
+            
+            </Text>
+            <View style={styles.line} />
+            <Text style={styles.goalText}>8000</Text>
+          </View>
         </View>
-      
-        
-    );
+
+        <Text style={styles.totd}>Porada dnia</Text>
+        <Text style={styles.tipInfo}>Lorem ipsum lorem ipsum</Text>
+      </View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map')}>
+          <Text style={styles.loginText}>Run!</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
 }
