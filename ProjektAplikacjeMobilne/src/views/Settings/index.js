@@ -32,7 +32,7 @@ export function Settings({ navigation }) {
         setDailyStepGoal(Math.round( tempStepGoal))
 
         const changeSettings = async () => {
-            axios.put(`https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings?userID=${userID}`,{
+            axios.put(`https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings/${userID}`,{
                 dailyStepGoal:dailyStepGoal
             })
             .then(() => {
