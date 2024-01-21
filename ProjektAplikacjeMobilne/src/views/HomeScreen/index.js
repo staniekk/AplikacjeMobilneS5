@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Pressable, Image, BackHandler, Alert } from 'react-native';
 import { styles } from './style';
 import { StepContext  } from '../../Context/stepContext';
@@ -11,7 +11,7 @@ export function HomeScreen({ navigation }) {
 
   const {setIsRunning, setStartTime,currentStepCount, startTime} = useContext(StepContext);
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
-  const {tip, setTip} = useState("Idź pobiegać");
+  const [tip, setTip] = useState("Idź pobiegać");
   const {userID} = useContext(SettingsContext)
 
 const onPress = () => {
@@ -29,9 +29,10 @@ const onPress = () => {
   //Losowanie porady dnia
   useEffect(()=>{
     const a =[
-      "Idź pobiegać!",
-      "Wyjdź z domu!",
-      "Ruch do zdrowie!"
+      "Apple a day keeps a doctor at bay",
+      "Go outside, touch some grass",
+      "Stop looking at the screen",
+      "Go to gym"
   ]
     const randomIndex = Math.floor(Math.random() * a.length);
     setTip(a[randomIndex])
