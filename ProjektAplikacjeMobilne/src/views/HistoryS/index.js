@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, ScrollView, ActivityIndicator, Image } from 'react-native';
 import axios from 'axios';
 import { styles } from "./style";
+import { SettingsContext } from '../../Context/settingsContext';
 
 // Użyj tej samej nazwy, co w definicji komponentu, zgodnie z konwencją
 const HistoryS = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const {userID} = useContext(SettingsContext)
   //Pobieranie danych z bazy danych
   useEffect(() => {
-    axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history')
+    axios.get(`https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history?userID=${userID}`)
       .then(response => {
         setHistory(response.data);
         setLoading(false);
       })
       .catch(error => {
         console.error("Wystąpił błąd podczas pobierania danych historii", error);
+        console.error("ID" + userID);
         setLoading(false);
       });
   }, []);
@@ -33,7 +35,7 @@ const HistoryS = () => {
     <ScrollView style={styles.mainContainer}>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
        <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
-      {history.map((entry) => (
+      {history && history.map((entry) => (
         <View key={entry.id} style={styles.historyInfo}>
           <View key={entry.id} style={styles.historyInfo2}>
           <Image style={styles.runner} source={require('../../img/logo/runner.png')}/>
