@@ -8,6 +8,7 @@ const HistoryS = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  //Pobieranie danych z bazy danych
   useEffect(() => {
     axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history')
       .then(response => {
@@ -27,6 +28,8 @@ const HistoryS = () => {
 
   return (
    
+    //Wyświetla wszystkie znalezione rekordy z bazy danych
+    //Dla każdego rekordu wyświetla jego dane
     <ScrollView style={styles.mainContainer}>
        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
        <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>

@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Pedometer } from 'expo-sensors';
 
+
+//StepContext - przetrzymuje informacje związane ze zliczaniem kroków oraz biegiem
 export const StepContext = createContext({
   currentStepCount: 0,
   isRunning: false,
@@ -28,11 +30,12 @@ export const StepProvider = ({ children }) => {
   const [endTime, setEndTime] = useState(null);
 
 
-  //Steps when running
+  //Steps when running - liczy ilość kroków w trakcie biegu
   useEffect(() => {
     let subscription;
     const subscribe = async () => {
       try {
+        //Sprawdzenie permisji
         const isAvailable = await Pedometer.isAvailableAsync();
         setIsPedometerAvailable(isAvailable ? 'available' : 'unavailable');
 
@@ -60,11 +63,13 @@ export const StepProvider = ({ children }) => {
     return () => subscription && subscription.remove();
   }, [isRunning])
 
-  //Normal steps
+  //Normal steps - liczy ilość kroków zawsze
   useEffect(() => {
     let subscription;
     const subscribe = async () => {
       try {
+        
+        //Sprawdzenie permisji
         const isAvailable = await Pedometer.isAvailableAsync();
         setIsPedometerAvailable(isAvailable ? 'available' : 'unavailable');
 

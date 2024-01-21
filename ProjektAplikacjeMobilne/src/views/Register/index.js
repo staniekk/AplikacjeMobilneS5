@@ -4,6 +4,9 @@ import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
 
+
+// Ekran odpowidzialny za rejestracje nowego użytkownika
+// Przy udanej rejestracji, dodaje nowego użytkownika do bazy
 export function Register({ navigation }) {
     const [textLoginR, setLoginR] = React.useState('');
     const [textPasswordR, setPasswordR] = React.useState('');
@@ -17,6 +20,7 @@ export function Register({ navigation }) {
         }, [])
     );
 
+    //Sprawdzenie czy istnineje dany użytkownik
     const checkUserExists = async (username) => {
         try {
             const response = await axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/users');
@@ -46,6 +50,8 @@ export function Register({ navigation }) {
             return;
         }
 
+        //Jeżeli użytkownik istnieje, wyrzuca błąd
+        //W innym przypadku próbuje utworzyć nowego użytkownika do bazy
         const userExists = await checkUserExists(textLoginR);
         if (userExists) {
             Alert.alert("Error", "Username already exists. Please choose a different one.");

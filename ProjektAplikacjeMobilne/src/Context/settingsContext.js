@@ -3,12 +3,16 @@ import axios from 'axios';
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Alert } from 'react-native';
 
+
+    //SettingsContext - przetrzymuje podstawowe informacje o uzytkowniku oraz jego ustawienia
 export const SettingsContext = createContext({
     stepLength: 1.00,
     userID: 1,
     dailyStepGoal: 10000,
 });
 
+
+    
 export default function SettingsContextProvider({ children }) {
 
   const [stepLength, setStepLength] = useState(1.00);
@@ -16,6 +20,10 @@ export default function SettingsContextProvider({ children }) {
   const [dailyStepGoal, setDailyStepGoal] = useState(10000);
 
 
+    // getSettings - funkcja odpowiedzialna za pobranie ustawień użytkownika z bazy. 
+    // Jest uruchamiana w momencie zmiany userID, czyli przy zalogowaniu.
+    // W momencie, w który nie znajdzie tych ustawień(np. jest to pierwszy raz gdy użytkownik się loguje)
+    // tworzy nowy rekord do bazy, z domyślnymi ustawieniami
   useEffect( () => {
 
     const getSettings = async () => {
