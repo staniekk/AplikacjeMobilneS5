@@ -1,10 +1,9 @@
-import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert, Button } from "react-native";
+import { Text, ScrollView, BackHandler, StyleSheet, Pressable, View, Alert, Button } from "react-native";
 import { styles } from "./style";
 import React, { useRef, useEffect, useState, useContext } from "react";
 import * as Location from 'expo-location';
 //import { Accelerometer } from 'expo-sensors';
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { SafeAreaView } from "react-native-safe-area-context";
 import { SettingsContext, useSettings } from "../../Context/settingsContext";
 import { StepContext, useStepContext } from "../../Context/stepContext";
 
@@ -113,6 +112,12 @@ const MapActive = ({ navigation }) => {
    
   }, [])
 
+
+  const onPress = () => {
+    setIsRunning(true);
+    
+  }
+
   //Back button
   useEffect(() => {
     const backAction = () => {
@@ -143,8 +148,14 @@ const MapActive = ({ navigation }) => {
         initialRegion={initialRegion}
        >
       </MapView>
-      <Button title="End" onPress={stopRunning}></Button>
+      <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+      <Pressable style={styles.runBtn} onPress={stopRunning}>
+        
+        <Text style={styles.runText}>End</Text>
+      </Pressable>
+      </View>
     </View>
+    
    
   ) : (
     <View>
@@ -160,7 +171,13 @@ const MapActive = ({ navigation }) => {
         initialRegion={initialRegion}
        >
       </MapView>
-      <Text>Maybe start running button? {isRunning}</Text>
+      <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+      <Pressable style={styles.runBtn} onPress={onPress}>
+        
+        <Text style={styles.runText}>Run!</Text>
+      </Pressable>
+      </View>
+    
     </View>
   );
 
