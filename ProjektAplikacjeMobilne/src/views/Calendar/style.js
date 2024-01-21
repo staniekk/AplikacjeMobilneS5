@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#11B5E4',
   },
   textInfo: {
     fontSize: 24,
@@ -108,10 +108,10 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   addButton: {
-    backgroundColor: '#007bff', // Example color
+    backgroundColor: '#007bff', 
     padding: 10,
     borderRadius: 5,
-    margin: 10,
+    margin: -45,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -145,4 +145,68 @@ export const styles = StyleSheet.create({
     color: '#666',
     fontStyle: 'italic',
   },
+  activityItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  activityDetails: {
+    flex: 1,
+  },
+  activityButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  editButton: {
+    backgroundColor: '#8ed8f5',
+    padding: 5,
+    borderRadius: 5,
+    marginRight: 5,
+  },
+  removeButton: {
+    backgroundColor: '#8ed8f5', 
+    padding: 5,
+    borderRadius: 5,
+  },
+  activityItem: {
+    backgroundColor: '#fff', 
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2, 
+  },
+  activityDetails: {
+    flex: 1,
+  },
+  addButtonContainer: {
+    alignItems: 'flex-end', 
+    marginRight: 35, 
+    marginTop: -45,
+  },
+  addButton: {
+    backgroundColor: '#007bff', 
+    padding: 8,
+    borderRadius: 15,
+    width: 40, 
+    height: 40, 
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  space: {
+    fontSize: 10,
+
+  },
+  
 });

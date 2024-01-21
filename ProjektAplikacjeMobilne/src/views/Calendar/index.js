@@ -5,6 +5,7 @@ import axios from 'axios';
 import { styles } from './style';
 import { SettingsContext, useSettings } from "../../Context/settingsContext";
 
+
 export function Calendar({ navigation }) {
   const [selectedDate, setSelectedDate] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -19,13 +20,14 @@ export function Calendar({ navigation }) {
   const [activitiesList, setActivitiesList] = useState([]);
   const {userID} = useContext(SettingsContext);
 
+
   useEffect(() => {
     fetchAllActivities();
-
     const backAction = () => true;
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => backHandler.remove();
   }, []);
+
 
   const fetchAllActivities = () => {
     axios.get(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities?userID=${userID}`)
@@ -39,19 +41,19 @@ export function Calendar({ navigation }) {
         });
         setMarkedDates(newMarkedDates);
       })
-      .catch(error => {
-        console.error('Error fetching all activities:', error);
-      });
   };
+
 
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
     retrieveActivityData(day.dateString);
   };
 
+
   const handleAddActivity = () => {
     setShowModal(true);
     setActivityData({
+      id: null, 
       date: selectedDate,
       activity: '',
       distance: '',
@@ -60,31 +62,35 @@ export function Calendar({ navigation }) {
     });
   };
 
+
   const saveActivity = () => {
     const dataToSend = {
       userID: userID,
-      date: selectedDate,
+      date: activityData.date,
       activity: activityData.activity,
       distance: activityData.distance,
       startTime: activityData.startTime,
       targetTime: activityData.targetTime
     };
-
-    axios.post('https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities', dataToSend)
-      .then(response => {
-        console.log('Activity saved successfully:', response.data);
-        setMarkedDates({
-          ...markedDates,
-          [selectedDate]: { marked: true, dotColor: 'red' },
-        });
-        fetchAllActivities(); // Refresh the marked dates and activities list
-      })
-      .catch(error => {
-        console.error('Error saving activity:', error);
-      });
-
-    setShowModal(false);
+  
+    let request;
+    if (activityData.id) {
+      // jesli jest id to nadpisz
+      request = axios.put(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities/${activityData.id}`, dataToSend);
+    } else {
+      // jelsli nie ma id to dodaj
+      request = axios.post('https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities', dataToSend);
+    }
+  
+    request.then(response => {
+      setShowModal(false);
+      fetchAllActivities(); // odswiez
+    }).catch(error => {
+      console.error('Error saving activity:', error);
+    });
+    refreshActivities();
   };
+
 
   const retrieveActivityData = (date) => {
     axios.get(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities?date=${date}&userID=${userID}`)
@@ -93,38 +99,79 @@ export function Calendar({ navigation }) {
       })
       .catch(error => {
         console.log('No activities for given day', error);
-        setActivitiesList([]); // Clear list if no activities are found or in case of error
+        setActivitiesList([]); // wyczysc liste jesli nie ma danych
       });
   };
 
+
+  const refreshActivities = () => {
+    fetchAllActivities();
+    retrieveActivityData(selectedDate); // update listy na dany dzien
+  };
+
+
+  const removeActivity = (activityId) => {
+    axios.delete(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities/${activityId}`)
+      .then(response => {
+        refreshActivities();
+      })
+      .catch(error => {
+        console.error('Error removing activity:', error);
+      });
+  };
+
+
+  const editActivity = (activity) => {
+    setActivityData(activity);
+    setShowModal(true);
+    refreshActivities();
+  };
+
+
+  const onActivitySaved = () => {
+    refreshActivities();
+  };
+
+
   const renderActivityItem = ({ item }) => (
     <View style={styles.activityItem}>
-      <Text style={styles.activityText}>Date: {item.date}</Text>
-      <Text style={styles.activityText}>Activity: {item.activity}</Text>
-      <Text style={styles.activityText}>Distance: {item.distance}</Text>
-      <Text style={styles.activityText}>Start Time: {item.startTime}</Text>
-      <Text style={styles.activityText}>Target Pace: {item.targetTime}</Text>
+      <View style={styles.activityDetails}>
+        <Text style={styles.activityText}>Date: {item.date}</Text>
+        <Text style={styles.activityText}>Activity: {item.activity}</Text>
+        <Text style={styles.activityText}>Distance: {item.distance}</Text>
+        <Text style={styles.activityText}>Start Time: {item.startTime}</Text>
+        <Text style={styles.activityText}>Target Pace: {item.targetTime}</Text>
+      </View>
+      <View style={styles.activityButtons}>
+        <TouchableOpacity style={styles.editButton} onPress={() => editActivity(item)}>
+          <Text>Edit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.removeButton} onPress={() => removeActivity(item.id)}>
+          <Text>Remove</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.calendarTitle}>Calendar</Text>
-      <View style={styles.calendarContainer}>
-        <RNCalendar
-          style={{ width: 300, height: 400 }}
-          onDayPress={handleDayPress}
-          markedDates={markedDates}
-        />
-      </View>
+    <Text style={styles.calendarTitle}> </Text>
+    <View style={styles.calendarContainer}>
+      <RNCalendar
+        style={{ width: 300, height: 400 }}
+        onDayPress={handleDayPress}
+        markedDates={markedDates}
+      />
+    </View>
 
-      {selectedDate && (
-        <View style={styles.addButtonContainer}>
-          <TouchableOpacity style={styles.addButton} onPress={handleAddActivity}>
-            <Text style={styles.addButtonText}>Add Activity</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+    {selectedDate && (
+      <View style={styles.addButtonContainer}>
+        <TouchableOpacity style={styles.addButton} onPress={handleAddActivity}>
+          <Text style={styles.addButtonText}>+</Text>
+        </TouchableOpacity>
+      </View>
+    )}
+    <Text style={styles.space}> </Text>
 
       {activitiesList.length > 0 ? (
         <FlatList
@@ -134,7 +181,9 @@ export function Calendar({ navigation }) {
           style={styles.activitiesContainer}
         />
       ) : selectedDate && (
-        <Text style={styles.noActivitiesText}>No activities planned for this day</Text>
+        <Text style={styles.noActivitiesText}>
+          No activities planned for this day: {"\n"}{selectedDate}
+        </Text>
       )}
 
       <Modal
