@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Text, View, Pressable, Image, BackHandler } from 'react-native';
+import { Text, View, Pressable, Image, BackHandler, Alert } from 'react-native';
 import { styles } from './style';
 import { StepContext, useStepContext } from '../../Context/stepContext';
 import { SettingsContext } from '../../Context/settingsContext';
@@ -7,14 +7,15 @@ import { SettingsContext } from '../../Context/settingsContext';
 
 export function HomeScreen({ navigation }) {
 
-  const {setIsRunning} = useContext(StepContext);
-  const { currentStepCount} = useContext(StepContext);
+  const {setIsRunning, setStartTime,currentStepCount, startTime} = useContext(StepContext);
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
+  
 
-  const onPress = () => {
-    setIsRunning(true);
-    navigation.navigate('Map');
-  }
+const onPress = () => {
+  setIsRunning(true);
+  setStartTime(new Date());
+  navigation.navigate('Map');
+}
 
   useEffect(() => {
     const backAction = () => true;

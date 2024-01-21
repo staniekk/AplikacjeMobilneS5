@@ -6,7 +6,14 @@ export const StepContext = createContext({
   isRunning: false,
   runningStepCount: 0,
   setIsRunning: ({}),
-  setRunningStepCount: ({})
+  setRunningStepCount: ({}),
+  currentTime:0,
+  setCurrentTime: ({}),
+  startTime: null,
+  endTime:0,
+  setStartTime:({}),
+  setEndTime:({}),
+  
 });
 
 export const StepProvider = ({ children }) => {
@@ -16,6 +23,9 @@ export const StepProvider = ({ children }) => {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [permissions, setPermissions] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
 
   //Steps when running
@@ -83,7 +93,7 @@ export const StepProvider = ({ children }) => {
   }, []);
 
   return (
-    <StepContext.Provider value={{ currentStepCount, isPedometerAvailable, permissions, runningStepCount, setRunningStepCount, isRunning, setIsRunning }}>
+    <StepContext.Provider value={{ currentStepCount, isPedometerAvailable, permissions, runningStepCount, setRunningStepCount, isRunning, setIsRunning, currentTime, setCurrentTime, startTime, endTime, setStartTime, setEndTime }}>
       {children}
     </StepContext.Provider>
   );
