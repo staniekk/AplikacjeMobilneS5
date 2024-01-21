@@ -16,7 +16,9 @@ export function Login({ navigation }) {
                 const timeNow = new Date().getTime();
                 const timeElapsed = timeNow - JSON.parse(lastLoginTime);
 
-                if (timeElapsed >= 150000) {
+                if (timeElapsed < 150000) { // 15 sekund = 15000 milisekund
+                    navigation.navigate("TabNav");
+                } else {
                     setLogin('');
                     setPassword('');
                 }
