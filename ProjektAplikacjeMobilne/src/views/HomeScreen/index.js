@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Text, View, Pressable, Image, BackHandler, Alert } from 'react-native';
 import { styles } from './style';
-import { StepContext, useStepContext } from '../../Context/stepContext';
+import { StepContext  } from '../../Context/stepContext';
 import { SettingsContext } from '../../Context/settingsContext';
+import { random } from 'node-forge';
 
-
+// Główny ekran aplikacji
+//Odpowiada za wyświetlania zrobionych kroków w trakcie danej sesji oraz przebytej odległości
 export function HomeScreen({ navigation }) {
 
   const {setIsRunning, setStartTime,currentStepCount, startTime} = useContext(StepContext);
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
-  
+  const [tip, setTip] = useState("Idź pobiegać");
+  const {userID} = useContext(SettingsContext)
 
 const onPress = () => {
   setIsRunning(true);
@@ -23,6 +26,19 @@ const onPress = () => {
     return () => backHandler.remove();
   }, []);
 
+  //Losowanie porady dnia
+  useEffect(()=>{
+    const a =[
+      "Apple a day keeps a doctor at bay",
+      "Go outside, touch some grass",
+      "Stop looking at the screen",
+      "Go to gym"
+  ]
+    const randomIndex = Math.floor(Math.random() * a.length);
+    setTip(a[randomIndex])
+  }, [userID]);
+
+  //Obliczanie dystansu na bazie ilości kroków i wielkości kroku użytkownika
   const distance = (currentStepCount/100 / stepLength / 1000).toFixed(2);
 
   return (
@@ -45,8 +61,8 @@ const onPress = () => {
           </View>
         </View>
 
-        <Text style={styles.totd}>Porada dnia</Text>
-        <Text style={styles.tipInfo}>Lorem ipsum lorem ipsum</Text>
+        <Text style={styles.totd}>Tip of the day</Text>
+        <Text style={styles.tipInfo}>{tip}</Text>
       </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Pressable style={styles.loginBtn} onPress={onPress}>

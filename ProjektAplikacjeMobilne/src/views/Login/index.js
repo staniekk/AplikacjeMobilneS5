@@ -7,6 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { SettingsContext } from '../../Context/settingsContext';
 
+// Ekran odpowiedzialny za logowanie użytkownika
+// Dane do autoryzacji pobierana są z bazy danych i porównywane z danymi od użytkownika
+
 export function Login({ navigation }) {
     const [textLogin, setLogin] = React.useState('');
     const [textPassword, setPassword] = React.useState('');
@@ -28,6 +31,8 @@ export function Login({ navigation }) {
         }, [])
     );
     
+    //Funckja odpowiedzialna za autoryzacja za pomocą odcisku palca
+    //Logowanie za pomocą odcisku palca, loguje nas na użytkownika o ID 1
     const authenticateBiometrics = async () => {
         const compatible = await LocalAuthentication.hasHardwareAsync();
         if (!compatible) {
@@ -55,6 +60,7 @@ export function Login({ navigation }) {
         }
     };
 
+    //Funkcja odpowiedzialna za logowanie użytkownika za pomocą hasła oraz loginu
     const handleLogin = () => {
         if (!textLogin.trim() || !textPassword.trim()) {
             Alert.alert("Error", "Login and password are required.");
@@ -65,8 +71,9 @@ export function Login({ navigation }) {
             .then(response => {
                 const users = response.data;
 
+                //Znalezienie użytkownika z tą samą nazwą oraz hasłem
                 const authenticatedUser = users.find(user => user.login === textLogin && user.password === textPassword);
-
+                
                 if (authenticatedUser) {
                     AsyncStorage.setItem('lastLoginTime', JSON.stringify(new Date().getTime()));
                     setUserID(authenticatedUser.id);

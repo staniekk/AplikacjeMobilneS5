@@ -12,8 +12,9 @@ export function Settings({ navigation }) {
     const [volume, setVolume] = useState(50);
     const [pauseTime, setPauseTime] = useState('10');
     const [finishTime, setFinishTime] = useState('120');
-    const { dailyStepGoal, setDailyStepGoal, userID } = useContext(SettingsContext);
+    const { dailyStepGoal, setDailyStepGoal, userID, stepLength, setStepLength } = useContext(SettingsContext);
     const [tempStepGoal, setTempStepGoal] = useState(dailyStepGoal);
+    const [tempStepLength, setTempLength] = useState(stepLength);
 
     const [modalVisible, setModalVisible] = useState(false);
     const [currentPassword, setCurrentPassword] = useState('');
@@ -42,6 +43,26 @@ export function Settings({ navigation }) {
         const changeSettings = async () => {
             axios.put(`https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings/${userID}`,{
                 dailyStepGoal:dailyStepGoal
+            })
+            .then(() => {
+                console.log("Success, settings modified.");
+             })
+            .catch(error => {
+                console.log(error.message)
+                Alert.alert("Settings modifications Error", error.message);
+            });
+            }
+        changeSettings();
+    }
+
+    const handleStepLengthChange = () =>{
+
+        setTempLength(tempStepLength)
+        setStepLength(tempStepLength)
+
+        const changeSettings = async () => {
+            axios.put(`https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings/${userID}`,{
+                stepLength:stepLength
             })
             .then(() => {
                 console.log("Success, settings modified.");
@@ -116,29 +137,6 @@ export function Settings({ navigation }) {
             <ScrollView style={styles.mainContainer} keyboardShouldPersistTaps='handled'>
                 <Text style={styles.textInfo}>Settings</Text>
 
-                {/* Dark Theme Toggle */}
-                <View style={styles.settingItem}>
-                    <Text style={styles.settingText}>Dark Theme</Text>
-                    <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
-                        onValueChange={toggleTheme}
-                        value={isDarkMode}
-                    />
-                </View>
-
-                {/* Volume Slider */}
-                <View style={styles.settingItem}>
-                    <Text style={styles.settingText}>Volume</Text>
-                    <Slider
-                        style={styles.slider}
-                        value={volume}
-                        onValueChange={setVolume}
-                        minimumValue={0}
-                        maximumValue={100}
-                    />
-                </View>
-
                 {/* Daily Steps Goal Input */}
                 <View style={styles.settingItem}>
                     <Text style={styles.settingText}>Daily Steps Goal</Text>
@@ -150,33 +148,24 @@ export function Settings({ navigation }) {
                         keyboardType="numeric"
                         onSubmitEditing={handleStepGoalChange}
                     />
-                </View>
+                </View> 
 
-                {/* Pause Time Input */}
+                {/* Step Length Input */}
                 <View style={styles.settingItem}>
-                    <Text style={styles.settingText}>Pause Time (s)</Text>
+                    <Text style={styles.settingText}>Step Length</Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={setPauseTime}
-                        value={pauseTime}
-                        placeholderTextColor="#FFFFFF"
+                        onChangeText={setTempLength}
+                        value={tempStepLength.toString()}
+                        inputMode='numeric'
+                        keyboardType="numeric"
+                        onSubmitEditing={handleStepLengthChange}
                     />
-                </View>
-
-                {/* Finish Time Input */}
-                <View style={styles.settingItem}>
-                    <Text style={styles.settingText}>Finish Time (s)</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={setFinishTime}
-                        value={finishTime}
-                        placeholderTextColor="#FFFFFF"
-                    />
-                </View>
+                </View> 
 
                 {/* User ID Display */}
                 <View style={styles.settingItem}>
-                    <Text style={styles.settingText}>{userID}</Text>
+                    <Text style={styles.settingText}>User ID:{userID}</Text>
                 </View>
 
                 {/* Change Password Button */}
