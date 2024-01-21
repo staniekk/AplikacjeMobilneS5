@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         padding: 20,
         borderRadius: 10,
-        width: '80%',
+        width: '100%',
       },
 
     settingText: {
@@ -83,5 +83,58 @@ export const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    // Style for the Change Password Button
+    changePasswordButton: {
+        backgroundColor: '#fff', // Example button color
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+    },
+    changePasswordButtonText: {
+        color: 'black',
+        fontSize: 18,
+    },
+
+    // Styles for the Password Change Modal
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    modalInput: {
+        width: '90%', // Increase width
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        padding: 30,
+        marginVertical: 4, // Equal vertical margin
+        alignSelf: 'center', // Center align
+    },
+    modalButton: {
+        backgroundColor: '#2196F3',
+        padding: 10,
+        borderRadius: 5,
+        margin: 10,
+    },
+    modalButtonText: {
+        color: 'white',
+        fontSize: 16,
     },
 });
