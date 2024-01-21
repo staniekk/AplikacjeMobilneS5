@@ -148,8 +148,14 @@ const MapActive = ({ navigation }) => {
         initialRegion={initialRegion}
        >
       </MapView>
-      <Button title="End" onPress={stopRunning}></Button>
+      <View style={{  alignItems: 'center', justifyContent: 'center' }}>
+      <Pressable style={styles.runBtn} onPress={stopRunning}>
+        
+        <Text style={styles.runText}>End</Text>
+      </Pressable>
+      </View>
     </View>
+    
    
   ) : (
     <View>

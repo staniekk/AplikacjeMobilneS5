@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
+        marginTop:40
       },
     textInfo: {
         color: '#fff',
@@ -47,13 +48,13 @@ export const styles = StyleSheet.create({
         fontSize: 25
     },
     runBtn: {
-        marginTop:5,
-        padding: 5,
+        
+        padding: 2,
         backgroundColor: '#F4F7F8',
         width: 150,
-        marginBottom: 30,
+        marginBottom: 15,
         borderRadius: 30,
-        marginTop: 30,
+        marginTop: 15,
         justifyContent: 'bottom', 
         textAlign:'center'
 
