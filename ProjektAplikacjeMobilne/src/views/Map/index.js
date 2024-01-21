@@ -47,7 +47,6 @@ const MapActive = ({ navigation }) => {
           if(currentLocation){
             setLocation(currentLocation);
           }
-          console.log(currentLocation.coords.latitude + ' aa');
           mapRef.current.animateToRegion({
             latitude: currentLocation.coords.latitude,
             longitude: currentLocation.coords.longitude,
