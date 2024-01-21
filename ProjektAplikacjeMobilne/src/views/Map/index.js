@@ -1,36 +1,63 @@
-import { Text, ScrollView, BackHandler, StyleSheet, Pressable, View, Alert, Button } from "react-native";
-import { styles } from "./style";
 import React, { useRef, useEffect, useState, useContext } from "react";
+import { ScrollView, View, Text, Pressable, Alert, BackHandler } from "react-native";
 import * as Location from 'expo-location';
-//import { Accelerometer } from 'expo-sensors';
-import MapView, { Callout, Marker } from 'react-native-maps';
-import { SettingsContext, useSettings } from "../../Context/settingsContext";
-import { StepContext, useStepContext } from "../../Context/stepContext";
-
+import MapView from 'react-native-maps';
+import { SettingsContext } from "../../Context/settingsContext";
+import { StepContext } from "../../Context/stepContext";
+import { styles } from "./style";
+import axios from 'axios';
 
 const MapActive = ({ navigation }) => {
-  
-
-  const {stepLength} = useContext(SettingsContext);
-  const {isRunning, setIsRunning, runningStepCount, setRunningStepCount} = useContext(StepContext);
-  
+  const { stepLength, userID } = useContext(SettingsContext);
+  const { isRunning, setIsRunning, runningStepCount, setRunningStepCount } = useContext(StepContext);
   const mapRef = useRef();
-  const [ {x, y, z}, setData] = useState({x:0, y:0, z:0});
   const [location, setLocation] = useState();
-  const [initialRegion, setInitialRegion] = useState({ latitude: 50.8795,
+  const [initialRegion, setInitialRegion] = useState({
+    latitude: 50.8795,
     longitude: 20.6400,
     latitudeDelta: 0.005,
-    longitudeDelta: 0.005,});
+    longitudeDelta: 0.005,
+  });
 
-  const stopRunning = () => { 
-     setIsRunning(false);
-     setRunningStepCount(0);
-     const distance = runningStepCount * stepLength;
-     Alert.alert("End of the run!", "You travelled " + distance.toString() + " meters",  [
-      { text: 'OK'},
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+
+  const startRunning = () => {
+    setIsRunning(true);
+    setStartTime(new Date());
+  };
+
+  const stopRunning = () => {
+    const endTime = new Date();
+    setEndTime(endTime);
+    setIsRunning(false);
+
+    const distance = runningStepCount * stepLength;
+    const timeDiff = (endTime - startTime) / 1000; // czas w sekundach
+    const currentDate = endTime.toLocaleDateString();
+
+    Alert.alert("End of the run!", `You travelled ${distance} meters in ${timeDiff} seconds`, [
+      { text: 'OK' },
     ],
     { cancelable: true });
-  }
+
+    // Wysyłanie danych na serwer
+    axios.post('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history', {
+      dist: distance,
+      time: timeDiff,
+      userID: userID,
+      steps: runningStepCount,
+      date: currentDate,
+    })
+    .then(response => {
+      console.log('Data sent successfully');
+    })
+    .catch(error => {
+      console.error('Error sending data', error);
+    });
+
+    setRunningStepCount(0);
+  };
 
   function getCurrentLocation() {
     const timeout = 1000;
@@ -40,13 +67,13 @@ const MapActive = ({ navigation }) => {
       resolve(await Location.getCurrentPositionAsync());
     });
   }
+
   const followLocation = async () => {
-      if(isRunning){
-        try{
-          let currentLocation = await getCurrentLocation();
-          if(currentLocation){
-            setLocation(currentLocation);
-          }
+    if(isRunning){
+      try{
+        let currentLocation = await getCurrentLocation();
+        if(currentLocation){
+          setLocation(currentLocation);
           mapRef.current.animateToRegion({
             latitude: currentLocation.coords.latitude,
             longitude: currentLocation.coords.longitude,
@@ -54,37 +81,35 @@ const MapActive = ({ navigation }) => {
             longitudeDelta: 0.005,
           }); 
         }
-        catch(error){ 
-            console.log("Follow error: " + error);
-        }
       }
-
-      setTimeout(followLocation, 1000);
-      
-      
+      catch(error){ 
+        console.log("Follow error: " + error);
+      }
     }
 
-  //Location
-  useEffect(() =>{
-    const getLoc = async () =>{
+    setTimeout(followLocation, 1000);
+  };
 
+  // Location
+  useEffect(() => {
+    const getLoc = async () => {
       let { status } = await Location.getForegroundPermissionsAsync();
       if (status !== 'granted') {
-          status = await Location.requestForegroundPermissionsAsync();
-          if(status !== 'granted'){
-            console.log("still no permissions");
-            return false;    
-          }
-          else{
-            console.log("access granted") 
-          }
+        status = await Location.requestForegroundPermissionsAsync();
+        if(status !== 'granted'){
+          console.log("still no permissions");
+          return false;    
+        }
+        else{
+          console.log("access granted"); 
+        }
       }
-      console.log("access granted")
+      console.log("access granted");
 
       try{
         let currentLocation = await getCurrentLocation();
         if(currentLocation){
-           setLocation(currentLocation);
+          setLocation(currentLocation);
         }
         
         setInitialRegion({
@@ -98,25 +123,17 @@ const MapActive = ({ navigation }) => {
         console.log(location);
       }
       catch(error){
-          console.log("error: " + error);
+        console.log("error: " + error);
       }
-     
-
-   }
+    };
     getLoc();
-   
-  }, [])
+  }, []);
 
-
-  const onPress = () => {
-    setIsRunning(true);
-    
-  }
-
-  //Back button
+  // Back button
   useEffect(() => {
     const backAction = () => {
       navigation.navigate('DrawerNav');
+      return true;
     };
     
     const backHandler = BackHandler.addEventListener(
@@ -127,11 +144,10 @@ const MapActive = ({ navigation }) => {
     return () => backHandler.remove();
   }, []);
 
-
-  //Content
+  // Content
   const content = isRunning ? ( 
     <View style={styles.mainContainer}>
-       <MapView
+      <MapView
         ref={mapRef} 
         style={styles.map}
         showsMyLocationButton={false}
@@ -139,19 +155,15 @@ const MapActive = ({ navigation }) => {
         rotateEnabled={false}
         zoomEnabled={false}
         followsUserLocation={true}
-        maxDelta={0.005}
         initialRegion={initialRegion}
-       >
+      >
       </MapView>
-      <View style={{  alignItems: 'center', justifyContent: 'center' }}>
-      <Pressable style={styles.runBtn} onPress={stopRunning}>
-        
-        <Text style={styles.runText}>End</Text>
-      </Pressable>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Pressable style={styles.runBtn} onPress={stopRunning}>
+          <Text style={styles.runText}>End</Text>
+        </Pressable>
       </View>
     </View>
-    
-   
   ) : (
     <View>
       <MapView
@@ -162,17 +174,14 @@ const MapActive = ({ navigation }) => {
         rotateEnabled={true}
         zoomEnabled={true}
         followsUserLocation={true}
-        maxDelta={0.006}
         initialRegion={initialRegion}
-       >
+      >
       </MapView>
-      <View style={{  alignItems: 'center', justifyContent: 'center' }}>
-      <Pressable style={styles.runBtn} onPress={onPress}>
-        
-        <Text style={styles.runText}>Run!</Text>
-      </Pressable>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Pressable style={styles.runBtn} onPress={startRunning}>
+          <Text style={styles.runText}>Run!</Text>
+        </Pressable>
       </View>
-    
     </View>
   );
 
@@ -181,14 +190,14 @@ const MapActive = ({ navigation }) => {
       style={styles.mainContainer}
       keyboardShouldPersistTaps='handled'
       contentContainerStyle={{
-          flexGrow: 1,
-          flex: 6,
-          alignItems: 'center',
-          justifyContent: 'center',
+        flexGrow: 1,
+        flex: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
       {content}
     </ScrollView>
   );
-}
+};
 
 export { MapActive };
