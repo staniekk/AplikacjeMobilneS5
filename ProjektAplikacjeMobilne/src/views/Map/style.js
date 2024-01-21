@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
     map: {
-        height: Dimensions.get('window').height - 100,
+        height: Dimensions.get('window').height - 150,
         width: Dimensions.get('window').width - 25,
         top: 0,
         left: 0,
@@ -38,6 +38,24 @@ export const styles = StyleSheet.create({
         marginTop: 30,
         width: 55,
         height: 55
-    }
+    },
+    runText: {
+        
+        color: '#564949',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 25
+    },
+    runBtn: {
+        marginTop:5,
+        padding: 5,
+        backgroundColor: '#F4F7F8',
+        width: 150,
+        marginBottom: 30,
+        borderRadius: 30,
+        marginTop: 30,
+        justifyContent: 'bottom', 
+        textAlign:'center'
 
+    },
 })
