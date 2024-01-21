@@ -1,16 +1,22 @@
-import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert } from "react-native";
+import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert, Button } from "react-native";
 import { styles } from "./style";
 import React, { useRef, useEffect, useState } from "react";
 import * as Location from 'expo-location';
 //import { Accelerometer } from 'expo-sensors';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useSettings } from "../../Context/settingsContext";
+import { useStepContext } from "../../Context/stepContext";
 
 
-const MapActive = ({ navigation, route }) => {
+const MapActive = ({ navigation }) => {
+  
+
+  const settings = useSettings;
+  const stepContext = useStepContext;
   
   const mapRef = useRef();
-  const [ shouldRun, setShouldRun] = useState([route.params]);
+  const [ shouldRun, setShouldRun] = useState([stepContext.isRunning]);
   const [ {x, y, z}, setData] = useState({x:0, y:0, z:0});
   const [location, setLocation] = useState();
   const [initialRegion, setInitialRegion] = useState({ latitude: 50.8795,
@@ -18,10 +24,9 @@ const MapActive = ({ navigation, route }) => {
     latitudeDelta: 0.005,
     longitudeDelta: 0.005,});
 
-  const onRegionChange = (region) => {
-    console.log("Region");
-    console.log(region);
-
+  const stopRunning = () => {
+     stepContext.isRunning = false;
+     navigation.navigate('Map');
   }
 
   function getCurrentLocation() {
@@ -120,27 +125,33 @@ const MapActive = ({ navigation, route }) => {
        <MapView
         ref={mapRef} 
         style={styles.map}
-        showsMyLocationButton={true}
+        showsMyLocationButton={false}
         showsUserLocation={true}
         rotateEnabled={false}
         zoomEnabled={false}
         followsUserLocation={true}
         maxDelta={0.005}
         initialRegion={initialRegion}
-       >{location &&  (
-        <Marker
-                coordinate={{
-                  longitude: location?.coords.longitude,
-                  latitude: location?.coords.latitude
-                }}
-              ></Marker>
-       )}
+       >
       </MapView>
+      <Button onPress={stopRunning}></Button>
     </View>
    
   ) : (
     <View>
-      <Text>{shouldRun.toString()} AAA</Text>
+      <MapView
+        ref={mapRef} 
+        style={styles.map}
+        showsMyLocationButton={true}
+        showsUserLocation={true}
+        rotateEnabled={true}
+        zoomEnabled={true}
+        followsUserLocation={true}
+        maxDelta={0.010}
+        initialRegion={initialRegion}
+       >
+      </MapView>
+      <Text>Maybe start running button?</Text>
     </View>
   );
 

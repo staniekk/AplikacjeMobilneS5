@@ -1,11 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import { Text, View, Pressable, Image, BackHandler } from 'react-native';
 import { styles } from './style';
-import { StepContext } from '../Context';
+import { StepContext, useStepContext } from '../../Context/stepContext';
 
 
 export function HomeScreen({ navigation }) {
+
+  const stepContext = useStepContext;
   const { currentStepCount} = useContext(StepContext);
+
+  const onPress = () => {
+    stepContext.isRunning = true;
+    navigation.navigate('Map');
+  }
 
   useEffect(() => {
     const backAction = () => true;
@@ -39,7 +46,7 @@ export function HomeScreen({ navigation }) {
         <Text style={styles.tipInfo}>Lorem ipsum lorem ipsum</Text>
       </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Map')}>
+        <Pressable style={styles.loginBtn} onPress={onPress}>
           <Text style={styles.loginText}>Run!</Text>
         </Pressable>
       </View>
