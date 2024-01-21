@@ -21,16 +21,29 @@ export default function SettingsContextProvider({ children }) {
         axios.get('https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings')
     .then(response => {
         const userSettings = response.data;
-        const foundSettings = userSettings.find(settings => settings.userID === userID);
+        const foundSettings = userSettings.find(settings => settings.userID === userID.toString());
         if (foundSettings) {
+            
+            setDailyStepGoal(foundSettings.dailyStepGoal)
+            console.log('Succes getting settings');
             console.log('Settings step goal:' +  foundSettings.dailyStepGoal);
-            console.log('Authenticated user:' +  foundSettings);
         } else {
-            Alert.alert("Error", "Settings not found");
+            setDailyStepGoal(10000)
+            axios.post('https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings', {
+                userID: userID,
+                dailyStepGoal: 10000
+            })
+            .then(() => {
+                console.log("Success, new settings posted.");
+            })
+            .catch(error => {
+                Alert.alert("Registration Error", error.message);
+            });
+            
         }
     })
     .catch(error => {
-        Alert.alert("Login Error", error.message);
+        Alert.alert("Settings post/get Error", error.message);
     });
     }
 

@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Pressable, ScrollView, BackHandler, Switch, TextInput } from 'react-native';
+import { View, Text, Pressable, ScrollView, BackHandler, Switch, TextInput, Alert } from 'react-native';
 import Slider from '@react-native-community/slider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './style';
 import { ThemeContext } from '../../Constants/ThemeContext';
 import { SettingsContext } from '../../Context/settingsContext';
+import axios from 'axios';
 
 export function Settings({ navigation }) {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext); // Get isDarkMode and toggleTheme
@@ -26,8 +27,23 @@ export function Settings({ navigation }) {
     };
 
     const handleStepGoalChange = () =>{
+
         setTempStepGoal(Math.round( tempStepGoal))
         setDailyStepGoal(Math.round( tempStepGoal))
+
+        const changeSettings = async () => {
+            axios.put(`https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings?userID=${userID}`,{
+                dailyStepGoal:dailyStepGoal
+            })
+            .then(() => {
+                console.log("Success, settings modified.");
+             })
+            .catch(error => {
+                console.log(error.message)
+                Alert.alert("Settings modifications Error", error.message);
+            });
+            }
+        changeSettings();
     }
 
     React.useEffect(() => {
