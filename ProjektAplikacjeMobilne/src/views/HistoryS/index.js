@@ -22,12 +22,11 @@ const HistoryS = () => {
     })
     .catch(error => {
       setHasHistory(false);
-      console.error("Wystąpił błąd podczas pobierania danych historii", error);
-      console.error("ID" + userID);
+      console.log("Baza danych historii jest pusta ", error);
       setLoading(false);
     });}
     catch(error){
-      console.error('Error sending data', error);
+      console.log('Error', error);
       setHasHistory(false);
     }
     
