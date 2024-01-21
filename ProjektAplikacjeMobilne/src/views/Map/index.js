@@ -22,11 +22,11 @@ const MapActive = ({ navigation }) => {
     latitudeDelta: 0.005,
     longitudeDelta: 0.005,});
 
-  const stopRunning = () => {
+  const stopRunning = () => { 
      setIsRunning(false);
      setRunningStepCount(0);
      const distance = runningStepCount * stepLength;
-     Alert.alert("End of the run!", "You travelled " + {distance},  [
+     Alert.alert("End of the run!", "You travelled " + distance.toString() + " meters",  [
       { text: 'OK', onPress: () => navigation.navigate('Map')},
     ],
     { cancelable: true });
@@ -41,27 +41,32 @@ const MapActive = ({ navigation }) => {
     });
   }
   const followLocation = async () => {
-
-      try{
-        let currentLocation = await getCurrentLocation();
-        if(currentLocation){
-           setLocation(currentLocation);
+      if(isRunning){
+        try{
+          let currentLocation = await getCurrentLocation();
+          if(currentLocation){
+            setLocation(currentLocation);
+          }
+          console.log(currentLocation.coords.latitude + ' aa');
+          mapRef.current.animateToRegion({
+            latitude: currentLocation.coords.latitude,
+            longitude: currentLocation.coords.longitude,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
+          }); 
         }
-        console.log(currentLocation.coords.latitude + ' aa');
-        mapRef.current.animateToRegion({
-          latitude: currentLocation.coords.latitude,
-          longitude: currentLocation.coords.longitude,
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.005,
-        });
-      }
-      catch(error){ 
-          console.log("Follow error: " + error);
-      }
-      finally{
-          setTimeout(followLocation, 1000);
-      }
+        catch(error){ 
+            console.log("Follow error: " + error);
+        }
+        finally{
+            setTimeout(followLocation, 1000);
+        }
 
+      }
+      else{
+        setTimeout(followLocation, 1000);
+      }
+      
     }
 
   //Location
