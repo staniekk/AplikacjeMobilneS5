@@ -44,16 +44,18 @@ export function Statistics({ navigation }) {
                     const timeArray = filteredData.map(item => item.time);
 
                     const sumSteps = stepsArray.reduce((acc, steps) => acc + steps, 0);
-                    const sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
-                    const sumTime = timeArray.reduce((acc, time) => acc + time, 0);
+                    var sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
+                    sumDist = sumDist/1000;
+                    var sumTime = timeArray.reduce((acc, time) => acc + time, 0);
+                    sumTime = sumTime / 3600;
 
                     const aveSpeed = sumDist / sumTime;
                     const aveTime = sumTime / timeArray.length;
 
                     const maxSteps = Math.max(...filteredData.map(item => item.steps));
-                    const maxSpeed = Math.max(...filteredData.map(item => item.speed));
-                    const maxDist = Math.max(...filteredData.map(item => item.dist));
-                    const maxTime = Math.max(...filteredData.map(item => item.time));
+                    const maxSpeed = (Math.max(...filteredData.map(item => item.speed))) * 3.6;
+                    const maxDist = (Math.max(...filteredData.map(item => item.dist))) / 1000;
+                    const maxTime = (Math.max(...filteredData.map(item => item.time))) / 3600;
 
                     setTotalSteps(sumSteps);
                     setTotalDist(sumDist);
