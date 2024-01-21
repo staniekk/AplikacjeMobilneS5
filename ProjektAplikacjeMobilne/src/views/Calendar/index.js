@@ -7,6 +7,7 @@ import { SettingsContext, useSettings } from "../../Context/settingsContext";
 
 
 export function Calendar({ navigation }) {
+  // usestaty dla uzytecznosci kalendarza
   const [selectedDate, setSelectedDate] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [activityData, setActivityData] = useState({
@@ -21,6 +22,8 @@ export function Calendar({ navigation }) {
   const {userID} = useContext(SettingsContext);
 
 
+  // wstepne wczytywanie danych aby zaznaczyc kropki na kalendarzu
+  // obsluga powrotu
   useEffect(() => {
     fetchAllActivities();
     const backAction = () => true;
@@ -28,7 +31,7 @@ export function Calendar({ navigation }) {
     return () => backHandler.remove();
   }, []);
 
-
+  // pobiera wszystkie zaplanowane aktywnosci uzytkownika o danym ID
   const fetchAllActivities = () => {
     axios.get(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities?userID=${userID}`)
       .then(response => {
@@ -39,19 +42,19 @@ export function Calendar({ navigation }) {
             newMarkedDates[activity.date] = { marked: true, dotColor: 'red' };
           }
         });
-        setMarkedDates(newMarkedDates);
+        setMarkedDates(newMarkedDates); // dodanie markera=kropki przy datach z aktywnosciami
       })
   };
 
-
+  // ustawia date na wybrany na kalendarzu dzien i aktualizuje liste aktywnosci dnia
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
     retrieveActivityData(day.dateString);
   };
 
-
+  // obsluga dodania aktywnosci, otwiera okno modalne ktore przyjmuje odpowiednie dane
   const handleAddActivity = () => {
-    setShowModal(true);
+    setShowModal(true); // ustawia pokazanie okna modalnego na true
     setActivityData({
       id: null, 
       date: selectedDate,
@@ -62,8 +65,9 @@ export function Calendar({ navigation }) {
     });
   };
 
-
+  // zapisz aktywnosc na serwer
   const saveActivity = () => {
+    // dane do wyslania
     const dataToSend = {
       userID: userID,
       date: activityData.date,
@@ -75,29 +79,29 @@ export function Calendar({ navigation }) {
   
     let request;
     if (activityData.id) {
-      // jesli jest id to nadpisz
+      // jesli dane id juz na serwerze to nadpisz dane
       request = axios.put(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities/${activityData.id}`, dataToSend);
     } else {
-      // jelsli nie ma id to dodaj
+      // jelsli nie ma takiego id, to dodaj aktywnosc
       request = axios.post('https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities', dataToSend);
     }
     request.then(response => {
-      setShowModal(false);
-      fetchAllActivities(); // odswiez
+      setShowModal(false); // zamknij okno modalne po dodaniu aktywnosci
+      fetchAllActivities(); // pobierz liste aktywnosci
     }).catch(error => {
       console.error('Error saving activity:', error);
     });
-    refreshActivities();
+    refreshActivities(); // odswiez liste aktywnosci
   };
 
-
+  // pobieranie danych usera o danym ID
   const retrieveActivityData = (date) => {
     axios.get(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities?date=${date}&userID=${userID}`)
       .then(response => {
-        setActivitiesList(response.data);
+        setActivitiesList(response.data); // wypelnij liste aktywnosci
       })
       .catch(error => {
-        console.log('No activities for given day', error);
+        console.log('No activities for given day');
         setActivitiesList([]); // wyczysc liste jesli nie ma danych
       });
   };
@@ -105,37 +109,38 @@ export function Calendar({ navigation }) {
 
   const refreshActivities = async () => {
     try {
-        fetchAllActivities();
-        retrieveActivityData(selectedDate); 
+        fetchAllActivities(); // pobierz wszystkie aktywnosci danego uzytkownika
+        retrieveActivityData(selectedDate); // pobierz pobierz wszystkie aktywnosci danego uzytkownika DLA DANEGO DNIA
     } catch (error) {
-        console.log("no activities fetched:");
+        console.log("no activities fetched"); // wiadomosc o braku aktywnosci (debug)
     }
 };
 
-
+  // usuwanie aktywnosci z listy i serwera
   const removeActivity = (activityId) => {
     axios.delete(`https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities/${activityId}`)
       .then(response => {
-        refreshActivities();
+        refreshActivities(); // odswiez liste aktywnosci dnia
       })
       .catch(error => {
-        console.error('Error removing activity:', error);
+        console.error('Error removing activity:', error); // blad usuwania aktywnosci
       });
   };
 
-
+  // edituj zaplanowana aktywnosc
   const editActivity = (activity) => {
-    setActivityData(activity);
-    setShowModal(true);
-    refreshActivities();
+    setActivityData(activity); // wczytaj dane do edycji
+    setShowModal(true); // pokaz okno modalne
+    refreshActivities(); // odswiez liste
   };
 
-
+  // odsswiez po zapisaniu
   const onActivitySaved = () => {
     refreshActivities();
   };
 
 
+  // renderowanie boxow z informacjami o aktywnosci oraz przyciskow edit remove
   const renderActivityItem = ({ item }) => (
     <View style={styles.activityItem}>
       <View style={styles.activityDetails}>
@@ -147,7 +152,7 @@ export function Calendar({ navigation }) {
       </View>
       <View style={styles.activityButtons}>
         <TouchableOpacity style={styles.editButton} onPress={() => editActivity(item)}>
-          <Text>Edit</Text>
+          <Text>Edit</Text>  
         </TouchableOpacity>
         <TouchableOpacity style={styles.removeButton} onPress={() => removeActivity(item.id)}>
           <Text>Remove</Text>
@@ -156,6 +161,8 @@ export function Calendar({ navigation }) {
     </View>
   );
 
+
+  // renderuje caly kalendarz, pokazuje przycisk dodania activity, pokazuje liste activities
   return (
     <View style={styles.mainContainer}>
     <Text style={styles.calendarTitle}> </Text>
