@@ -3,14 +3,14 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
-    mainContainer: {
-        flex: 1,
-        backgroundColor: '#11B5E4', 
-        paddingTop: 40, 
-        paddingBottom:40,
+ mainContainer:
+    {
+        backgroundColor: '#11B5E4',
+
     },
     logo: {
         marginBottom:15,
+        marginTop: 30,
         width: 55,
         height: 45
     },
