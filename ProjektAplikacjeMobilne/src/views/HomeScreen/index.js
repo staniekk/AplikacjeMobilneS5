@@ -7,9 +7,9 @@ import { SettingsContext } from '../../Context/settingsContext';
 
 export function HomeScreen({ navigation }) {
 
-  const {isRunning, setIsRunning} = useContext(StepContext);
+  const {setIsRunning} = useContext(StepContext);
   const { currentStepCount} = useContext(StepContext);
-  const {stepLength} = useContext(SettingsContext);
+  const {stepLength, dailyStepGoal} = useContext(SettingsContext);
 
   const onPress = () => {
     setIsRunning(true);
@@ -36,11 +36,11 @@ export function HomeScreen({ navigation }) {
           <View style={styles.pedometerContainer}>
             <Image style={styles.footprint} source={require('../../img/logo/footprint.png')}/>
             <Text style={styles.stepCount}>
-             {currentStepCount/100 * stepLength}
+             {(currentStepCount/100 * stepLength).toFixed(0)}
             
             </Text>
             <View style={styles.line} />
-            <Text style={styles.goalText}>8000</Text>
+            <Text style={styles.goalText}>{dailyStepGoal}</Text>
           </View>
         </View>
 
