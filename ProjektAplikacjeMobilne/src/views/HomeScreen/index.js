@@ -22,7 +22,7 @@ export function HomeScreen({ navigation }) {
     return () => backHandler.remove();
   }, []);
 
-  const distance = (currentStepCount/100 * stepLength / 1000).toFixed(2);
+  const distance = (currentStepCount/100 / stepLength / 1000).toFixed(2);
 
   return (
     <View style={styles.mainContainer}>
@@ -36,7 +36,7 @@ export function HomeScreen({ navigation }) {
           <View style={styles.pedometerContainer}>
             <Image style={styles.footprint} source={require('../../img/logo/footprint.png')}/>
             <Text style={styles.stepCount}>
-             {(currentStepCount/100 * stepLength).toFixed(0)}
+             {Math.round(currentStepCount/100 / stepLength)}
             
             </Text>
             <View style={styles.line} />
