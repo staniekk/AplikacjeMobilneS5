@@ -89,17 +89,9 @@ export function Statistics({ }) {
       return (
 
             <View style={{ backgroundColor: '#11B5E4', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                              <Image style={styles.logo}
-                                  source={require('../../img/logo/Logo.png')}
-                              />
+                          <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>    
 
-                <ScrollView style={styles.mainContainer}
-                        keyboardShouldPersistTaps='handled'
-                        contentContainerStyle={{
-                            flex: 6,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}>
+                <ScrollView style={styles.mainContainer}>
 
 
                   <View style={styles.panel}>
