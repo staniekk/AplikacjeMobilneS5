@@ -90,4 +90,59 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
   },
+  activitiesContainer: {
+    padding: 10,
+  },
+  activityItem: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    margin: 5,
+    borderRadius: 8,
+    width: '90%', 
+  },
+  activityTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  activityDetails: {
+    fontSize: 14,
+  },
+  addButton: {
+    backgroundColor: '#007bff', // Example color
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  activityItem: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderRadius: 8,
+    marginVertical: 5,
+    marginHorizontal: 10,
+  },
+  activityText: {
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  emptyDayText: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 20,
+    color: '#666',
+    fontStyle: 'italic',
+  },
+  noActivitiesText: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 20,
+    color: '#666',
+    fontStyle: 'italic',
+  },
 });
