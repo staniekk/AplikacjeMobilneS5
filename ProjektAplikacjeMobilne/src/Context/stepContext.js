@@ -31,7 +31,8 @@ export const StepProvider = ({ children }) => {
           setPermissions(perm);
 
           subscription = Pedometer.watchStepCount(result => {
-            setRunningStepCount(current => current + result.steps);
+            console.log("Ilosc krokow biegania" + result.steps);
+            setRunningStepCount(result.steps);
 
           });
           
@@ -64,7 +65,7 @@ export const StepProvider = ({ children }) => {
           subscription = Pedometer.watchStepCount(result => {
             console.log("Ilosc krokow");
             console.log(result.steps);
-            setCurrentStepCount(current => current + result.steps);
+            setCurrentStepCount(result.steps);
             console.log("Zmienna trzymajaca kroki");
             console.log(currentStepCount);
           });

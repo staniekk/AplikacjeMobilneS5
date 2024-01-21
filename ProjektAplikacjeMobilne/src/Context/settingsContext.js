@@ -1,10 +1,11 @@
 import { func } from 'prop-types';
 import axios from 'axios';
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { Alert } from 'react-native';
 
 export const SettingsContext = createContext({
     stepLength: 1.00,
-    userID: -1,
+    userID: 1,
     dailyStepGoal: 10000,
 });
 
@@ -21,7 +22,7 @@ export default function SettingsContextProvider({ children }) {
         axios.get('https://65ad4acaadbd5aa31be0832b.mockapi.io/am/userSettings')
     .then(response => {
         const userSettings = response.data;
-        const foundSettings = userSettings.find(settings => settings.userID === userID.toString());
+        const foundSettings = userSettings.find(settings => settings.userID === userID);
         if (foundSettings) {
             
             setDailyStepGoal(foundSettings.dailyStepGoal)
