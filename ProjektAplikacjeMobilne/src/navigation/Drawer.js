@@ -3,7 +3,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Image } from "react-native";
 import { Statistics } from '../views/Statistics';
 import { Settings } from '../views/Settings/index';
-import { HomeScreen } from '../views/HomeScreen';
 import BottomTabNav from './BottomTab';
 import { HistoryS } from '../views';
 

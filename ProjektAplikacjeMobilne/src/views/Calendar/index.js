@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, View, Modal, TextInput, TouchableOpacity, FlatList, BackHandler, StyleSheet } from 'react-native';
+import { Text, View, Modal, TextInput, TouchableOpacity, FlatList, BackHandler } from 'react-native';
 import { Calendar as RNCalendar } from 'react-native-calendars';
 import axios from 'axios';
 import { styles } from './style';
-import { SettingsContext, useSettings } from "../../Context/settingsContext";
+import { SettingsContext} from "../../Context/settingsContext";
 
 
 export function Calendar({ navigation }) {

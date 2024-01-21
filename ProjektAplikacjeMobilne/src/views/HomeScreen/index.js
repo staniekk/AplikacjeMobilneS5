@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, Pressable, Image, BackHandler, Alert } from 'react-native';
+import { Text, View, Pressable, Image, BackHandler } from 'react-native';
 import { styles } from './style';
 import { StepContext  } from '../../Context/stepContext';
 import { SettingsContext } from '../../Context/settingsContext';
-import { random } from 'node-forge';
+
 
 // Główny ekran aplikacji
 //Odpowiada za wyświetlania zrobionych kroków w trakcie danej sesji oraz przebytej odległości

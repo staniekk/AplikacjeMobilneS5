@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, Pressable, TextInput, Alert, BackHandler, Image } from "react-native";
+import { Text, ScrollView, Pressable, TextInput, Alert, Image } from "react-native";
 import { styles } from "./style";
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';

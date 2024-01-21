@@ -1,17 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Pressable, ScrollView, BackHandler, Switch, TextInput, Alert, Modal } from 'react-native';
-import Slider from '@react-native-community/slider';
+import { View, Text, Pressable, ScrollView, BackHandler, TextInput, Alert, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './style';
-import { ThemeContext } from '../../Constants/ThemeContext';
 import { SettingsContext } from '../../Context/settingsContext';
 import axios from 'axios';
 
 export function Settings({ navigation }) {
-    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
-    const [volume, setVolume] = useState(50);
-    const [pauseTime, setPauseTime] = useState('10');
-    const [finishTime, setFinishTime] = useState('120');
     const { dailyStepGoal, setDailyStepGoal, userID, stepLength, setStepLength } = useContext(SettingsContext);
     const [tempStepGoal, setTempStepGoal] = useState(dailyStepGoal);
     const [tempStepLength, setTempLength] = useState(stepLength);
