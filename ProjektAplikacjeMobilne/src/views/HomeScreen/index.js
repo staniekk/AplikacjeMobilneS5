@@ -7,19 +7,14 @@ import { SettingsContext } from '../../Context/settingsContext';
 
 export function HomeScreen({ navigation }) {
 
-  const {setIsRunning} = useContext(StepContext);
-  const { currentStepCount} = useContext(StepContext);
+  const {setIsRunning, setStartTime,currentStepCount, startTime} = useContext(StepContext);
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
   
 
 const onPress = () => {
   setIsRunning(true);
-  currentTime = new Date().getTime();
-  Alert.alert("Nowy czas!", `Aktualny czas ${currentTime}`, [
-    { text: 'OK' },
-  ],
-  { cancelable: true });
-  navigation.navigate('Map', { startTime: currentTime });
+  setStartTime(new Date());
+  navigation.navigate('Map');
 }
 
   useEffect(() => {

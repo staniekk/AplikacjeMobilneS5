@@ -7,9 +7,9 @@ import { StepContext } from "../../Context/stepContext";
 import { styles } from "./style";
 import axios from 'axios';
 
-const MapActive = ({ navigation, route }) => {
+const MapActive = ({ navigation }) => {
   const { stepLength, userID } = useContext(SettingsContext);
-  const { isRunning, setIsRunning, runningStepCount, setRunningStepCount } = useContext(StepContext);
+  const { isRunning, setIsRunning, runningStepCount, setRunningStepCount, startTime, endTime, setStartTime, setEndTime } = useContext(StepContext);
   const mapRef = useRef();
   const [location, setLocation] = useState();
   const [initialRegion, setInitialRegion] = useState({
@@ -19,17 +19,8 @@ const MapActive = ({ navigation, route }) => {
     longitudeDelta: 0.005,
   });
 
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
-  
 
-  useEffect(() => {
-    if (route.params?.startTime) {
-      const startDate = new Date(route.params.startTime);
-      setStartTime(startDate);
-      setIsRunning(true);
-    }
-  }, [route.params?.startTime]);
+  
 
   const startRunning = () => {
       setIsRunning(true);
@@ -38,10 +29,6 @@ const MapActive = ({ navigation, route }) => {
 
   const stopRunning = () => {
     const endTime = new Date();
-    Alert.alert("Nowy czas!", `Aktualny czas ${endTime}`, [
-      { text: 'OK' },
-    ],
-    { cancelable: true });
     setEndTime(endTime);
     setIsRunning(false);
 
