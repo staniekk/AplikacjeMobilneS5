@@ -1,22 +1,21 @@
 import { Text, ScrollView, BackHandler, StyleSheet, Image, View, Alert, Button } from "react-native";
 import { styles } from "./style";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import * as Location from 'expo-location';
 //import { Accelerometer } from 'expo-sensors';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useSettings } from "../../Context/settingsContext";
-import { useStepContext } from "../../Context/stepContext";
+import { SettingsContext, useSettings } from "../../Context/settingsContext";
+import { StepContext, useStepContext } from "../../Context/stepContext";
 
 
 const MapActive = ({ navigation }) => {
   
 
-  const settings = useSettings;
-  const stepContext = useStepContext;
+  const {stepLength} = useContext(SettingsContext);
+  const {isRunning, setIsRunning, runningStepCount, setRunningStepCount} = useContext(StepContext);
   
   const mapRef = useRef();
-  const [ shouldRun, setShouldRun] = useState([stepContext.isRunning]);
   const [ {x, y, z}, setData] = useState({x:0, y:0, z:0});
   const [location, setLocation] = useState();
   const [initialRegion, setInitialRegion] = useState({ latitude: 50.8795,
@@ -25,8 +24,13 @@ const MapActive = ({ navigation }) => {
     longitudeDelta: 0.005,});
 
   const stopRunning = () => {
-     stepContext.isRunning = false;
-     navigation.navigate('Map');
+     setIsRunning(false);
+     setRunningStepCount(0);
+     const distance = runningStepCount * stepLength;
+     Alert.alert("End of the run!", "You travelled " + {distance},  [
+      { text: 'OK', onPress: () => navigation.navigate('Map')},
+    ],
+    { cancelable: true });
   }
 
   function getCurrentLocation() {
@@ -120,7 +124,7 @@ const MapActive = ({ navigation }) => {
 
 
   //Content
-  const content = shouldRun ? ( 
+  const content = isRunning ? ( 
     <View style={styles.mainContainer}>
        <MapView
         ref={mapRef} 
@@ -134,7 +138,7 @@ const MapActive = ({ navigation }) => {
         initialRegion={initialRegion}
        >
       </MapView>
-      <Button onPress={stopRunning}></Button>
+      <Button title="End" onPress={stopRunning}></Button>
     </View>
    
   ) : (

@@ -1,9 +1,10 @@
 import { func } from 'prop-types';
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-export const SettingsContext = createContext(null);
-
-export const useSettings = useContext(SettingsContext);
+export const SettingsContext = createContext({
+    stepLength: 1.00,
+    userID: -1
+});
 
 export default function SettingsContextProvider({ children }) {
 

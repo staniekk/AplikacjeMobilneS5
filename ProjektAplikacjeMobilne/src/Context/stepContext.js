@@ -5,10 +5,9 @@ export const StepContext = createContext({
   currentStepCount: 0,
   isRunning: false,
   runningStepCount: 0,
-
+  setIsRunning: ({}),
+  setRunningStepCount: ({})
 });
-
-export const useStepContext = useContext(StepContext);
 
 export const StepProvider = ({ children }) => {
   const [currentStepCount, setCurrentStepCount] = useState(0);
@@ -77,7 +76,7 @@ export const StepProvider = ({ children }) => {
   }, []);
 
   return (
-    <StepContext.Provider value={{ currentStepCount, isPedometerAvailable, permissions, runningStepCount, isRunning }}>
+    <StepContext.Provider value={{ currentStepCount, isPedometerAvailable, permissions, runningStepCount, setRunningStepCount, isRunning, setIsRunning }}>
       {children}
     </StepContext.Provider>
   );

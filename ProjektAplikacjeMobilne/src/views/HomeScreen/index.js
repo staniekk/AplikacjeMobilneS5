@@ -6,11 +6,11 @@ import { StepContext, useStepContext } from '../../Context/stepContext';
 
 export function HomeScreen({ navigation }) {
 
-  const stepContext = useStepContext;
+  const {isRunning, setIsRunning} = useContext(StepContext);
   const { currentStepCount} = useContext(StepContext);
 
   const onPress = () => {
-    stepContext.isRunning = true;
+    setIsRunning(true);
     navigation.navigate('Map');
   }
 
