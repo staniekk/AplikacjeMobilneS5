@@ -7,7 +7,7 @@ import { StepContext } from "../../Context/stepContext";
 import { styles } from "./style";
 import axios from 'axios';
 
-const MapActive = ({ navigation }) => {
+const MapActive = ({ navigation, route }) => {
   const { stepLength, userID } = useContext(SettingsContext);
   const { isRunning, setIsRunning, runningStepCount, setRunningStepCount } = useContext(StepContext);
   const mapRef = useRef();
@@ -21,20 +21,29 @@ const MapActive = ({ navigation }) => {
 
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  const [timeFlag, setTimeFlag] = useState(route.params);
 
+  
   const startRunning = () => {
-    setIsRunning(true);
-    setStartTime(new Date());
+    if(!timeFlag.flag){
+      setIsRunning(true);
+      setStartTime(new Date());
+      setTimeFlag(true);
+    }
+    
+    
   };
 
   const stopRunning = () => {
     const endTime = new Date();
+    setTimeFlag(false);
     setEndTime(endTime);
     setIsRunning(false);
 
     const distance = runningStepCount * stepLength;
     const timeDiff = (endTime - startTime) / 1000; // czas w sekundach
     const currentDate = endTime.toLocaleDateString();
+    const speed = distance/timeDiff; 
 
     Alert.alert("End of the run!", `You travelled ${distance} meters in ${timeDiff} seconds`, [
       { text: 'OK' },
@@ -48,6 +57,7 @@ const MapActive = ({ navigation }) => {
       userID: userID,
       steps: runningStepCount,
       date: currentDate,
+      speed: speed,
     })
     .then(response => {
       console.log('Data sent successfully');
@@ -146,8 +156,10 @@ const MapActive = ({ navigation }) => {
 
   // Content
   const content = isRunning ? ( 
+    
     <View style={styles.mainContainer}>
       <MapView
+      
         ref={mapRef} 
         style={styles.map}
         showsMyLocationButton={false}
@@ -158,6 +170,7 @@ const MapActive = ({ navigation }) => {
         initialRegion={initialRegion}
       >
       </MapView>
+      {()=>{startRunning()}}
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <Pressable style={styles.runBtn} onPress={stopRunning}>
           <Text style={styles.runText}>End</Text>

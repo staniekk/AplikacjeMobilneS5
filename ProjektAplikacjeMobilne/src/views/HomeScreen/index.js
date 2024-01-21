@@ -12,8 +12,10 @@ export function HomeScreen({ navigation }) {
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
 
   const onPress = () => {
+   
+    
     setIsRunning(true);
-    navigation.navigate('Map');
+    navigation.navigate('Map',{flag: true});
   }
 
   useEffect(() => {
