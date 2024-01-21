@@ -1,4 +1,4 @@
-import { Text, ScrollView, BackHandler, StyleSheet, Pressable, View, Alert, Button } from "react-native";
+import { Text, ScrollView, BackHandler, StyleSheet, Image, Pressable, View, Alert, Button } from "react-native";
 import { styles } from "./style";
 import React, { useRef, useEffect, useState, useContext } from "react";
 import * as Location from 'expo-location';
@@ -136,6 +136,9 @@ const MapActive = ({ navigation }) => {
   //Content
   const content = isRunning ? ( 
     <View style={styles.mainContainer}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
+        </View>
        <MapView
         ref={mapRef} 
         style={styles.map}
@@ -159,6 +162,9 @@ const MapActive = ({ navigation }) => {
    
   ) : (
     <View>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
+        </View>
       <MapView
         ref={mapRef} 
         style={styles.map}

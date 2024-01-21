@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, BackHandler, Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
+import { ScrollView, BackHandler, Text,Image,  View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { Calendar as RNCalendar } from 'react-native-calendars';
 import { styles } from './style';
 
@@ -73,6 +73,7 @@ export function Calendar({ navigation }) {
         backgroundColor: '#11B5E4',
       }}
     >
+       <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
       <Text style={styles.calendarTitle}>Calendar</Text>
       <View style={styles.calendarContainer}>
         <RNCalendar

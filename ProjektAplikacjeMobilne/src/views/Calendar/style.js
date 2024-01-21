@@ -90,4 +90,9 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
   },
+  logo: {
+    marginTop: 50,
+    width: 55,
+    height: 45
+},
 });

@@ -3,13 +3,13 @@ import { Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
     map: {
-        height: Dimensions.get('window').height - 150,
+        height: Dimensions.get('window').height - 200,
         width: Dimensions.get('window').width - 25,
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        marginTop:40
+        marginTop:20
       },
     textInfo: {
         color: '#fff',
@@ -31,9 +31,9 @@ export const styles = StyleSheet.create({
 
     },
     logo: {
-
-        width: 240,
-        height: 200
+        marginTop: 50,
+        width: 55,
+        height: 45
     },
     FP: {
         marginTop: 30,
