@@ -13,6 +13,7 @@ const optionScreen = {
 
 const BottomTab = createBottomTabNavigator();
 
+//BottomTabNav - opowiedzialny za tworzenie dolnego paska nawigacji
 export default function BottomTabNav() {
     return (
         <BottomTab.Navigator screenOptions={({ route }) => ({

@@ -13,7 +13,7 @@ const optionScreen = {
     headerShown: false
 }
 
-
+//DrawerNav - odpowiedzialny za tworzenie nawigacji na bazie szufladki
 export default function DrawerNav() {
     return (
         <Drawer.Navigator
