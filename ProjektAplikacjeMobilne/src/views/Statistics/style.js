@@ -122,6 +122,18 @@ export const styles = StyleSheet.create({
     },
     chart: {
         width: Dimensions.get('window').width - 80
-    }
+    },
+    settingItem: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 10,
+        },
+        settingText: {
+                color: '#fff',
+                fontSize: 18,
+                marginBottom: 10,
+                fontWeight: 'bold',
+            }
 
 })

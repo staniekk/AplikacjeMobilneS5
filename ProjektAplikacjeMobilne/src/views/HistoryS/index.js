@@ -39,7 +39,7 @@ const HistoryS = () => {
           <Image style={styles.runner} source={require('../../img/logo/runner.png')}/>
           <View style={{flex: 1}}>
           <Text style={styles.historyInfoText}>
-            {entry.dist} km - {entry.speed} km/h
+            {entry.dist} km - {entry.data} 
           </Text>
           <Text style={styles.historyInfoText2}>
             Czas: {entry.time} h - Kroki: {entry.steps}

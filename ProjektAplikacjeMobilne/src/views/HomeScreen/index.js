@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Text, View, Pressable, Image, BackHandler } from 'react-native';
+import { Text, View, Pressable, Image, BackHandler, Alert } from 'react-native';
 import { styles } from './style';
 import { StepContext  } from '../../Context/stepContext';
 import { SettingsContext } from '../../Context/settingsContext';
@@ -9,16 +9,16 @@ import { random } from 'node-forge';
 //Odpowiada za wyświetlania zrobionych kroków w trakcie danej sesji oraz przebytej odległości
 export function HomeScreen({ navigation }) {
 
-  const {setIsRunning} = useContext(StepContext);
-  const { currentStepCount} = useContext(StepContext);
+  const {setIsRunning, setStartTime,currentStepCount, startTime} = useContext(StepContext);
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
   const {tip, setTip} = useState("Idź pobiegać");
   const {userID} = useContext(SettingsContext)
-  const onPress = () => {
-    //Zmienna ktora określa, czy użytkownik rozpoczął bieg
-    setIsRunning(true);
-    navigation.navigate('Map');
-  }
+
+const onPress = () => {
+  setIsRunning(true);
+  setStartTime(new Date());
+  navigation.navigate('Map');
+}
 
   useEffect(() => {
     const backAction = () => true;
