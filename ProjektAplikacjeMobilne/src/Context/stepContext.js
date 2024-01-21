@@ -20,6 +20,7 @@ export const StepProvider = ({ children }) => {
 
   //Steps when running
   useEffect(() => {
+    let subscription;
     const subscribe = async () => {
       try {
         const isAvailable = await Pedometer.isAvailableAsync();
