@@ -81,7 +81,6 @@ export function Calendar({ navigation }) {
       // jelsli nie ma id to dodaj
       request = axios.post('https://65ad4130adbd5aa31be071b7.mockapi.io/api/am/activities', dataToSend);
     }
-  
     request.then(response => {
       setShowModal(false);
       fetchAllActivities(); // odswiez
@@ -104,10 +103,14 @@ export function Calendar({ navigation }) {
   };
 
 
-  const refreshActivities = () => {
-    fetchAllActivities();
-    retrieveActivityData(selectedDate); // update listy na dany dzien
-  };
+  const refreshActivities = async () => {
+    try {
+        fetchAllActivities();
+        retrieveActivityData(selectedDate); 
+    } catch (error) {
+        console.log("no activities fetched:");
+    }
+};
 
 
   const removeActivity = (activityId) => {
