@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Text, View, Pressable, Image, BackHandler } from 'react-native';
+import { Text, View, Pressable, Image, BackHandler, Alert } from 'react-native';
 import { styles } from './style';
 import { StepContext, useStepContext } from '../../Context/stepContext';
 import { SettingsContext } from '../../Context/settingsContext';
@@ -10,13 +10,17 @@ export function HomeScreen({ navigation }) {
   const {setIsRunning} = useContext(StepContext);
   const { currentStepCount} = useContext(StepContext);
   const {stepLength, dailyStepGoal} = useContext(SettingsContext);
+  
 
-  const onPress = () => {
-   
-    
-    setIsRunning(true);
-    navigation.navigate('Map',{flag: true});
-  }
+const onPress = () => {
+  setIsRunning(true);
+  currentTime = new Date().getTime();
+  Alert.alert("Nowy czas!", `Aktualny czas ${currentTime}`, [
+    { text: 'OK' },
+  ],
+  { cancelable: true });
+  navigation.navigate('Map', { startTime: currentTime });
+}
 
   useEffect(() => {
     const backAction = () => true;

@@ -21,22 +21,27 @@ const MapActive = ({ navigation, route }) => {
 
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  const [timeFlag, setTimeFlag] = useState(route.params);
-
   
-  const startRunning = () => {
-    if(!timeFlag.flag){
+
+  useEffect(() => {
+    if (route.params?.startTime) {
+      const startDate = new Date(route.params.startTime);
+      setStartTime(startDate);
       setIsRunning(true);
-      setStartTime(new Date());
-      setTimeFlag(true);
     }
-    
-    
+  }, [route.params?.startTime]);
+
+  const startRunning = () => {
+      setIsRunning(true);
+      setStartTime(new Date());    
   };
 
   const stopRunning = () => {
     const endTime = new Date();
-    setTimeFlag(false);
+    Alert.alert("Nowy czas!", `Aktualny czas ${endTime}`, [
+      { text: 'OK' },
+    ],
+    { cancelable: true });
     setEndTime(endTime);
     setIsRunning(false);
 
@@ -170,7 +175,7 @@ const MapActive = ({ navigation, route }) => {
         initialRegion={initialRegion}
       >
       </MapView>
-      {()=>{startRunning()}}
+     
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <Pressable style={styles.runBtn} onPress={stopRunning}>
           <Text style={styles.runText}>End</Text>
