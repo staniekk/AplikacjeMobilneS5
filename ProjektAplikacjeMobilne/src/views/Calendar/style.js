@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
     backgroundColor: '#11B5E4',
   },
 
@@ -75,12 +74,14 @@ export const styles = StyleSheet.create({
         color: 'white',
   },
   activitiesContainer: {
-    padding: 10,
+    padding: 30,
+    marginVertical: 40
+    
   },
   activityItem: {
     backgroundColor: '#f0f0f0',
     padding: 10,
-    margin: 5,
+    marginBottom: 15,
     borderRadius: 8,
     width: '90%', 
   },

@@ -48,10 +48,10 @@ const HistoryS = () => {
            <Image style={styles.runner} source={require('../../img/logo/runner.png')}/>
            <View style={{flex: 1}}>
            <Text style={styles.historyInfoText}>
-             {entry.dist} km - {entry.date} 
+             {(entry.dist/1000).toFixed(3)} km - {entry.date} 
            </Text>
            <Text style={styles.historyInfoText2}>
-             Czas: {entry.time} h - Kroki: {entry.steps}
+             Czas: {(entry.time/60).toFixed(2)} min - Kroki: {entry.steps}
            </Text>
            </View>
        </View>
@@ -63,16 +63,18 @@ const HistoryS = () => {
   (
     
     <View style ={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-  
+  <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
+ 
+    
   <View  style={styles.historyInfo}>
            <View  style={styles.historyInfo2}>
-           <Text>
+           <Text style={styles.historyInfoText}>
           You have no history
         </Text>
+        </View>
+    </View>
+    </View>
     
-    </View>
-    </View>
-    </View>
   );
 
   return (

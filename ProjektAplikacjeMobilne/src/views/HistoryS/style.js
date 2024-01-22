@@ -8,6 +8,12 @@ export const styles = StyleSheet.create({
         backgroundColor: '#11B5E4',
 
     },
+    noHistory:
+    {
+        backgroundColor: '#11B5E4',
+        marginTop:20,
+
+    },
     logo: {
         marginBottom:15,
         marginTop: 30,

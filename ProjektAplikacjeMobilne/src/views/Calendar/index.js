@@ -165,6 +165,7 @@ export function Calendar({ navigation }) {
 
   // renderuje caly kalendarz, pokazuje przycisk dodania activity, pokazuje liste activities
   return (
+   
     <View style={styles.mainContainer}>
     <Text style={styles.calendarTitle}> </Text>
     <View style={styles.calendarContainer}>
@@ -189,7 +190,9 @@ export function Calendar({ navigation }) {
           data={activitiesList}
           renderItem={renderActivityItem}
           keyExtractor={item => item.id.toString()}
+          
           style={styles.activitiesContainer}
+        
         />
       ) : selectedDate && (
         <Text style={styles.noActivitiesText}>
@@ -201,6 +204,7 @@ export function Calendar({ navigation }) {
         visible={showModal}
         transparent={true}
         animationType='slide'
+        
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -242,5 +246,6 @@ export function Calendar({ navigation }) {
         </View>
       </Modal>
     </View>
+    
   );
 }
