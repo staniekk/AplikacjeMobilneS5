@@ -53,8 +53,9 @@ export const styles = StyleSheet.create({
     },
     logo: {
         marginTop: 50,
+        marginBottom: 20,
         width: 55,
-        height: 45
+        height: 45,
     },
     FP: {
         marginTop: 30,

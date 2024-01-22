@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
  mainContainer:
     {
         backgroundColor: '#11B5E4',
-
+        marginBottom:120
     },
     noHistory:
     {
@@ -15,10 +15,11 @@ export const styles = StyleSheet.create({
 
     },
     logo: {
-        marginBottom:15,
-        marginTop: 30,
+        marginTop: 50,
+        marginBottom: 20,
         width: 55,
-        height: 45
+        height: 45,
+        alignSelf: 'center'
     },
     runner: {
 

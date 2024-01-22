@@ -41,7 +41,7 @@ const HistoryS = () => {
   const content = hasHistory ? (
     
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
+    
    {history.map((entry) => (
        <View key={entry.id} style={styles.historyInfo}>
            <View key={entry.id} style={styles.historyInfo2}>
@@ -78,13 +78,12 @@ const HistoryS = () => {
   );
 
   return (
+    <View style={{ backgroundColor: '#11B5E4' }}>
+    <Image style={styles.logo} source={require('../../img/logo/Logo.png')}/>
     <ScrollView style={styles.mainContainer}>
-    
       {content}
-
-    
-
     </ScrollView>
+    </View>
   );
 };
 export { HistoryS }; 
