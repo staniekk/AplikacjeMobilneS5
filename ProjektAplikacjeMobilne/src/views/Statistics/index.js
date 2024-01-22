@@ -9,7 +9,7 @@ import { SettingsContext } from "../../Context/settingsContext";
 
 export function Statistics({ }) {
 
-    const {userID} = useContext(SettingsContext);
+    const {userID, stepLength} = useContext(SettingsContext);
     const [data, setData] = React.useState([]);
 
 
@@ -38,7 +38,7 @@ export function Statistics({ }) {
         axios.get('https://65a40329a54d8e805ed451eb.mockapi.io/api/am/history')
               .then(response => {
                     const readData = response.data;
-                    const filteredData = readData.filter(item => item.userID === userID);
+                    const filteredData = readData.filter(item => item.userID == userID);
                     const runsNo = filteredData.length;
 
                     const stepsArray = filteredData.map(item => item.steps);
@@ -46,8 +46,8 @@ export function Statistics({ }) {
                     const timeArray = filteredData.map(item => item.time);
 
                     const sumSteps = stepsArray.reduce((acc, steps) => acc + steps, 0);
-                    var sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
-                    sumDist = sumDist/1000;
+                    // sumDist = distArray.reduce((acc, dist) => acc + dist, 0);
+                    sumDist = sumSteps * stepLength /1000;
                     var sumTime = timeArray.reduce((acc, time) => acc + time, 0);
                     sumTime = sumTime / 3600;
 
