@@ -141,9 +141,12 @@ export function Statistics({}) {
           style={styles.logo}
           source={require("../../img/logo/Logo.png")}
         />
-        <Pressable title="Refresh" style={styles.loginBtn} onPress={getStats}>
-          <Text>Refresh</Text>
-        </Pressable>
+        <Pressable style={{  alignItems: "center", justifyContent: "center" }} onPress={getStats}>
+      <Image
+              style={styles.refreshIcon}
+              source={require("../../img/logo/RefreshIcon.png")}
+            />
+      </Pressable>
         <ScrollView style={styles.mainContainer}>
           <View style={styles.panel}>
             <Text style={styles.panelTitle}>Lifetime summary</Text>

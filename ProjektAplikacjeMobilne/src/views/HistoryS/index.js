@@ -77,8 +77,12 @@ const HistoryS = () => {
   return (
     <View style={{ backgroundColor: "#11B5E4" }}>
       <Image style={styles.logo} source={require("../../img/logo/Logo.png")} />
-      <Pressable title="Refresh" style={styles.loginBtn} onPress={getData}>
-        <Text>Refresh</Text>
+      
+      <Pressable style={{  alignItems: "center", justifyContent: "center" }} onPress={getData}>
+      <Image
+              style={styles.refreshIcon}
+              source={require("../../img/logo/RefreshIcon.png")}
+            />
       </Pressable>
       <ScrollView style={styles.mainContainer}>{content}</ScrollView>
     </View>

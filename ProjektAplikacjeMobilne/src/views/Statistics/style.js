@@ -62,6 +62,13 @@ export const styles = StyleSheet.create({
         width: 55,
         height: 55
     },
+    refreshIcon: {
+        width: 48,
+        height: 48,
+        position: 'absolute', 
+        right: -145,
+        bottom: 20
+      },
     panel: {
         backgroundColor: '#F4F7F8',
         padding: 5,

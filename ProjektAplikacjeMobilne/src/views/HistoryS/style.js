@@ -38,6 +38,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  refreshIcon: {
+    width: 48,
+    height: 48,
+    position: 'absolute', 
+    right: 45,
+    bottom: 20
+  },
 
   historyInfo: {
     backgroundColor: "#FFFFFF",
