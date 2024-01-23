@@ -53,7 +53,7 @@ const onPress = () => {
           <View style={styles.pedometerContainer}>
             <Image style={styles.footprint} source={require('../../img/logo/footprint.png')}/>
             <Text style={styles.stepCount}>
-             {Math.round(currentStepCount/100 / stepLength)}
+             {Math.round(currentStepCount)}
             
             </Text>
             <View style={styles.line} />
