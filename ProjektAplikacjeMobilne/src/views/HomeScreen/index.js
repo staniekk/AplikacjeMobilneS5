@@ -39,7 +39,7 @@ const onPress = () => {
   }, [userID]);
 
   //Obliczanie dystansu na bazie ilości kroków i wielkości kroku użytkownika
-  const distance = (currentStepCount/100 / stepLength / 1000).toFixed(2);
+  const distance = (currentStepCount * stepLength / 1000).toFixed(2);
 
   return (
     <View style={styles.mainContainer}>
